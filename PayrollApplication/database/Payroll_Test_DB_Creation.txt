@@ -9,6 +9,8 @@ CREATE TABLE Account
     Name varchar(64) CHARACTER SET utf8 NOT NULL,
     Email varchar(128) CHARACTER SET utf8 NOT NULL,
     Account_Sub varchar(64) CHARACTER SET utf8 NOT NULL,
+    Pay_Period enum('Weekly','Biweekly') NOT NULL,
+    Period_Start_Day enum('Sun','Mon','Tues','Wed','Thurs','Fri','Sat') NOT NULL,
     PRIMARY KEY (Account_Id));
 
 CREATE TABLE Employee
@@ -25,7 +27,7 @@ CREATE TABLE Employee
 CREATE TABLE Hourly_Employee
     (Account_Id int NOT NULL,
     Emp_Id varchar(32) NOT NULL,
-    Rate int NOT NULL,
+    Rate decimal(5,2) NOT NULL,
     PRIMARY KEY (Account_Id, Emp_Id),
     FOREIGN KEY (Account_Id) REFERENCES Account(Account_Id)
 	        ON DELETE CASCADE ON UPDATE CASCADE,
@@ -35,7 +37,7 @@ CREATE TABLE Hourly_Employee
 CREATE TABLE Salary_Employee
     (Account_Id int NOT NULL,
     Emp_Id varchar(32) NOT NULL,
-    Base_Salary int NOT NULL,
+    Period_Rate decimal(7,2) NOT NULL,
     PRIMARY KEY (Account_Id, Emp_Id),
     FOREIGN KEY (Account_Id) REFERENCES Account(Account_Id)
 	        ON DELETE CASCADE ON UPDATE CASCADE,
@@ -55,10 +57,10 @@ CREATE TABLE Timecard
     (Account_Id int NOT NULL,
     Emp_Id varchar(32) NOT NULL,
     Period_Id varchar(32) NOT NULL,
-    Regular_Hours int,
-    Overtime_Hours int,
-    Bonus_Pay int,
-    Other_Pay int,
+    Regular_Hours decimal(5,2),
+    Overtime_Hours decimal(5,2),
+    Bonus_Pay decimal(7,2),
+    Other_Pay decimal(7,2),
     PRIMARY KEY (Account_Id, Emp_Id, Period_Id),
     FOREIGN KEY (Account_Id) REFERENCES Account(Account_Id)
 	        ON DELETE CASCADE ON UPDATE CASCADE,
