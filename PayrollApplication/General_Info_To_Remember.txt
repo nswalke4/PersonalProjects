@@ -1,0 +1,19 @@
+Cognito Information:
+
+User Sign In
+	- Accessed via Email or Username (or preferred Username)
+		- Usernames are case-sensitive
+	- Password must be 8 char min with at least 1 number, 1 upper case, 1 lower case, and 1 special character (^ $ * . [ ] { } ( ) ? - " ! @ # % & / \ , > < ' : ; | _ ~ ` + =)
+	- Multi-Factor Authentication can be used
+		- Will require users to have an "Authenticator App"
+	- Account recovery can be completed by users, and this will be via email
+	- Users can self-verify their account
+		- Completed via email
+
+App Name - Small-b Payroll
+
+
+Database Information:
+	- Only "Account_Id" will auto-increment
+	- "Emp_Id" and "Payroll_Id" will need to be calculated by the Java program when creating new data
+		- Example: "Account_Id" is 1, potential "Emp_Id" could be 1-E-0001 and "Payroll_Id" could be 1-P-[YR]-[WK]
