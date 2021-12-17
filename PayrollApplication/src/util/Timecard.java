@@ -1,3 +1,5 @@
+package util;
+
 /**
  * This class is a representation of the Timecard table in the database
  * for the payroll application.

@@ -1,3 +1,5 @@
+package util;
+
 /**
  * This class represents the Salary Employee object based off of the database
  * schema for the payroll application.
