@@ -6,8 +6,16 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Creates an properties object from the database properties file and stores
+ * the key/value pairs as class parameters accessable through getter methods.
+ * 
+ * @author Nicholas Walker (nswalke4@asu.edu)
+ * @version 1.01
+ */
 public class DatabaseProperties {
 	
+	// Class Varialbes
 	private final String FILE_NAME = "database.properties";
 	private static String username;
 	private static String password;
@@ -15,6 +23,13 @@ public class DatabaseProperties {
 	private static String writeDb;
 	private static String driver;
 	
+	// Constructor
+	/**
+	 * Creates the database properties object and sets up all of the different
+	 * parameters to match the key/value pairs listed in properties file.
+	 * NOTE: This constructor must be called prior to using any of the getter
+	 * methods that follow.
+	 */
 	public DatabaseProperties() {
 		FileInputStream fis = null;
 		Properties prop = null;
@@ -81,6 +96,4 @@ public class DatabaseProperties {
 	public static String getDriver() {
 		return driver;
 	}
-	
-	
 }

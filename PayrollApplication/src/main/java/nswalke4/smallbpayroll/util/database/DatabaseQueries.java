@@ -1,7 +1,14 @@
 package main.java.nswalke4.smallbpayroll.util.database;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+
+import main.java.nswalke4.smallbpayroll.util.Account;
+import main.java.nswalke4.smallbpayroll.util.Employee;
+import main.java.nswalke4.smallbpayroll.util.PayPeriod;
+import main.java.nswalke4.smallbpayroll.util.Timecard;
 
 /**
  * (The following description is the "goal" of this class, and does not
@@ -10,7 +17,7 @@ import java.sql.SQLException;
  * executed onto the Payroll database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.03
+ * @version 1.03A
  */
 public class DatabaseQueries {
 
@@ -88,5 +95,74 @@ public class DatabaseQueries {
 	public void closeConnections() {
 		this.readDB.closeConnection();
 		this.writeDB.closeConnection();
+	}
+	
+	// #TODO Methods to be implemented (not all, just a handful from first thoughts)
+	public static void addAccount(String name, String email, PayPeriod.PayPeriodType periodType,
+			PayPeriod.PeriodStartDay startDay) {
+	}
+	
+	public static void addHourlyEmployee(Account account, String firstName, String lastName,
+			String phoneNum, Double payRate) {
+	}
+	
+	public static void addSalaryEmployee(Account account, String firstName, String lastName,
+			String phoneNum, Double payRate) {
+	}
+	
+	public static void addPayPeriod(Account account, Date startDate) {
+	}
+	
+	public static void addTimecard(Account account, Employee employee, PayPeriod payPeriod,
+			float regHours, float overtimeHours, float bonusPay, float otherPay) {
+	}
+	
+	public static List<Account> getAccounts() {
+		List<Account> result = null;
+		
+		return result;
+	}
+	
+	public static List<Employee> getEmployees(Account account) {
+		List<Employee> result = null;
+		
+		return result;
+	}
+	
+	public static List<PayPeriod> getPayPeriods(Account account) {
+		List<PayPeriod> result = null;
+		
+		return result;
+	}
+	
+	public static List<Timecard> getAllTimecards(Account account) {
+		List<Timecard> result = null;
+		
+		return result;
+	}
+	
+	public static List<Timecard> getAllTimecardsPeriod(Account account, Date start, Date end) {
+		List<Timecard> result = null;
+		
+		return result;
+	}
+	
+	public static List<Timecard> getTimecardsFromPayPeriod(Account account, PayPeriod payPeriod) {
+		List<Timecard> result = null;
+		
+		return result;
+	}
+	
+	public static List<Timecard> getEmployeeTimecards(Account account, Employee employee) {
+		List<Timecard> result = null;
+		
+		return result;
+	}
+	
+	public static List<Timecard> getEmployeeTimecardsPeriod(Account account, Employee employee,
+			Date start, Date end) {
+		List<Timecard> result = null;
+		
+		return result;
 	}
 }
