@@ -8,7 +8,7 @@ CREATE TABLE Account
     (Account_Id int NOT NULL AUTO_INCREMENT,
     Name varchar(64) CHARACTER SET utf8 NOT NULL,
     Email varchar(128) CHARACTER SET utf8 NOT NULL,
-    Account_Sub varchar(64) CHARACTER SET utf8 NOT NULL,
+    Account_Sub varchar(64) CHARACTER SET utf8 NOT NULL UNIQUE,
     Pay_Period enum('WEEKLY','BIWEEKLY') NOT NULL,
     PRIMARY KEY (Account_Id));
 
