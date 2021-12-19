@@ -61,7 +61,7 @@ public class DatabaseQueries {
 		String empId = account.generateEmployeeID();
 		String insertEmp = "INSERT INTO Employee VALUES (" + account.getId() + ", \"" + empId
 				+ "\", \"" + firstName + "\", \"" + lastName + "\", \"" + phoneNum
-				+ "\", 'Hourly');";
+				+ "\", 'HOURLY');";
 		String insertHrly = "INSERT INTO Hourly_Employee VALUES (" + account.getId() + ", \""
 				+ empId + "\", " + payRate + ");";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
@@ -87,7 +87,7 @@ public class DatabaseQueries {
 		String empId = account.generateEmployeeID();
 		String insertEmp = "INSERT INTO Employee VALUES (" + account.getId() + ", \"" + empId
 				+ "\", \"" + firstName + "\", \"" + lastName + "\", \"" + phoneNum
-				+ "\", 'Hourly');";
+				+ "\", 'SALARY');";
 		String insertSlry = "INSERT INTO Salary_Employee VALUES (" + account.getId() + ", \""
 				+ empId + "\", " + payRate + ");";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
