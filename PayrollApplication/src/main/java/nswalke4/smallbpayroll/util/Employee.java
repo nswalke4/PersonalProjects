@@ -1,13 +1,16 @@
 package main.java.nswalke4.smallbpayroll.util;
 
 import java.util.HashMap;
+import java.util.List;
+
+import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
 
 /**
  * This class contains all of the necessary information for an Employee object
  * based off of the payroll application database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.03
+ * @version 1.04
  */
 public class Employee {
 
@@ -79,7 +82,7 @@ public class Employee {
 	 * object using the pay period's id as the key and the timecard object as the
 	 * value.
 	 * 
-	 * @return the HashMap of the timecards of the account object
+	 * @return the HashMap of the timecards of the employee object
 	 */
 	public HashMap<String, Timecard> getTimecards() {
 		return timecards;
@@ -92,6 +95,11 @@ public class Employee {
 	 * any tuple to the employees HashMap that is not already listed in it.
 	 */
 	public void updateTimecards() {
-		// #TODO Database "Get Timecard with E.EmployeeID == T.EmployeeID"
+		List<Timecard> timecardList = DatabaseQueries.getAllEmployeeTimecards(this);
+		for (Timecard t : timecardList) {
+			if (!timecards.containsKey(t.getPeriodId())) {
+				timecards.put(t.getPeriodId(), t);
+			}
+		}
 	}
 }

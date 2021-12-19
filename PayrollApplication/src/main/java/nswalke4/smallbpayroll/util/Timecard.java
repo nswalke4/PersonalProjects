@@ -5,17 +5,17 @@ package main.java.nswalke4.smallbpayroll.util;
  * payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.01
+ * @version 1.02
  */
 public class Timecard {
 
 	// Class Variables
 	private final String employeeId;
 	private final String periodId;
-	private float regularHours;
-	private float overtimeHours;
-	private float bonusPay;
-	private float otherPay;
+	private double regularHours;
+	private double overtimeHours;
+	private double bonusPay;
+	private double otherPay;
 
 	// Constructors
 	/**
@@ -28,8 +28,8 @@ public class Timecard {
 	 * @param pBonusPay      - the amount of bonus pay of the Timecard object
 	 * @param pOtherPay      - the amount of other pay of the Timecard object
 	 */
-	public Timecard(String pEmployeeId, String pPeriodId, float pRegularHours, float pOvertimeHours, float pBonusPay,
-			float pOtherPay) {
+	public Timecard(String pEmployeeId, String pPeriodId, double pRegularHours,
+			double pOvertimeHours, double pBonusPay, double pOtherPay) {
 		this.employeeId = pEmployeeId;
 		this.periodId = pPeriodId;
 		this.regularHours = pRegularHours;
@@ -62,7 +62,7 @@ public class Timecard {
 	 * 
 	 * @return the regularHours of the Timecard object
 	 */
-	public float getRegularHours() {
+	public double getRegularHours() {
 		return regularHours;
 	}
 
@@ -71,7 +71,7 @@ public class Timecard {
 	 * 
 	 * @return the overtimeHours of the Timecard object
 	 */
-	public float getOvertimeHours() {
+	public double getOvertimeHours() {
 		return overtimeHours;
 	}
 
@@ -80,7 +80,7 @@ public class Timecard {
 	 * 
 	 * @return the bonusPay of the Timecard object
 	 */
-	public float getBonusPay() {
+	public double getBonusPay() {
 		return bonusPay;
 	}
 
@@ -89,7 +89,7 @@ public class Timecard {
 	 * 
 	 * @return the otherPay of the Timecard object
 	 */
-	public float getOtherPay() {
+	public double getOtherPay() {
 		return otherPay;
 	}
 }
