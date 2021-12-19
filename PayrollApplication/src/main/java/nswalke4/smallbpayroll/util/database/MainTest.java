@@ -17,7 +17,7 @@ public class MainTest {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		DatabaseProperties dbProps = new DatabaseProperties();
+		new DatabaseProperties();
 		DatabaseQueries dbQueries = new DatabaseQueries();
 		dbQueries.basicDbReadTestAccounts();
 		dbQueries.basicDbReadTestEmployees();

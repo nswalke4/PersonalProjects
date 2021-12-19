@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class DatabaseProperties {
 	
-	private final String FILE_NAME = "src/main/resources/database.properties";
+	private final String FILE_NAME = "database.properties";
 	private static String username;
 	private static String password;
 	private static String readDb;
@@ -16,12 +16,12 @@ public class DatabaseProperties {
 	private static String driver;
 	
 	public DatabaseProperties() {
-		InputStream is = null;
+		FileInputStream fis = null;
 		Properties prop = null;
 		try {
 			prop = new Properties();
-			is = getClass().getResourceAsStream(FILE_NAME);
-			prop.load(is);
+			fis = new FileInputStream(FILE_NAME);
+			prop.load(fis);
 			username = prop.getProperty("username");
 			password = prop.getProperty("password");
 			readDb = prop.getProperty("read_database");
@@ -35,9 +35,9 @@ public class DatabaseProperties {
 			System.out.println("[FAILURE] Something went wrong with the input/output");
 			ioex.printStackTrace();
 		} finally {
-			if (is != null) {
+			if (fis != null) {
 				try {
-					is.close();
+					fis.close();
 				} catch (IOException ioex2) {
 					System.out.println("[FAILURE] Unable to properly close the input stream...");
 					ioex2.printStackTrace();
