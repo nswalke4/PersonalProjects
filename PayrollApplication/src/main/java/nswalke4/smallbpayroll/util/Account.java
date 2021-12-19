@@ -3,13 +3,16 @@ package main.java.nswalke4.smallbpayroll.util;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
+
+import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
 
 /**
  * This class contains the Account object that is used in the database for the
  * Payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.04
+ * @version 1.05
  */
 public class Account {
 
@@ -195,7 +198,12 @@ public class Account {
 	 * tuple to the employees HashMap that is not already listed in it.
 	 */
 	public void updateEmployees() {
-		// #TODO Database "Get Employees with A.AccountID == E.AccountID"
+		List<Employee> empList = DatabaseQueries.getEmployees(this);
+		for (Employee e : empList) {
+			if (!employees.containsKey(e.getEmployeeId())) {
+				employees.put(e.getEmployeeId(), e);
+			}
+		}
 	}
 
 	/**
@@ -204,6 +212,11 @@ public class Account {
 	 * tuple to the payPeriods HashMap that is not already listed in it.
 	 */
 	public void updatePayPeriods() {
-		// #TODO Database "Get PayPeriods with A.AccountID == P.AccountID"
+		List<PayPeriod> payPeriodList = DatabaseQueries.getPayPeriods(this);
+		for (PayPeriod p : payPeriodList) {
+			if (!payPeriods.containsKey(p.getPeriodId())) {
+				payPeriods.put(p.getPeriodId(), p);
+			}
+		}
 	}
 }
