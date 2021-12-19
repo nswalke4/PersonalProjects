@@ -3,7 +3,8 @@ package util;
 import java.util.HashMap;
 
 /**
- * This class contains the Account object that is used in the database for the Payroll application.
+ * This class contains the Account object that is used in the database for the
+ * Payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
  * @version 1.02
@@ -23,11 +24,11 @@ public class Account {
 	/**
 	 * Create's an Account object based off of the given information.
 	 * 
-	 * @param pId - the id of the account object
-	 * @param pName - the name of the account object
-	 * @param pEmail - the email of the account object
+	 * @param pId         - the id of the account object
+	 * @param pName       - the name of the account object
+	 * @param pEmail      - the email of the account object
 	 * @param pPeriodType - the pay period type of the account object
-	 * @param pStartDay - the start day of the pay period of the account object
+	 * @param pStartDay   - the start day of the pay period of the account object
 	 */
 	public Account(int pId, String pName, String pEmail, PayPeriod.PayPeriodType pPeriodType,
 			PayPeriod.PeriodStartDay pStartDay) {
@@ -87,7 +88,7 @@ public class Account {
 	public PayPeriod.PeriodStartDay getStartDay() {
 		return startDay;
 	}
-	
+
 	/**
 	 * Get's the hash map of all employees that are connected to the account object
 	 * using the employee's id as the key and the employee object as the value.
@@ -97,10 +98,11 @@ public class Account {
 	public HashMap<String, Employee> getEmployees() {
 		return employees;
 	}
-	
+
 	/**
-	 * Get's the hash map of all the pay periods that are connected to the account object
-	 * using the pay period's id as the key and the PayPeriod object as the value.
+	 * Get's the hash map of all the pay periods that are connected to the account
+	 * object using the pay period's id as the key and the PayPeriod object as the
+	 * value.
 	 * 
 	 * @return the HashMap of the pay periods of the account object
 	 */
@@ -110,9 +112,9 @@ public class Account {
 
 	// Class Methods
 	/**
-	 * Generates an employee ID number using the account ID and the number of employees
-	 * that the account has, up to 9999 employees.
-	 * Style: "[AccountID]-E-[# of Employees, with leading zeros to make 4 digits]"
+	 * Generates an employee ID number using the account ID and the number of
+	 * employees that the account has, up to 9999 employees. Style:
+	 * "[AccountID]-E-[# of Employees, with leading zeros to make 4 digits]"
 	 * 
 	 * @return - the generated EmployeeID string
 	 */
@@ -134,11 +136,11 @@ public class Account {
 		empId += String.valueOf(empNum);
 		return empId;
 	}
-	
+
 	/**
-	 * Generates a pay period ID number using the account ID and the number of pay periods
-	 * that the account has, up to 9999 pay periods.
-	 * Style: "[AccountID]-P-[# of PayPeriods, with leading zeros to make 4 digits]"
+	 * Generates a pay period ID number using the account ID and the number of pay
+	 * periods that the account has, up to 9999 pay periods. Style:
+	 * "[AccountID]-P-[# of PayPeriods, with leading zeros to make 4 digits]"
 	 * 
 	 * @return - the generated PayPeriodID string
 	 */
@@ -160,20 +162,20 @@ public class Account {
 		ppId += String.valueOf(ppNum);
 		return ppId;
 	}
-	
+
 	/**
 	 * Collects all of the tuples attached to the Employee table with the AccountID
-	 * equal to the current account's AccountID from the database, and then adds any tuple
-	 * to the employees HashMap that is not already listed in it.
+	 * equal to the current account's AccountID from the database, and then adds any
+	 * tuple to the employees HashMap that is not already listed in it.
 	 */
 	public void updateEmployees() {
-		// #TODO Database "Get Employees with A.AccountID == E.AccountID" 
+		// #TODO Database "Get Employees with A.AccountID == E.AccountID"
 	}
-	
+
 	/**
 	 * Collects all of the tuples attached to the PayPeriod table with the AccountID
-	 * equal to the current account's AccountID from the database, and then adds any tuple
-	 * to the payPeriods HashMap that is not already listed in it.
+	 * equal to the current account's AccountID from the database, and then adds any
+	 * tuple to the payPeriods HashMap that is not already listed in it.
 	 */
 	public void updatePayPeriods() {
 		// #TODO Database "Get PayPeriods with A.AccountID == P.AccountID"

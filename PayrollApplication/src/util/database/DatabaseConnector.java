@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnector {
-	
+
 	// Class Variables
 	private final String databaseURL;
 	private final String databaseUsername;
@@ -16,8 +16,7 @@ public class DatabaseConnector {
 	private Connection conn;
 
 	// Constructor
-	public DatabaseConnector(String pDatabaseURL, String pDatabaseUsername,
-			String pDatabasePassword) {
+	public DatabaseConnector(String pDatabaseURL, String pDatabaseUsername, String pDatabasePassword) {
 		this.databaseURL = urlStringStarter + pDatabaseURL + schemaName;
 		this.databaseUsername = pDatabaseUsername;
 		this.databasePassword = pDatabasePassword;
@@ -57,8 +56,7 @@ public class DatabaseConnector {
 	private void initalizeConnection() {
 		try {
 			Class.forName(databaseDriverString);
-			this.conn = DriverManager.getConnection(getDatabaseURL(), getDatabaseUsername(),
-					getDatabasePassword());
+			this.conn = DriverManager.getConnection(getDatabaseURL(), getDatabaseUsername(), getDatabasePassword());
 		} catch (ClassNotFoundException cnfex) {
 			System.out.println("[FAILURE] Unable to find the driver class...");
 			cnfex.printStackTrace();
@@ -67,7 +65,7 @@ public class DatabaseConnector {
 			sqlex.printStackTrace();
 		}
 	}
-	
+
 	public void closeConnection() {
 		try {
 			if (conn != null) {

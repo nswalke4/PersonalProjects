@@ -1,8 +1,8 @@
 package util;
 
 /**
- * This class is a representation of the Timecard table in the database
- * for the payroll application.
+ * This class is a representation of the Timecard table in the database for the
+ * payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
  * @version 1.01
@@ -21,15 +21,15 @@ public class Timecard {
 	/**
 	 * Creates a timecard object from the given information.
 	 * 
-	 * @param pEmployeeId - the employee id of the Timecard object
-	 * @param pPeriodId - the pay period id of the Timecard object
-	 * @param pRegularHours - the number of regular hours of the Timecard object
+	 * @param pEmployeeId    - the employee id of the Timecard object
+	 * @param pPeriodId      - the pay period id of the Timecard object
+	 * @param pRegularHours  - the number of regular hours of the Timecard object
 	 * @param pOvertimeHours - the number of overtime hours of the Timecard object
-	 * @param pBonusPay - the amount of bonus pay of the Timecard object
-	 * @param pOtherPay - the amount of other pay of the Timecard object
+	 * @param pBonusPay      - the amount of bonus pay of the Timecard object
+	 * @param pOtherPay      - the amount of other pay of the Timecard object
 	 */
-	public Timecard(String pEmployeeId, String pPeriodId, float pRegularHours, 
-			float pOvertimeHours, float pBonusPay, float pOtherPay) {
+	public Timecard(String pEmployeeId, String pPeriodId, float pRegularHours, float pOvertimeHours, float pBonusPay,
+			float pOtherPay) {
 		this.employeeId = pEmployeeId;
 		this.periodId = pPeriodId;
 		this.regularHours = pRegularHours;

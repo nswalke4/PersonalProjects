@@ -14,26 +14,28 @@ public class HourlyEmployee extends Employee {
 
 	// Constructors
 	/**
-	 * Creates an Hourly Employee object from the given information (includes phone number).
+	 * Creates an Hourly Employee object from the given information (includes phone
+	 * number).
 	 * 
 	 * @param pEmployeeId - the id of the Hourly Employee object
-	 * @param pFirstName - the first name of the Hourly Employee object
-	 * @param pLastName - the last name of the Hourly Employee object
-	 * @param pPhoneNum - the phone number of the Hourly Employee object (can be null)
-	 * @param pRate - the pay rate of the Hourly Employee object
+	 * @param pFirstName  - the first name of the Hourly Employee object
+	 * @param pLastName   - the last name of the Hourly Employee object
+	 * @param pPhoneNum   - the phone number of the Hourly Employee object (can be
+	 *                    null)
+	 * @param pRate       - the pay rate of the Hourly Employee object
 	 */
-	public HourlyEmployee(String pEmployeeId, String pFirstName, String pLastName,
-			String pPhoneNum, float pRate) {
+	public HourlyEmployee(String pEmployeeId, String pFirstName, String pLastName, String pPhoneNum, float pRate) {
 		super(pEmployeeId, pFirstName, pLastName, pPhoneNum);
 		this.rate = pRate;
 	}
+
 	/**
 	 * Creates an HourlyEmployee without a phone number.
 	 * 
 	 * @param pEmployeeId - the id of the Hourly Employee object
-	 * @param pFirstName - the first name of the Hourly Employee object
-	 * @param pLastName - the last name of the Hourly Employee object
-	 * @param pRate - the pay rate of the Hourly Employee object
+	 * @param pFirstName  - the first name of the Hourly Employee object
+	 * @param pLastName   - the last name of the Hourly Employee object
+	 * @param pRate       - the pay rate of the Hourly Employee object
 	 */
 	public HourlyEmployee(String pEmployeeId, String pFirstName, String pLastName, float pRate) {
 		super(pEmployeeId, pFirstName, pLastName);
