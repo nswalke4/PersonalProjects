@@ -1,3 +1,5 @@
+package main.java.nswalke4.smallbpayroll.util;
+
 import java.util.HashMap;
 
 /**
@@ -5,7 +7,7 @@ import java.util.HashMap;
  * based off of the payroll application database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.02
+ * @version 1.03
  */
 public class Employee {
 
@@ -16,14 +18,15 @@ public class Employee {
 	private final String phoneNum;
 	private HashMap<String, Timecard> timecards;
 
-	// Constructors
+	// Constructor
 	/**
-	 * Constructs an Employee object from the given information (includes the phone number).
+	 * Constructs an Employee object from the given information (includes the phone
+	 * number).
 	 * 
 	 * @param pEmployeeId - the id of the Employee object
-	 * @param pFirstName - the first name of the Employee object
-	 * @param pLastName - the last name of the Employee object
-	 * @param pPhoneNum - the phone number of the Employee object (can be null)
+	 * @param pFirstName  - the first name of the Employee object
+	 * @param pLastName   - the last name of the Employee object
+	 * @param pPhoneNum   - the phone number of the Employee object (can be null)
 	 */
 	public Employee(String pEmployeeId, String pFirstName, String pLastName, String pPhoneNum) {
 		this.employeeId = pEmployeeId;
@@ -32,17 +35,6 @@ public class Employee {
 		this.phoneNum = pPhoneNum;
 		this.timecards = new HashMap<String, Timecard>();
 		this.updateTimecards();
-	}
-	
-	/**
-	 * Constructs an Employee object without a phone number.
-	 * 
-	 * @param pEmployeeId - the id of the Employee object
-	 * @param pFirstName - the first name of the Employee object
-	 * @param pLastName - the last name of the Employee object
-	 */
-	public Employee(String pEmployeeId, String pFirstName, String pLastName) {
-		this(pEmployeeId, pFirstName, pLastName, null);
 	}
 
 	// Getters
@@ -81,10 +73,11 @@ public class Employee {
 	public String getPhoneNum() {
 		return phoneNum;
 	}
-	
+
 	/**
-	 * Get's the hash map of all the timecards that are connected to the employee object
-	 * using the pay period's id as the key and the timecard object as the value.
+	 * Get's the hash map of all the timecards that are connected to the employee
+	 * object using the pay period's id as the key and the timecard object as the
+	 * value.
 	 * 
 	 * @return the HashMap of the timecards of the account object
 	 */
@@ -95,8 +88,8 @@ public class Employee {
 	// Class Methods
 	/**
 	 * Collects all of the tuples attached to the Timecard table with the EmployeeID
-	 * equal to the current employee's EmployeeID from the database, and then adds any
-	 * tuple to the employees HashMap that is not already listed in it.
+	 * equal to the current employee's EmployeeID from the database, and then adds
+	 * any tuple to the employees HashMap that is not already listed in it.
 	 */
 	public void updateTimecards() {
 		// #TODO Database "Get Timecard with E.EmployeeID == T.EmployeeID"

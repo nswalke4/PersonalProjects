@@ -1,6 +1,6 @@
-INSERT INTO Account (Name, Email, Account_Sub, Pay_Period, Period_Start_Day) VALUES
-    ("test_account", "nsw.amicosnypizza@gmail.com", "ada144e7-5084-49e4-a7e5-701f762ecacf", 'Weekly', 'Sun'),
-    ("test_account_2", "nsw.advocare@gmail.com", "bcdea241-27b3-4efd-a8c6-cd797c0f8a68", 'Biweekly', 'Mon');
+INSERT INTO Account (Name, Email, Account_Sub, Pay_Period) VALUES
+    ("test_account", "nsw.amicosnypizza@gmail.com", "ada144e7-5084-49e4-a7e5-701f762ecacf", 'Weekly'),
+    ("test_account_2", "nsw.advocare@gmail.com", "bcdea241-27b3-4efd-a8c6-cd797c0f8a68", 'Biweekly');
 
 INSERT INTO Employee VALUES
     (1, "1-E-0001", "TestA", "EmployeeA", NULL, 'Hourly'),
