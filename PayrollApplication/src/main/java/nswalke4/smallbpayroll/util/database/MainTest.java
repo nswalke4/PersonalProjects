@@ -50,7 +50,7 @@ public class MainTest {
 		// Basic Insertion Tests
 		System.out.println("\nBeginning Insertion Testing...");
 		DatabaseQueries.addAccount("JavaTestingAccount", "testEmail@javaTest1",
-				"abc123-notarealsub", PayPeriod.PayPeriodType.Biweekly);
+				"abc123-notarealsub", PayPeriod.PayPeriodType.BIWEEKLY);
 		printAccounts(DatabaseQueries.getAllAccounts());
 		Account newAccount = DatabaseQueries.getSpecificAccount("abc123-notarealsub");
 		DatabaseQueries.addHourlyEmployee(newAccount, "3JavaA", "3EmployeeA", String.valueOf(Types.NULL), 21.00);

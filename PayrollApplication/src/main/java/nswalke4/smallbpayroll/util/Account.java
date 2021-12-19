@@ -149,10 +149,10 @@ public class Account {
 	public Date generateEndDate(Date startDate) {
 		int numDaysToIncrement = 0;
 		switch (this.periodType) {
-			case Weekly:
+			case WEEKLY:
 				numDaysToIncrement = 6;
 				break;
-			case Biweekly:
+			case BIWEEKLY:
 				numDaysToIncrement = 13;
 				break;
 			default:

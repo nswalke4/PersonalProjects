@@ -18,7 +18,7 @@ public class PayPeriod {
 	 * that can be used with this payroll application.
 	 */
 	public enum PayPeriodType {
-		Weekly, Biweekly
+		WEEKLY, BIWEEKLY
 	}
 
 	// Class Variables
