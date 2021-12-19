@@ -1,15 +1,15 @@
-DROP SCHEMA IF EXISTS Payroll_Test;
+DROP SCHEMA IF EXISTS Smallb_Payroll
 
-CREATE SCHEMA Payroll_Test;
+CREATE SCHEMA Smallb_Payroll;
 
-USE Payroll_Test;
+USE Smallb_Payroll;
 
 CREATE TABLE Account
     (Account_Id int NOT NULL AUTO_INCREMENT,
     Name varchar(64) CHARACTER SET utf8 NOT NULL,
     Email varchar(128) CHARACTER SET utf8 NOT NULL,
     Account_Sub varchar(64) CHARACTER SET utf8 NOT NULL,
-    Pay_Period enum('Weekly','Biweekly') NOT NULL,
+    Pay_Period enum('WEEKLY','BIWEEKLY') NOT NULL,
     PRIMARY KEY (Account_Id));
 
 CREATE TABLE Employee
@@ -18,7 +18,7 @@ CREATE TABLE Employee
     First_Name varchar(32) CHARACTER SET utf8 NOT NULL,
     Last_Name varchar(32) CHARACTER SET utf8 NOT NULL,
     Phone_Num varchar(32) CHARACTER SET utf8,
-    Emp_Type enum('Hourly','Salary') NOT NULL,
+    Emp_Type enum('HOURLY','SALARY') NOT NULL,
     PRIMARY KEY (Account_Id, Emp_Id),
     FOREIGN KEY (Account_Id) REFERENCES Account(Account_Id)
 		ON DELETE CASCADE ON UPDATE CASCADE);

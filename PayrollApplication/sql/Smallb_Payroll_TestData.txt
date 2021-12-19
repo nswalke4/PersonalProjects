@@ -1,12 +1,12 @@
 INSERT INTO Account (Name, Email, Account_Sub, Pay_Period) VALUES
-    ("test_account", "nsw.amicosnypizza@gmail.com", "ada144e7-5084-49e4-a7e5-701f762ecacf", 'Weekly'),
-    ("test_account_2", "nsw.advocare@gmail.com", "bcdea241-27b3-4efd-a8c6-cd797c0f8a68", 'Biweekly');
+    ("test_account", "nsw.amicosnypizza@gmail.com", "ada144e7-5084-49e4-a7e5-701f762ecacf", 'WEEKLY'),
+    ("test_account_2", "nsw.advocare@gmail.com", "bcdea241-27b3-4efd-a8c6-cd797c0f8a68", 'BIWEEKLY');
 
 INSERT INTO Employee VALUES
-    (1, "1-E-0001", "TestA", "EmployeeA", NULL, 'Hourly'),
-    (2, "2-E-0001", "2TestA", "2EmployeeA", NULL, 'Hourly'),
-    (1, "1-E-0002", "TestB", "EmployeeB", NULL, 'Hourly'),
-    (1, "1-E-0003", "TestC", "EmployeeC", NULL, 'Salary');
+    (1, "1-E-0001", "TestA", "EmployeeA", NULL, 'HOURLY'),
+    (2, "2-E-0001", "2TestA", "2EmployeeA", NULL, 'HOURLY'),
+    (1, "1-E-0002", "TestB", "EmployeeB", NULL, 'HOURLY'),
+    (1, "1-E-0003", "TestC", "EmployeeC", NULL, 'SALARY');
 
 INSERT INTO Hourly_Employee VALUES
     (1, "1-E-0001", 7.25),
