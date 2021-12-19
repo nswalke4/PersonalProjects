@@ -7,7 +7,7 @@ import java.util.HashMap;
  * Payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.02
+ * @version 1.03
  */
 public class Account {
 
@@ -15,6 +15,7 @@ public class Account {
 	private final int id;
 	private final String name;
 	private final String email;
+	private final String sub;
 	private final PayPeriod.PayPeriodType periodType;
 	private final PayPeriod.PeriodStartDay startDay;
 	private HashMap<String, Employee> employees;
@@ -30,11 +31,12 @@ public class Account {
 	 * @param pPeriodType - the pay period type of the account object
 	 * @param pStartDay   - the start day of the pay period of the account object
 	 */
-	public Account(int pId, String pName, String pEmail, PayPeriod.PayPeriodType pPeriodType,
-			PayPeriod.PeriodStartDay pStartDay) {
+	public Account(int pId, String pName, String pEmail, String pSub, PayPeriod.PayPeriodType 
+			pPeriodType, PayPeriod.PeriodStartDay pStartDay) {
 		this.id = pId;
 		this.name = pName;
 		this.email = pEmail;
+		this.sub = pSub;
 		this.periodType = pPeriodType;
 		this.startDay = pStartDay;
 		this.employees = new HashMap<String, Employee>();
@@ -69,6 +71,15 @@ public class Account {
 	 */
 	public String getEmail() {
 		return email;
+	}
+
+	/**
+	 * Get's the sub (which is the AWS Cognito id) of the account object.
+	 * 
+	 * @return the sub of the account object
+	 */
+	public String getSub() {
+		return sub;
 	}
 
 	/**

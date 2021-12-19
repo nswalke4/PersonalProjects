@@ -14,7 +14,7 @@ import java.sql.Statement;
  * from the database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.03
+ * @version 1.04
  */
 public class DatabaseConnector {
 
@@ -27,20 +27,15 @@ public class DatabaseConnector {
 
 	// Constructor
 	/**
-	 * Constructs a basic Database Connector object to the given database URL, and
-	 * uses the given username/password combination to access the database.
+	 * Constructs a basic Database Connector object to the given database URL..
 	 * 
-	 * @param pDatabaseURL      - the URL of the database connection
-	 * @param pDatabaseUsername - the username to access the database connection
-	 * @param pDatabasePassword - the password to access the database connection
+	 * @param pDatabaseURL - the URL of the database connection
 	 */
-	public DatabaseConnector(String pDatabaseURL, String pDatabaseUsername, 
-			String pDatabasePassword) {
+	public DatabaseConnector(String pDatabaseURL) {
 		this.URL = pDatabaseURL;
-		this.USERNAME = pDatabaseUsername;
-		this.PASSWORD = pDatabasePassword;
+		this.USERNAME = DatabaseProperties.getUsername();
+		this.PASSWORD = DatabaseProperties.getPassword();
 		this.DRIVER = DatabaseProperties.getDriver();
-		this.initalizeConnection();
 	}
 
 	// Class Methods
@@ -48,7 +43,7 @@ public class DatabaseConnector {
 	 * Initializes a connection to the database, and informs the user if there were
 	 * any errors in attempting to connect to the database.
 	 */
-	private void initalizeConnection() {
+	protected void openConnection() {
 		try {
 			Class.forName(DRIVER);
 			this.conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -106,7 +101,7 @@ public class DatabaseConnector {
 	 * Closes a connection to the database, and informs the user if there were any
 	 * errors in attempting to disconnect from the database.
 	 */
-	public void closeConnection() {
+	protected void closeConnection() {
 		try {
 			if (conn != null) {
 				conn.close();
