@@ -8,25 +8,17 @@ import java.sql.Date;
  * account object in the database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.01
+ * @version 1.02
  */
 public class PayPeriod {
 
-	// Enumerators
+	// Enumerator
 	/**
 	 * This enumerator represents all of the different possible pay-period types
 	 * that can be used with this payroll application.
 	 */
 	public enum PayPeriodType {
-		WEEKLY, BIWEEKLY
-	}
-
-	/**
-	 * This enumerator represents all of the different potential start days for the
-	 * pay period that can be used with this payroll application.
-	 */
-	public enum PeriodStartDay {
-		SUN, MON, TUES, WED, THURS, FRI, SAT
+		Weekly, Biweekly
 	}
 
 	// Class Variables
@@ -41,6 +33,7 @@ public class PayPeriod {
 		this.endDate = pEndDate;
 	}
 
+	// Getters
 	/**
 	 * Get's the id of the Pay Period object.
 	 * 

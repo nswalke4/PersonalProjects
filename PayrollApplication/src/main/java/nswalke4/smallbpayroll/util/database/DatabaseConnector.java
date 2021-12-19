@@ -14,7 +14,7 @@ import java.sql.Statement;
  * from the database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.04
+ * @version 1.05
  */
 public class DatabaseConnector {
 
@@ -36,6 +36,7 @@ public class DatabaseConnector {
 		this.USERNAME = DatabaseProperties.getUsername();
 		this.PASSWORD = DatabaseProperties.getPassword();
 		this.DRIVER = DatabaseProperties.getDriver();
+		this.connect();
 	}
 
 	// Class Methods
@@ -43,7 +44,7 @@ public class DatabaseConnector {
 	 * Initializes a connection to the database, and informs the user if there were
 	 * any errors in attempting to connect to the database.
 	 */
-	protected void openConnection() {
+	private void connect() {
 		try {
 			Class.forName(DRIVER);
 			this.conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);

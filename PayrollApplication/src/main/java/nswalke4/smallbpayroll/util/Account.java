@@ -1,5 +1,7 @@
 package main.java.nswalke4.smallbpayroll.util;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 /**
@@ -7,7 +9,7 @@ import java.util.HashMap;
  * Payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.03
+ * @version 1.04
  */
 public class Account {
 
@@ -17,7 +19,6 @@ public class Account {
 	private final String email;
 	private final String sub;
 	private final PayPeriod.PayPeriodType periodType;
-	private final PayPeriod.PeriodStartDay startDay;
 	private HashMap<String, Employee> employees;
 	private HashMap<String, PayPeriod> payPeriods;
 
@@ -29,16 +30,14 @@ public class Account {
 	 * @param pName       - the name of the account object
 	 * @param pEmail      - the email of the account object
 	 * @param pPeriodType - the pay period type of the account object
-	 * @param pStartDay   - the start day of the pay period of the account object
 	 */
-	public Account(int pId, String pName, String pEmail, String pSub, PayPeriod.PayPeriodType 
-			pPeriodType, PayPeriod.PeriodStartDay pStartDay) {
+	public Account(int pId, String pName, String pEmail, String pSub,
+			PayPeriod.PayPeriodType pPeriodType) {
 		this.id = pId;
 		this.name = pName;
 		this.email = pEmail;
 		this.sub = pSub;
 		this.periodType = pPeriodType;
-		this.startDay = pStartDay;
 		this.employees = new HashMap<String, Employee>();
 		this.updateEmployees();
 		this.payPeriods = new HashMap<String, PayPeriod>();
@@ -92,15 +91,6 @@ public class Account {
 	}
 
 	/**
-	 * Get's the start day of the pay period of the account object.
-	 * 
-	 * @return the startDay of the account object
-	 */
-	public PayPeriod.PeriodStartDay getStartDay() {
-		return startDay;
-	}
-
-	/**
 	 * Get's the hash map of all employees that are connected to the account object
 	 * using the employee's id as the key and the employee object as the value.
 	 * 
@@ -146,6 +136,31 @@ public class Account {
 		}
 		empId += String.valueOf(empNum);
 		return empId;
+	}
+
+	/**
+	 * Generates the end date of a PayPeriod by using the given start date and
+	 * the account's information about the type of PayPeriod it uses to calculate
+	 * the PayPeriod's end date.
+	 * 
+	 * @param startDate - the date that the PayPeriod begins
+	 * @return - the last day of the PayPeriod (is included in the period)
+	 */
+	public Date generateEndDate(Date startDate) {
+		int numDaysToIncrement = 0;
+		switch (this.periodType) {
+			case Weekly:
+				numDaysToIncrement = 6;
+				break;
+			case Biweekly:
+				numDaysToIncrement = 13;
+				break;
+			default:
+				numDaysToIncrement = 1;
+				break;
+		}
+		LocalDate endLocalDate = startDate.toLocalDate().plusDays(numDaysToIncrement);
+		return Date.valueOf(endLocalDate);
 	}
 
 	/**
