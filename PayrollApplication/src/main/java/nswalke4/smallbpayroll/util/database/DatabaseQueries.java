@@ -21,7 +21,7 @@ import main.java.nswalke4.smallbpayroll.util.Timecard;
  * insertion to be sent through, keeping the connection time as minimal as possible.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.05
+ * @version 1.06
  */
 public class DatabaseQueries {
 
@@ -83,7 +83,7 @@ public class DatabaseQueries {
 	 * @param payRate - the pay rate of the salary employee
 	 */
 	public static void addSalaryEmployee(Account account, String firstName, String lastName,
-			String phoneNum, Double payRate) {
+			String phoneNum, double payRate) {
 		String empId = account.generateEmployeeID();
 		String insertEmp = "INSERT INTO Employee VALUES (" + account.getId() + ", \"" + empId
 				+ "\", \"" + firstName + "\", \"" + lastName + "\", \"" + phoneNum

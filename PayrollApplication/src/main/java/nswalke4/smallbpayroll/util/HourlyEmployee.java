@@ -5,12 +5,12 @@ package main.java.nswalke4.smallbpayroll.util;
  * schema for the payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.02
+ * @version 1.03
  */
 public class HourlyEmployee extends Employee {
 
 	// Class Variables
-	private final float rate;
+	private final double rate;
 
 	// Constructor
 	/**
@@ -23,7 +23,8 @@ public class HourlyEmployee extends Employee {
 	 *                    null)
 	 * @param pRate       - the pay rate of the Hourly Employee object
 	 */
-	public HourlyEmployee(String pEmployeeId, String pFirstName, String pLastName, String pPhoneNum, float pRate) {
+	public HourlyEmployee(String pEmployeeId, String pFirstName, String pLastName,
+			String pPhoneNum, double pRate) {
 		super(pEmployeeId, pFirstName, pLastName, pPhoneNum);
 		this.rate = pRate;
 	}
@@ -34,7 +35,7 @@ public class HourlyEmployee extends Employee {
 	 * 
 	 * @return the rate of the Hourly Employee object
 	 */
-	public float getRate() {
+	public double getRate() {
 		return rate;
 	}
 }
