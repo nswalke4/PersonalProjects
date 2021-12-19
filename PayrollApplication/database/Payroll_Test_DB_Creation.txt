@@ -10,7 +10,6 @@ CREATE TABLE Account
     Email varchar(128) CHARACTER SET utf8 NOT NULL,
     Account_Sub varchar(64) CHARACTER SET utf8 NOT NULL,
     Pay_Period enum('Weekly','Biweekly') NOT NULL,
-    Period_Start_Day enum('Sun','Mon','Tues','Wed','Thurs','Fri','Sat') NOT NULL,
     PRIMARY KEY (Account_Id));
 
 CREATE TABLE Employee
