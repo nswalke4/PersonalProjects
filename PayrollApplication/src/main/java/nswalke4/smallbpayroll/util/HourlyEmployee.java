@@ -5,17 +5,16 @@ package main.java.nswalke4.smallbpayroll.util;
  * schema for the payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.01
+ * @version 1.02
  */
 public class HourlyEmployee extends Employee {
 
 	// Class Variables
 	private final float rate;
 
-	// Constructors
+	// Constructor
 	/**
-	 * Creates an Hourly Employee object from the given information (includes phone
-	 * number).
+	 * Creates an Hourly Employee object from the given information.
 	 * 
 	 * @param pEmployeeId - the id of the Hourly Employee object
 	 * @param pFirstName  - the first name of the Hourly Employee object
@@ -26,19 +25,6 @@ public class HourlyEmployee extends Employee {
 	 */
 	public HourlyEmployee(String pEmployeeId, String pFirstName, String pLastName, String pPhoneNum, float pRate) {
 		super(pEmployeeId, pFirstName, pLastName, pPhoneNum);
-		this.rate = pRate;
-	}
-
-	/**
-	 * Creates an HourlyEmployee without a phone number.
-	 * 
-	 * @param pEmployeeId - the id of the Hourly Employee object
-	 * @param pFirstName  - the first name of the Hourly Employee object
-	 * @param pLastName   - the last name of the Hourly Employee object
-	 * @param pRate       - the pay rate of the Hourly Employee object
-	 */
-	public HourlyEmployee(String pEmployeeId, String pFirstName, String pLastName, float pRate) {
-		super(pEmployeeId, pFirstName, pLastName);
 		this.rate = pRate;
 	}
 

@@ -5,17 +5,16 @@ package main.java.nswalke4.smallbpayroll.util;
  * schema for the payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.01
+ * @version 1.02
  */
 public class SalaryEmployee extends Employee {
 
 	// Class Variables
 	private final float periodRate;
 
-	// Constructors
+	// Constructor
 	/**
-	 * Creates an Salary Employee object from the given information (includes phone
-	 * number).
+	 * Creates an Salary Employee object from the given information.
 	 * 
 	 * @param pEmployeeId - the id of the Salary Employee object
 	 * @param pFirstName  - the first name of the Salary Employee object
@@ -28,20 +27,6 @@ public class SalaryEmployee extends Employee {
 	public SalaryEmployee(String pEmployeeId, String pFirstName, String pLastName, String pPhoneNum,
 			float pPeriodRate) {
 		super(pEmployeeId, pFirstName, pLastName, pPhoneNum);
-		this.periodRate = pPeriodRate;
-	}
-
-	/**
-	 * Creates a Salary Employee object without a phone number.
-	 * 
-	 * @param pEmployeeId - the id of the Salary Employee object
-	 * @param pFirstName  - the first name of the Salary Employee object
-	 * @param pLastName   - the last name of the Salary Employee object
-	 * @param pPeriodRate - the rate of pay for a pay period of the Salary Employee
-	 *                    object
-	 */
-	public SalaryEmployee(String pEmployeeId, String pFirstName, String pLastName, float pPeriodRate) {
-		super(pEmployeeId, pFirstName, pLastName);
 		this.periodRate = pPeriodRate;
 	}
 
