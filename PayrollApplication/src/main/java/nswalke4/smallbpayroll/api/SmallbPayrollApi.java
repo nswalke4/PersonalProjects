@@ -34,16 +34,56 @@ public class SmallbPayrollApi extends HttpServlet {
 	/**
 	 * Handles all of the requests that come in via a "get" request.
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws
+			ServletException, IOException {
 		response.setContentType(JSON_CONTENT);
-		JSONObject requestObj = new JSONObject(request.getReader().lines().collect(Collectors.joining()));
+		JSONObject requestObj = new JSONObject(request.getReader().lines()
+				.collect(Collectors.joining()));
 		String command = requestObj.getString("command");
 		JSONObject responseObj = new JSONObject();
 		switch (command) {
-			default:
-				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-				responseObj.put("message", "Given get-command is not available.");
+		
+			case "CompleteLogin":
+				if (requestObj.has("AccountSub")) {
+					response.setStatus(HttpServletResponse.SC_OK);
+					responseObj = SmallbPayrollMethods.completeAccountLogin(requestObj
+							.getString("AccountSub"));
+				} else {
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					responseObj.put("ErrorMessage", "Value for \"AccountSub\" was not found and is"
+							+ " a required parameter for this method");
+				}
 				break;
+				
+			case "GetEmployeeTimecards":
+				if (requestObj.has("EmployeeId")) {
+					response.setStatus(HttpServletResponse.SC_OK);
+					responseObj = SmallbPayrollMethods.gatherEmployeeTimecards(requestObj
+							.getString("EmployeeId"));
+				} else {
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					responseObj.put("ErrorMessage", "Value for \"EmployeeId\" was not found and is"
+							+ " a required parameter for this method");
+				}
+				break;
+				
+			case "GetPayPeriodTimecards":
+				if (requestObj.has("PayPeriodId")) {
+					response.setStatus(HttpServletResponse.SC_OK);
+					responseObj = SmallbPayrollMethods.gatherPayPeriodTimecards(requestObj
+							.getString("PayPeriodId"));
+				} else {
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					responseObj.put("ErrorMessage", "Value for \"PayPeriodId\" was not found and is"
+							+ " a required parameter for this method");
+				}
+				break;
+				
+			default:
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				responseObj.put("ErrorMessage", "Given get-command is not available.");
+				break;
+				
 		}
 		response.getWriter().println(responseObj.toString());
 	}
@@ -51,14 +91,42 @@ public class SmallbPayrollApi extends HttpServlet {
 	/**
 	 * Handles all of the requests that come in via a "post" request.
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws
+			ServletException, IOException {
 		response.setContentType(JSON_CONTENT);
-		JSONObject requestObj = new JSONObject(request.getReader().lines().collect(Collectors.joining()));
+		JSONObject requestObj = new JSONObject(request.getReader().lines()
+				.collect(Collectors.joining()));
 		String command = requestObj.getString("command");
 		JSONObject responseObj = new JSONObject();
 		switch (command) {
+		
+			case "CreateNewAccount":
+				if (requestObj.has("NewAccount")) {
+					JSONObject newAccountObj = requestObj.getJSONObject("NewAccount");
+					if ((newAccountObj.has("AccountSub")) && (newAccountObj.has("Name")) &&
+							(newAccountObj.has("Email")) && (newAccountObj.has("PayPeriodType"))) {
+						responseObj = SmallbPayrollMethods.createNewAccount(newAccountObj);
+						if (responseObj.getBoolean("AccountCreated")) {
+							response.setStatus(HttpServletResponse.SC_CREATED);
+						} else {
+							response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						}
+					} else {
+						response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						responseObj.put("ErrorMessage", "The \"NewAccount\" object must have the "
+								+ "following parameters: AccountSub, Name, Email, PayPeriodType");
+					}
+				} else {
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					responseObj.put("ErrorMessage", "Object for \"NewAccount\" was not found and "
+							+ "is a required parameter for this method");
+				}
+				break;
+				
+			case "CreateNewEmployee":
+				
 			default:
-				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 				responseObj.put("message", "Given post-command is not available.");
 				break;
 		}
@@ -68,14 +136,16 @@ public class SmallbPayrollApi extends HttpServlet {
 	/**
 	 * Handles all of the requests that come in via a "delete" request.
 	 */
-	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws
+			ServletException, IOException {
 		response.setContentType(JSON_CONTENT);
-		JSONObject requestObj = new JSONObject(request.getReader().lines().collect(Collectors.joining()));
+		JSONObject requestObj = new JSONObject(request.getReader().lines()
+				.collect(Collectors.joining()));
 		String command = requestObj.getString("command");
 		JSONObject responseObj = new JSONObject();
 		switch (command) {
 			default:
-				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 				responseObj.put("message", "Given delete-command is not available.");
 				break;
 		}
