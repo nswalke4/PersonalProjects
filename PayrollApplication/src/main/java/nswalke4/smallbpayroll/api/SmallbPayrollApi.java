@@ -16,7 +16,7 @@ import org.json.JSONObject;
  * execute commands on the back end of the Smallb Payroll Application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.01
+ * @version 1.02
  */
 public class SmallbPayrollApi extends HttpServlet {
 	
