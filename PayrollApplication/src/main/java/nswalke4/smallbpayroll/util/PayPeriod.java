@@ -1,10 +1,6 @@
 package main.java.nswalke4.smallbpayroll.util;
 
 import java.sql.Date;
-import java.util.HashMap;
-import java.util.List;
-
-import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
 
 /**
  * This class is a representation of the PayPeriod table from the database used
@@ -12,7 +8,7 @@ import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
  * account object in the database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.03
+ * @version 1.04
  */
 public class PayPeriod {
 
@@ -29,15 +25,12 @@ public class PayPeriod {
 	private final String periodId;
 	private final Date startDate;
 	private final Date endDate;
-	private HashMap<String, Timecard> timecards;
 
 	// Constructor
 	public PayPeriod(String pPeriodId, Date pStartDate, Date pEndDate) {
 		this.periodId = pPeriodId;
 		this.startDate = pStartDate;
 		this.endDate = pEndDate;
-		this.timecards = new HashMap<String, Timecard>();
-		this.updateTimecards();
 	}
 
 	// Getters
@@ -66,30 +59,5 @@ public class PayPeriod {
 	 */
 	public Date getEndDate() {
 		return endDate;
-	}
-
-	/**
-	 * Get's the hash map of all the timecards that are connected to the Pay Period
-	 * object using the employee's id as the key and the timecard object as the value.
-	 * 
-	 * @return the HashMap of the timecards of the PayPeriod object
-	 */
-	public HashMap<String, Timecard> getTimecards() {
-		return timecards;
-	}
-
-	// Class Methods
-	/**
-	 * Collects all of the tuples attached to the Timecard table with the PeriodID
-	 * equal to the current PayPeriod's PeriodID from the database, and then adds
-	 * any tuple to the timecards HashMap that is not already listed in it.
-	 */
-	public void updateTimecards() {
-		List<Timecard> timecardList = DatabaseQueries.getAllPayPeriodTimecards(this);
-		for (Timecard t : timecardList) {
-			if (!timecards.containsKey(t.getEmployeeId())) {
-				timecards.put(t.getEmployeeId(), t);
-			}
-		}
 	}
 }
