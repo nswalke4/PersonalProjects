@@ -219,11 +219,11 @@ public class DatabaseQueries {
 				if (rs.getString("Emp_Type").equalsIgnoreCase("hourly")) {
 					emp = new HourlyEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"), 
 							rs.getString("Last_Name"), rs.getString("Phone_Num"),
-							rs.getFloat("Rate"));
+							rs.getDouble("Rate"));
 				} else {
 					emp = new SalaryEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"), 
 							rs.getString("Last_Name"), rs.getString("Phone_Num"),
-							rs.getFloat("Period_Rate"));
+							rs.getDouble("Period_Rate"));
 				}
 				result.add(emp);
 			}
@@ -281,8 +281,8 @@ public class DatabaseQueries {
 		try {
 			while (rs.next()) {
 				Timecard tc = new Timecard(rs.getString("Emp_Id"), rs.getString("Period_Id"), 
-						rs.getFloat("Regular_Hours"), rs.getFloat("Overtime_Hours"),
-						rs.getFloat("Bonus_Pay"), rs.getFloat("Other_Pay"));
+						rs.getDouble("Regular_Hours"), rs.getDouble("Overtime_Hours"),
+						rs.getDouble("Bonus_Pay"), rs.getDouble("Other_Pay"));
 				result.add(tc);
 			}
 		} catch (SQLException sqlex) {
@@ -311,8 +311,8 @@ public class DatabaseQueries {
 		try {
 			while (rs.next()) {
 				Timecard tc = new Timecard(rs.getString("Emp_Id"), rs.getString("Period_Id"), 
-						rs.getFloat("Regular_Hours"), rs.getFloat("Overtime_Hours"),
-						rs.getFloat("Bonus_Pay"), rs.getFloat("Other_Pay"));
+						rs.getDouble("Regular_Hours"), rs.getDouble("Overtime_Hours"),
+						rs.getDouble("Bonus_Pay"), rs.getDouble("Other_Pay"));
 				result.add(tc);
 			}
 		} catch (SQLException sqlex) {
