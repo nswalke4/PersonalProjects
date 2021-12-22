@@ -226,31 +226,31 @@ public class SmallbPayrollApi extends HttpServlet {
 		response.getWriter().println(responseObj.toString());
 	}
 
-	/**
-	 * Handles all of the requests that come in via a "delete" request.
-	 */
-	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws
-			ServletException, IOException {
-		response.setContentType(JSON_CONTENT);
-		JSONObject responseObj = new JSONObject();
-		if (!request.getContentType().equals(JSON_CONTENT)) {
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			responseObj.put("Failure", "Invalid Content Type");
-			responseObj.put("ErrorMessage", "The content type of the request cannot be properly "
-					+ "handled.  Currently, this server can only accept \"" + JSON_CONTENT + "\""
-					+ " as the request content-type.");
-		}
-		JSONObject requestObj = new JSONObject(request.getReader().lines()
-				.collect(Collectors.joining()));
-		String command = requestObj.getString("command");
-		switch (command) {
-			default:
-				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-				responseObj.put("Failure", "Command Not Found");
-				responseObj.put("ErrorMessage", "The client's requested \"delete\" method was not "
-						+ "found as a valid method on this server.");
-				break;
-		}
-		response.getWriter().println(responseObj.toString());
-	}
+//	/**
+//	 * Handles all of the requests that come in via a "delete" request.
+//	 */
+//	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws
+//			ServletException, IOException {
+//		response.setContentType(JSON_CONTENT);
+//		JSONObject responseObj = new JSONObject();
+//		if (!request.getContentType().equals(JSON_CONTENT)) {
+//			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//			responseObj.put("Failure", "Invalid Content Type");
+//			responseObj.put("ErrorMessage", "The content type of the request cannot be properly "
+//					+ "handled.  Currently, this server can only accept \"" + JSON_CONTENT + "\""
+//					+ " as the request content-type.");
+//		}
+//		JSONObject requestObj = new JSONObject(request.getReader().lines()
+//				.collect(Collectors.joining()));
+//		String command = requestObj.getString("command");
+//		switch (command) {
+//			default:
+//				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+//				responseObj.put("Failure", "Command Not Found");
+//				responseObj.put("ErrorMessage", "The client's requested \"delete\" method was not "
+//						+ "found as a valid method on this server.");
+//				break;
+//		}
+//		response.getWriter().println(responseObj.toString());
+//	}
 }
