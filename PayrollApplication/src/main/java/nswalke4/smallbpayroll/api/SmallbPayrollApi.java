@@ -37,19 +37,27 @@ public class SmallbPayrollApi extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws
 			ServletException, IOException {
 		response.setContentType(JSON_CONTENT);
+		JSONObject responseObj = new JSONObject();
+		if (!request.getContentType().equals(JSON_CONTENT)) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			responseObj.put("Failure", "Invalid Content Type");
+			responseObj.put("ErrorMessage", "The content type of the request cannot be properly "
+					+ "handled.  Currently, this server can only accept \"" + JSON_CONTENT + "\""
+					+ " as the request content-type.");
+		}
 		JSONObject requestObj = new JSONObject(request.getReader().lines()
 				.collect(Collectors.joining()));
 		String command = requestObj.getString("command");
-		JSONObject responseObj = new JSONObject();
 		switch (command) {
 		
-			case "CompleteLogin":
+			case "GetAccountInfo":
 				if (requestObj.has("AccountSub")) {
 					response.setStatus(HttpServletResponse.SC_OK);
-					responseObj = SmallbPayrollMethods.completeAccountLogin(requestObj
+					responseObj = SmallbPayrollMethods.gatherAccountInformation(requestObj
 							.getString("AccountSub"));
 				} else {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					responseObj.put("Failure", "Invalid Parameters");
 					responseObj.put("ErrorMessage", "Value for \"AccountSub\" was not found and is"
 							+ " a required parameter for this method");
 				}
@@ -62,6 +70,7 @@ public class SmallbPayrollApi extends HttpServlet {
 							.getString("EmployeeId"));
 				} else {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					responseObj.put("Failure", "Invalid Parameters");
 					responseObj.put("ErrorMessage", "Value for \"EmployeeId\" was not found and is"
 							+ " a required parameter for this method");
 				}
@@ -74,6 +83,7 @@ public class SmallbPayrollApi extends HttpServlet {
 							.getString("PayPeriodId"));
 				} else {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					responseObj.put("Failure", "Invalid Parameters");
 					responseObj.put("ErrorMessage", "Value for \"PayPeriodId\" was not found and is"
 							+ " a required parameter for this method");
 				}
@@ -81,7 +91,9 @@ public class SmallbPayrollApi extends HttpServlet {
 				
 			default:
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-				responseObj.put("ErrorMessage", "Given get-command is not available.");
+				responseObj.put("Failure", "Command Not Found");
+				responseObj.put("ErrorMessage", "The client's requested \"get\" method was not "
+						+ "found as a valid method on this server.");
 				break;
 				
 		}
@@ -94,10 +106,17 @@ public class SmallbPayrollApi extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws
 			ServletException, IOException {
 		response.setContentType(JSON_CONTENT);
+		JSONObject responseObj = new JSONObject();
+		if (!request.getContentType().equals(JSON_CONTENT)) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			responseObj.put("Failure", "Invalid Content Type");
+			responseObj.put("ErrorMessage", "The content type of the request cannot be properly "
+					+ "handled.  Currently, this server can only accept \"" + JSON_CONTENT + "\""
+					+ " as the request content-type.");
+		}
 		JSONObject requestObj = new JSONObject(request.getReader().lines()
 				.collect(Collectors.joining()));
 		String command = requestObj.getString("command");
-		JSONObject responseObj = new JSONObject();
 		switch (command) {
 		
 			case "CreateNewAccount":
@@ -106,28 +125,102 @@ public class SmallbPayrollApi extends HttpServlet {
 					if ((newAccountObj.has("AccountSub")) && (newAccountObj.has("Name")) &&
 							(newAccountObj.has("Email")) && (newAccountObj.has("PayPeriodType"))) {
 						responseObj = SmallbPayrollMethods.createNewAccount(newAccountObj);
-						if (responseObj.getBoolean("AccountCreated")) {
-							response.setStatus(HttpServletResponse.SC_CREATED);
-						} else {
+						if (responseObj.has("Failure")) {
 							response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						} else {
+							response.setStatus(HttpServletResponse.SC_CREATED);
 						}
 					} else {
 						response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						responseObj.put("Failure", "Invalid Parameters");
 						responseObj.put("ErrorMessage", "The \"NewAccount\" object must have the "
 								+ "following parameters: AccountSub, Name, Email, PayPeriodType");
 					}
 				} else {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					responseObj.put("Failure", "Invalid Parameters");
 					responseObj.put("ErrorMessage", "Object for \"NewAccount\" was not found and "
 							+ "is a required parameter for this method");
 				}
 				break;
 				
 			case "CreateNewEmployee":
+				if ((requestObj.has("AccountSub")) && (requestObj.has("NewEmployee"))) {
+					JSONObject newEmployeeObj = requestObj.getJSONObject("NewEmployee");
+					if ((newEmployeeObj.has("EmployeeId")) && (newEmployeeObj.has("FirstName"))
+							&& (newEmployeeObj.has("LastName")) && (newEmployeeObj.has("EmpType"))
+							&& (newEmployeeObj.has("PayRate"))) {
+						responseObj = SmallbPayrollMethods.createNewEmployee(requestObj);
+						if (responseObj.has("Failure")) {
+							response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						} else {
+							response.setStatus(HttpServletResponse.SC_CREATED);
+						}
+					} else {
+						response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						responseObj.put("Failure", "Invalid Parameters");
+						responseObj.put("ErrorMessage", "The \"NewEmployee\" object must have the "
+								+ "following parameters: EmployeeId, FirstName, LastName, EmpType,"
+								+ " PayRate");
+					}
+				} else {
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					responseObj.put("Failure", "Invalid Parameters");
+					responseObj.put("ErrorMessage", "The creation of a \"NewEmployee\" must "
+							+ "include both the \"NewEmployee\" object as well as the "
+							+ "\"AccountSub\" that the employee belongs to.");
+					
+				}
+				break;
+				
+			case "CreateNewPayPeriod":
+				if ((requestObj.has("AccountSub")) && (requestObj.has("PeriodStartDate"))) {
+					responseObj = SmallbPayrollMethods.createNewPayPeriod(requestObj);
+					if (responseObj.has("Failure")) {
+						response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					} else {
+						response.setStatus(HttpServletResponse.SC_CREATED);
+					}
+				} else {
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					responseObj.put("Failure", "Invalid Parameters");
+					responseObj.put("ErrorMessage", "The creation of a \"NewPayPeriod\" must "
+							+ "include both the \"PeriodStartDate\" as well as the "
+							+ "\"AccountSub\" that the pay period belongs to.");
+					
+				}
+				break;
+				
+			case "CreateNewTimecard":
+				if ((requestObj.has("AccountSub")) && (requestObj.has("TimecardInfo"))) {
+					JSONObject timecardObj = requestObj.getJSONObject("TimecardInfo");
+					if ((timecardObj.has("EmployeeId")) && (timecardObj.has("PeriodId"))) {
+						responseObj = SmallbPayrollMethods.createNewTimecard(requestObj);
+						if (responseObj.has("Failure")) {
+							response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						} else {
+							response.setStatus(HttpServletResponse.SC_CREATED);
+						}
+					} else {
+						response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+						responseObj.put("Failure", "Invalid Parameters");
+						responseObj.put("ErrorMessage", "The \"TimecardInfo\" object must have "
+								+ "the following parameters: EmployeeId, PeriodId");
+					}
+				} else {
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					responseObj.put("Failure", "Invalid Parameters");
+					responseObj.put("ErrorMessage", "The creation of a \"NewEmployeeTimecard\" "
+							+ "must include both the \"TimecardInfo\" as well as the "
+							+ "\"AccountSub\" that the timecard belongs to.");
+				}
+				break;
 				
 			default:
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-				responseObj.put("message", "Given post-command is not available.");
+				responseObj.put("Failure", "Command Not Found");
+				responseObj.put("ErrorMessage", "The client's requested \"post\" method was not "
+						+ "found as a valid method on this server.");
 				break;
 		}
 		response.getWriter().println(responseObj.toString());
@@ -139,14 +232,23 @@ public class SmallbPayrollApi extends HttpServlet {
 	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws
 			ServletException, IOException {
 		response.setContentType(JSON_CONTENT);
+		JSONObject responseObj = new JSONObject();
+		if (!request.getContentType().equals(JSON_CONTENT)) {
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			responseObj.put("Failure", "Invalid Content Type");
+			responseObj.put("ErrorMessage", "The content type of the request cannot be properly "
+					+ "handled.  Currently, this server can only accept \"" + JSON_CONTENT + "\""
+					+ " as the request content-type.");
+		}
 		JSONObject requestObj = new JSONObject(request.getReader().lines()
 				.collect(Collectors.joining()));
 		String command = requestObj.getString("command");
-		JSONObject responseObj = new JSONObject();
 		switch (command) {
 			default:
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-				responseObj.put("message", "Given delete-command is not available.");
+				responseObj.put("Failure", "Command Not Found");
+				responseObj.put("ErrorMessage", "The client's requested \"delete\" method was not "
+						+ "found as a valid method on this server.");
 				break;
 		}
 		response.getWriter().println(responseObj.toString());
