@@ -14,7 +14,7 @@ import main.java.nswalke4.smallbpayroll.util.Timecard;
  * database and check to ensure that basic queries are being executed properly.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.02
+ * @version 1.03
  */
 public class MainTest {
 
@@ -29,7 +29,7 @@ public class MainTest {
 		new DatabaseProperties();
 		
 		System.out.println("Welcome to the Small-b Payroll Application Testing!");
-		System.out.println("                Testing Version 1.02");
+		System.out.println("                Testing Version 1.03");
 		
 		// Basic Query Tests
 		System.out.println("\nBeginning Query Testing...");
@@ -62,6 +62,17 @@ public class MainTest {
 		DatabaseQueries.addTimecard(newAccount, newEmp, newPayP, 40.00, 5.00, 0.00, 0.00);
 		printTimecards(DatabaseQueries.getAllEmployeeTimecards(newEmp));
 		System.out.println("\nEnd Insertion Testing...");
+		
+		// Basic Count Tests
+		System.out.println("\nBeginning Count Testing...");
+		System.out.println("\nCounting the number of Employees for Account #2");
+		System.out.println("     - NOTE: The result should be 1");
+		Account account2 = DatabaseQueries.getSpecificAccount("bcdea241-27b3-4efd-a8c6-cd797c0f8a68");
+		System.out.println(DatabaseQueries.getNumEmployees(account2));
+		
+		System.out.println("\nCounting the number of PayPeriods for Account #2");
+		System.out.println("     - Note: The result should be 2");
+		System.out.println(DatabaseQueries.getNumPayPeriods(account2));
 		
 		System.out.println("\nThis concludes the basic testing for the Database connection");
 	}
