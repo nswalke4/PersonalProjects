@@ -21,7 +21,7 @@ import main.java.nswalke4.smallbpayroll.util.Timecard;
  * insertion to be sent through, keeping the connection time as minimal as possible.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.06
+ * @version 1.07
  */
 public class DatabaseQueries {
 
@@ -198,12 +198,38 @@ public class DatabaseQueries {
 	}
 	
 	/**
+	 * Queries the database to gather the number of Employee accounts attached
+	 * to the given Account and returns the result.
+	 * 
+	 * @param account - the Account object that the employees are tied to
+	 * @return - an integer representing the number of Employees the account has
+	 */
+	public static int getNumEmployees(Account account) {
+		int result = 0;
+		String query = "SELECT COUNT(*) AS Emp_Count FROM Employee WHERE Account_Id = "
+				+ account.getId() + ";";
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		ResultSet rs = db.executeBasicQuery(query);
+		try {
+			while (rs.next()) {
+				result = rs.getInt("Emp_Count"); 
+			}
+		} catch (SQLException sqlex) {
+			System.out.println("[FAILURE] Something went wrong while trying to read the "
+					+ "results...");
+			sqlex.printStackTrace();
+		}
+		db.closeConnection();
+		return result;
+	}
+	
+	/**
 	 * Queries the database to gather all of the Employee accounts attached
 	 * to the given Account, creates the HourlyEmployee or SalaryEmployee
 	 * object representation based on the "emp_type" attribute, and then adds
 	 * each employee to an ArrayList to be returned as the result.
 	 * 
-	 * @param account - the Account object that the employee's are tied to
+	 * @param account - the Account object that the employees are tied to
 	 * @return - an ArrayList of all of the employees attached to the given account
 	 */
 	public static List<Employee> getEmployees(Account account) {
@@ -226,6 +252,32 @@ public class DatabaseQueries {
 							rs.getDouble("Period_Rate"));
 				}
 				result.add(emp);
+			}
+		} catch (SQLException sqlex) {
+			System.out.println("[FAILURE] Something went wrong while trying to read the "
+					+ "results...");
+			sqlex.printStackTrace();
+		}
+		db.closeConnection();
+		return result;
+	}
+	
+	/**
+	 * Queries the database to gather the number of Pay Periods that are attached
+	 * to the given Account and returns the result.
+	 * 
+	 * @param account - the Account object that the pay periods are tied to
+	 * @return - an integer representing the number of pay periods the account has
+	 */
+	public static int getNumPayPeriods(Account account) {
+		int result = 0;
+		String query = "SELECT COUNT(*) AS Pay_Period_Count FROM Pay_Period WHERE Account_Id = "
+				+ account.getId() + ";";
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		ResultSet rs = db.executeBasicQuery(query);
+		try {
+			while (rs.next()) {
+				result = rs.getInt("Pay_Period_Count"); 
 			}
 		} catch (SQLException sqlex) {
 			System.out.println("[FAILURE] Something went wrong while trying to read the "
