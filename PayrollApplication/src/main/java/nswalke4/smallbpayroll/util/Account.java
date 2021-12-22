@@ -12,7 +12,7 @@ import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
  * Payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.05
+ * @version 1.06
  */
 public class Account {
 
@@ -100,6 +100,7 @@ public class Account {
 	 * @return the HashMap of the employees of the account object
 	 */
 	public HashMap<String, Employee> getEmployees() {
+		this.updateEmployees();
 		return employees;
 	}
 
@@ -111,6 +112,7 @@ public class Account {
 	 * @return the HashMap of the pay periods of the account object
 	 */
 	public HashMap<String, PayPeriod> getPayPeriods() {
+		this.updatePayPeriods();
 		return payPeriods;
 	}
 
@@ -126,6 +128,7 @@ public class Account {
 		String empId = String.valueOf(this.id);
 		empId += "-E-";
 		int empNum = 1;
+		this.updateEmployees();
 		if (!employees.isEmpty()) {
 			empNum += employees.size();
 		}
@@ -177,6 +180,7 @@ public class Account {
 		String ppId = String.valueOf(this.id);
 		ppId += "-P-";
 		int ppNum = 1;
+		this.updatePayPeriods();
 		if (!payPeriods.isEmpty()) {
 			ppNum += payPeriods.size();
 		}
@@ -197,7 +201,7 @@ public class Account {
 	 * equal to the current account's AccountID from the database, and then adds any
 	 * tuple to the employees HashMap that is not already listed in it.
 	 */
-	public void updateEmployees() {
+	private void updateEmployees() {
 		List<Employee> empList = DatabaseQueries.getEmployees(this);
 		for (Employee e : empList) {
 			if (!employees.containsKey(e.getEmployeeId())) {
@@ -211,7 +215,7 @@ public class Account {
 	 * equal to the current account's AccountID from the database, and then adds any
 	 * tuple to the payPeriods HashMap that is not already listed in it.
 	 */
-	public void updatePayPeriods() {
+	private void updatePayPeriods() {
 		List<PayPeriod> payPeriodList = DatabaseQueries.getPayPeriods(this);
 		for (PayPeriod p : payPeriodList) {
 			if (!payPeriods.containsKey(p.getPeriodId())) {
