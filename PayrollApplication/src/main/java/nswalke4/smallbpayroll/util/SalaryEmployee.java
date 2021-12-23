@@ -1,11 +1,13 @@
 package main.java.nswalke4.smallbpayroll.util;
 
+import org.json.JSONObject;
+
 /**
  * This class represents the Salary Employee object based off of the database
  * schema for the payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.03
+ * @version 1.04
  */
 public class SalaryEmployee extends Employee {
 
@@ -38,5 +40,20 @@ public class SalaryEmployee extends Employee {
 	 */
 	public double getPeriodRate() {
 		return periodRate;
+	}
+	
+	// Class Methods
+	/**
+	 * Creates a JSONObject of the Hourly Employee object using the super class's
+	 * method to create the basic object, and then appends the Salary Employee's
+	 * period pay rate to the object before returning it.
+	 * 
+	 * @return - the JSONObject representation of an Salary employee
+	 */
+	@Override
+	public JSONObject makeIntoJSONObject() {
+		JSONObject result = super.makeIntoJSONObject();
+		result.put("PayPeriodRate", this.getPeriodRate());
+		return result;
 	}
 }

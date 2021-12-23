@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
 
 /**
@@ -12,7 +15,7 @@ import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
  * Payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.06
+ * @version 1.07
  */
 public class Account {
 
@@ -222,5 +225,34 @@ public class Account {
 				payPeriods.put(p.getPeriodId(), p);
 			}
 		}
+	}
+
+	/**
+	 * Collects all of the information about the Account object and then creates a
+	 * JSONObject representation of all of that information (including the basic info
+	 * about the Account object [excluding the AccountSub], basic info about all of
+	 * the Employees tied to this account, and basic info about all of the PayPeriods
+	 * tied to this account.
+	 * 
+	 * @return - a JSONObject representation of an Account object as well as all of its
+	 *           Employees and PayPeriods
+	 */
+	public JSONObject makeIntoJSONObject() {
+		JSONObject result = new JSONObject();
+		result.put("ID", this.getId());
+		result.put("Name", this.getName());
+		result.put("Email", this.getEmail());
+		result.put("PeriodType", this.getPeriodType());
+		JSONArray employeesArray = new JSONArray();
+		for (HashMap.Entry<String, Employee> empMap : employees.entrySet()) {
+			employeesArray.put(empMap.getValue().makeIntoJSONObject());
+		}
+		result.put("Employees", employeesArray);
+		JSONArray payPeriodsArray = new JSONArray();
+		for (HashMap.Entry<String, PayPeriod> payPeriodMap : payPeriods.entrySet()) {
+			payPeriodsArray.put(payPeriodMap.getValue().makeIntoJSONObject());
+		}
+		result.put("PayPeriods", payPeriodsArray);
+		return result;
 	}
 }
