@@ -21,7 +21,7 @@ import main.java.nswalke4.smallbpayroll.util.Timecard;
  * insertion to be sent through, keeping the connection time as minimal as possible.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.07
+ * @version 1.08
  */
 public class DatabaseQueries {
 
@@ -35,13 +35,18 @@ public class DatabaseQueries {
 	 * @param sub - the AWS Cognito generated sub (id) to signify the account being used
 	 * @param periodType - the type of PayPeriod the account uses
 	 */
-	public static void addAccount(String name, String email, String sub,
+	public static boolean addAccount(String name, String email, String sub,
 			PayPeriod.PayPeriodType periodType) {
 		String insert = "INSERT INTO Account (Name, Email, Account_Sub, Pay_Period) VALUES (\""
 				+ name + "\", \"" + email + "\", \"" + sub + "\", \"" + periodType + "\");";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
-		db.executeBasicUpdate(insert);
+		int insertedRows = db.executeBasicUpdate(insert);
 		db.closeConnection();
+		if (insertedRows == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	/**
@@ -56,7 +61,7 @@ public class DatabaseQueries {
 	 * @param phoneNum - the phone number of the employee
 	 * @param payRate - the pay rate of the hourly employee
 	 */
-	public static void addHourlyEmployee(Account account, String firstName, String lastName,
+	public static boolean addHourlyEmployee(Account account, String firstName, String lastName,
 			String phoneNum, double payRate) {
 		String empId = account.generateEmployeeID();
 		String insertEmp = "INSERT INTO Employee VALUES (" + account.getId() + ", \"" + empId
@@ -65,9 +70,15 @@ public class DatabaseQueries {
 		String insertHrly = "INSERT INTO Hourly_Employee VALUES (" + account.getId() + ", \""
 				+ empId + "\", " + payRate + ");";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
-		db.executeBasicUpdate(insertEmp);
-		db.executeBasicUpdate(insertHrly);
+		int insertedRows = 0;
+		insertedRows += db.executeBasicUpdate(insertEmp);
+		insertedRows += db.executeBasicUpdate(insertHrly);
 		db.closeConnection();
+		if (insertedRows == 2) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	/**
@@ -82,7 +93,7 @@ public class DatabaseQueries {
 	 * @param phoneNum - the phone number of the employee
 	 * @param payRate - the pay rate of the salary employee
 	 */
-	public static void addSalaryEmployee(Account account, String firstName, String lastName,
+	public static boolean addSalaryEmployee(Account account, String firstName, String lastName,
 			String phoneNum, double payRate) {
 		String empId = account.generateEmployeeID();
 		String insertEmp = "INSERT INTO Employee VALUES (" + account.getId() + ", \"" + empId
@@ -91,9 +102,15 @@ public class DatabaseQueries {
 		String insertSlry = "INSERT INTO Salary_Employee VALUES (" + account.getId() + ", \""
 				+ empId + "\", " + payRate + ");";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
-		db.executeBasicUpdate(insertEmp);
-		db.executeBasicUpdate(insertSlry);
+		int insertedRows = 0;
+		insertedRows += db.executeBasicUpdate(insertEmp);
+		insertedRows += db.executeBasicUpdate(insertSlry);
 		db.closeConnection();
+		if (insertedRows == 2) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	/**
@@ -105,14 +122,19 @@ public class DatabaseQueries {
 	 * @param account - the account to attach the payPeriod to
 	 * @param startDate - the start date of the payPeriod
 	 */
-	public static void addPayPeriod(Account account, Date startDate) {
+	public static boolean addPayPeriod(Account account, Date startDate) {
 		String periodId = account.generatePayPeriodID();
 		Date endDate = account.generateEndDate(startDate);
 		String insert = "INSERT INTO Pay_Period VALUES (" + account.getId() + ", \"" + periodId
 				+ "\", '" + startDate + "', '" + endDate + "');";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
-		db.executeBasicUpdate(insert);
+		int insertedRows = db.executeBasicUpdate(insert);
 		db.closeConnection();
+		if (insertedRows == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	/**
@@ -122,22 +144,26 @@ public class DatabaseQueries {
 	 * NOTE: This does not check if the insertion worked properly...
 	 * 
 	 * @param account - the account to attach the timecard to
-	 * @param employee - the employee to attach the timecard to
-	 * @param payPeriod - the payPeriod to attach the timercard to
+	 * @param employeeId - the id of the employee to attach the timecard to
+	 * @param payPeriod - the id of the payPeriod to attach the timercard to
 	 * @param regHours - the number of regular hours worked (used by 'hourly')
 	 * @param overtimeHours - the number of overtime hours worked (used by 'hourly')
 	 * @param bonusPay - the amount of bonusPay given to the employee
 	 * @param otherPay - the amount of otherPay given to the employee
 	 */
-	public static void addTimecard(Account account, Employee employee, PayPeriod payPeriod,
+	public static boolean addTimecard(Account account, String employeeId, String payPeriodId,
 			double regHours, double overtimeHours, double bonusPay, double otherPay) {
 		String insert = "INSERT INTO Timecard VALUES (" + account.getId() + ", \""
-				+ employee.getEmployeeId() + "\", \"" + payPeriod.getPeriodId() + "\", \""
-				+ regHours + "\", \"" + overtimeHours + "\", \"" + bonusPay + "\", \""
-				+ otherPay +"\");";
+				+ employeeId + "\", \"" + payPeriodId + "\", \"" + regHours + "\", \""
+				+ overtimeHours + "\", \"" + bonusPay + "\", \"" + otherPay +"\");";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
-		db.executeBasicUpdate(insert);
+		int insertedRows = db.executeBasicUpdate(insert);
 		db.closeConnection();
+		if (insertedRows == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	// Query Methods
@@ -317,6 +343,42 @@ public class DatabaseQueries {
 	}
 	
 	/**
+	 * Queries the database to gather a specific employee using the given "employeeId"
+	 * string to find the specific employee, and then return's the given hourly or salary
+	 * employee object.
+	 * 
+	 * @param employeeId - the id of the employee to find in the database
+	 * @return - the Employee object tied to the given employeeId string (or null)
+	 */
+	public static Employee getSpecificEmployee(String employeeId) {
+		Employee result = null;
+		String query ="SELECT * FROM ((Employee AS E LEFT JOIN Hourly_Employee AS H ON E.Emp_Id = "
+				+ "H.Emp_Id) LEFT JOIN Salary_Employee AS S ON E.Emp_Id = S.Emp_Id)"
+				+ "WHERE E.Emp_Id = \"" + employeeId + "\";";
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		ResultSet rs = db.executeBasicQuery(query);
+		try {
+			while (rs.next()) {
+				if (rs.getString("Emp_Type").equalsIgnoreCase("hourly")) {
+					result = new HourlyEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"), 
+							rs.getString("Last_Name"), rs.getString("Phone_Num"),
+							rs.getDouble("Rate"));
+				} else {
+					result = new SalaryEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"), 
+							rs.getString("Last_Name"), rs.getString("Phone_Num"),
+							rs.getDouble("Period_Rate"));
+				}
+			}
+		} catch (SQLException sqlex) {
+			System.out.println("[FAILURE] Something went wrong while trying to read the "
+					+ "results...");
+			sqlex.printStackTrace();
+		}
+		db.closeConnection();
+		return result;
+	}
+
+	/**
 	 * Queries the database to gather all of the timecard tuples attached to the given
 	 * employee, creates new Timecard object for each of the tuples, and then returns an
 	 * ArrayList of all of the Timecards attached to the given employee.
@@ -346,6 +408,32 @@ public class DatabaseQueries {
 		return result;
 	}
 	
+	/**
+	 * Queries the database to gather a specific pay period using the give "payPeriodId"
+	 * string to find the specific pay period, and then return's the pay period object.
+	 * 
+	 * @param payPeriodId - the id of the pay period to find in the database
+	 * @return - the PayPeriod object tied to the given payPeriodId string (or null)
+	 */
+	public static PayPeriod getSpecificPayPeriod(String payPeriodId) {
+		PayPeriod result = null;
+		String query = "";
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		ResultSet rs = db.executeBasicQuery(query);
+		try {
+			while (rs.next()) {
+				result = new PayPeriod(rs.getString("Period_Id"), 
+						rs.getDate("Start_Date"), rs.getDate("End_Date"));
+			}
+		} catch (SQLException sqlex) {
+			System.out.println("[FAILURE] Something went wrong while trying to read the "
+					+ "results...");
+			sqlex.printStackTrace();
+		}
+		db.closeConnection();
+		return result;
+	}
+
 	/**
 	 * Queries the database to gather all of the timecard tuples attached to the given
 	 * pay period, creates new Timecard object for each of the tuples, and then returns an

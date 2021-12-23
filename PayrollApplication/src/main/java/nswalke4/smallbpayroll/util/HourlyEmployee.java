@@ -1,11 +1,13 @@
 package main.java.nswalke4.smallbpayroll.util;
 
+import org.json.JSONObject;
+
 /**
  * This class represents an Hourly Employee object based off of the database
  * schema for the payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.03
+ * @version 1.04
  */
 public class HourlyEmployee extends Employee {
 
@@ -37,5 +39,20 @@ public class HourlyEmployee extends Employee {
 	 */
 	public double getRate() {
 		return rate;
+	}
+	
+	// Class Methods
+	/**
+	 * Creates a JSONObject of the Hourly Employee object using the super class's
+	 * method to create the basic object, and then appends the Hourly Employee's
+	 * pay rate to the object before returning it.
+	 * 
+	 * @return - the JSONObject representation of an Hourly employee
+	 */
+	@Override
+	public JSONObject makeIntoJSONObject() {
+		JSONObject result = super.makeIntoJSONObject();
+		result.put("HourlyRate", this.getRate());
+		return result;
 	}
 }

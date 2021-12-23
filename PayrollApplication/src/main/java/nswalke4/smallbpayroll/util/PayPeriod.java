@@ -2,13 +2,15 @@ package main.java.nswalke4.smallbpayroll.util;
 
 import java.sql.Date;
 
+import org.json.JSONObject;
+
 /**
  * This class is a representation of the PayPeriod table from the database used
  * for the payroll application, as well as the two enumerators used by the
  * account object in the database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.04
+ * @version 1.05
  */
 public class PayPeriod {
 
@@ -59,5 +61,19 @@ public class PayPeriod {
 	 */
 	public Date getEndDate() {
 		return endDate;
+	}
+
+	// Class Methods
+	/**
+	 * Creates a JSONObject representation of the PayPeriod object.
+	 * 
+	 * @return - a JSONObject representation of this PayPeriod object
+	 */
+	public JSONObject makeIntoJSONObject() {
+		JSONObject result = new JSONObject();
+		result.put("PeriodID", this.getPeriodId());
+		result.put("StartDate", this.getStartDate());
+		result.put("EndDate", this.getEndDate());
+		return result;
 	}
 }

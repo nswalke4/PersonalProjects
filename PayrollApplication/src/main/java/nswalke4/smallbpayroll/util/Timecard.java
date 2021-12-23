@@ -1,11 +1,13 @@
 package main.java.nswalke4.smallbpayroll.util;
 
+import org.json.JSONObject;
+
 /**
  * This class is a representation of the Timecard table in the database for the
  * payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.02
+ * @version 1.03
  */
 public class Timecard {
 
@@ -91,5 +93,22 @@ public class Timecard {
 	 */
 	public double getOtherPay() {
 		return otherPay;
+	}
+
+	// Class Methods
+	/**
+	 * Creates a JSONObject representation of the Timecard java object.
+	 * 
+	 * @return - a JSONObject representation of the Timecard object
+	 */
+	public JSONObject makeIntoJSONObject() {
+		JSONObject result = new JSONObject();
+		result.put("EmployeeID", this.getEmployeeId());
+		result.put("PayPeriodID", this.getPeriodId());
+		result.put("RegularHours", this.getRegularHours());
+		result.put("OvertimeHours", this.getOvertimeHours());
+		result.put("BonusPay", this.getBonusPay());
+		result.put("OtherPay", this.getOtherPay());
+		return result;
 	}
 }

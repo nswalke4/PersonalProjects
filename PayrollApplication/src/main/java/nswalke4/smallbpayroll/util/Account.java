@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
 
 /**
@@ -12,7 +15,7 @@ import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
  * Payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.06
+ * @version 1.08
  */
 public class Account {
 
@@ -42,9 +45,7 @@ public class Account {
 		this.sub = pSub;
 		this.periodType = pPeriodType;
 		this.employees = new HashMap<String, Employee>();
-		this.updateEmployees();
 		this.payPeriods = new HashMap<String, PayPeriod>();
-		this.updatePayPeriods();
 	}
 
 	// Getters
@@ -127,11 +128,7 @@ public class Account {
 	public String generateEmployeeID() {
 		String empId = String.valueOf(this.id);
 		empId += "-E-";
-		int empNum = 1;
-		this.updateEmployees();
-		if (!employees.isEmpty()) {
-			empNum += employees.size();
-		}
+		int empNum = DatabaseQueries.getNumEmployees(this) + 1;
 		if (empNum < 10) {
 			empId += "000";
 		} else if (empNum < 100) {
@@ -179,11 +176,7 @@ public class Account {
 	public String generatePayPeriodID() {
 		String ppId = String.valueOf(this.id);
 		ppId += "-P-";
-		int ppNum = 1;
-		this.updatePayPeriods();
-		if (!payPeriods.isEmpty()) {
-			ppNum += payPeriods.size();
-		}
+		int ppNum = DatabaseQueries.getNumPayPeriods(this) + 1;
 		if (ppNum < 10) {
 			ppId += "000";
 		} else if (ppNum < 100) {
@@ -222,5 +215,34 @@ public class Account {
 				payPeriods.put(p.getPeriodId(), p);
 			}
 		}
+	}
+
+	/**
+	 * Collects all of the information about the Account object and then creates a
+	 * JSONObject representation of all of that information (including the basic info
+	 * about the Account object [excluding the AccountSub], basic info about all of
+	 * the Employees tied to this account, and basic info about all of the PayPeriods
+	 * tied to this account.
+	 * 
+	 * @return - a JSONObject representation of an Account object as well as all of its
+	 *           Employees and PayPeriods
+	 */
+	public JSONObject makeIntoJSONObject() {
+		JSONObject result = new JSONObject();
+		result.put("ID", this.getId());
+		result.put("Name", this.getName());
+		result.put("Email", this.getEmail());
+		result.put("PeriodType", this.getPeriodType());
+		JSONArray employeesArray = new JSONArray();
+		for (HashMap.Entry<String, Employee> empMap : this.getEmployees().entrySet()) {
+			employeesArray.put(empMap.getValue().makeIntoJSONObject());
+		}
+		result.put("Employees", employeesArray);
+		JSONArray payPeriodsArray = new JSONArray();
+		for (HashMap.Entry<String, PayPeriod> payPeriodMap : this.getPayPeriods().entrySet()) {
+			payPeriodsArray.put(payPeriodMap.getValue().makeIntoJSONObject());
+		}
+		result.put("PayPeriods", payPeriodsArray);
+		return result;
 	}
 }
