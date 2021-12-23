@@ -1,5 +1,6 @@
 package main.java.nswalke4.smallbpayroll.api;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -8,6 +9,7 @@ import org.json.JSONObject;
 import main.java.nswalke4.smallbpayroll.util.Account;
 import main.java.nswalke4.smallbpayroll.util.Employee;
 import main.java.nswalke4.smallbpayroll.util.PayPeriod;
+import main.java.nswalke4.smallbpayroll.util.PayPeriod.PayPeriodType;
 import main.java.nswalke4.smallbpayroll.util.Timecard;
 import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
 
@@ -21,6 +23,7 @@ import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
  */
 public class SmallbPayrollMethods {
 	
+	// Get Methods
 	/**
 	 * Gather's the account tied to the given "accountSub" string and then generates a
 	 * JSONObject response with the account information.
@@ -99,6 +102,7 @@ public class SmallbPayrollMethods {
 		return result;
 	}
 
+	// Insert Methods
 	/**
 	 * Attempt's to create a new Account object from the given "accountObj" JSONObject, and then
 	 * generates a JSONObject response with the created Account information (or a failure message).
@@ -109,8 +113,18 @@ public class SmallbPayrollMethods {
 	 *           requested method failed
 	 */
 	protected static JSONObject createNewAccount(JSONObject accountObj) {
-		// TODO Auto-generated method stub
-		return null;
+		JSONObject result = new JSONObject();
+		String name = accountObj.getString("Name");
+		String email = accountObj.getString("Email");
+		String sub = accountObj.getString("AccountSub");
+		PayPeriodType periodType = PayPeriodType.valueOf(accountObj.getString("PayPeriodType"));
+		if (DatabaseQueries.addAccount(name, email, sub, periodType)) {
+			result.put("Success", "Account Created");
+		} else {
+			result.put("Failure", "Unable to Create Account");
+			result.put("ErrorMessage", "Something went wrong when trying to create this account.");
+		}
+		return result;
 	}
 
 	/**
@@ -125,8 +139,36 @@ public class SmallbPayrollMethods {
 	 *           requested method failed
 	 */
 	protected static JSONObject createNewEmployee(JSONObject requestObj) {
-		// TODO Auto-generated method stub
-		return null;
+		JSONObject result = new JSONObject();
+		Account account = DatabaseQueries.getSpecificAccount(requestObj.getString("AccountSub"));
+		JSONObject newEmpObj = requestObj.getJSONObject("NewEmployee");
+		String firstName = newEmpObj.getString("FirstName");
+		String lastName = newEmpObj.getString("LastName");
+		String empType = newEmpObj.getString("EmpType");
+		String phoneNum = null;
+		if (newEmpObj.has("PhoneNum")) {
+			phoneNum = newEmpObj.getString("PhoneNum");
+		}
+		Double payRate = newEmpObj.getDouble("PayRate");
+		if (empType.equalsIgnoreCase("hourly")) {
+			if (DatabaseQueries.addHourlyEmployee(account, firstName, lastName, phoneNum,
+					payRate)) {
+				result.put("Success", "Hourly Employee Created");
+			} else {
+				result.put("Failure", "Unable to Create Employee");
+				result.put("ErrorMessage", "Something went wrong with trying to create this "
+						+ "employee.");
+			}
+		} else {
+			if (DatabaseQueries.addSalaryEmployee(account, firstName, lastName, phoneNum, payRate)) {
+				result.put("Success", "Salary Employee Created");
+			} else {
+				result.put("Failure", "Unable to Create Employee");
+				result.put("ErrorMessage", "Something went wrong with trying to create this "
+						+ "employee.");
+			}
+		}
+		return result;
 	}
 
 	/**
@@ -141,8 +183,17 @@ public class SmallbPayrollMethods {
 	 *           requested method failed
 	 */
 	protected static JSONObject createNewPayPeriod(JSONObject requestObj) {
-		// TODO Auto-generated method stub
-		return null;
+		JSONObject result = new JSONObject();
+		Account account = DatabaseQueries.getSpecificAccount(requestObj.getString("AccountSub"));
+		Date startDate = Date.valueOf(requestObj.getString("PeriodStartDate"));
+		if (DatabaseQueries.addPayPeriod(account, startDate)) {
+			result.put("Success", "Pay Period Created");
+		} else {
+			result.put("Failure", "Unable to Create Pay Period");
+			result.put("ErrorMessage", "Something went wrong with trying to create this "
+					+ "pay period.");
+		}
+		return result;
 	}
 
 	/**
@@ -157,8 +208,35 @@ public class SmallbPayrollMethods {
 	 *           requested method failed
 	 */
 	protected static JSONObject createNewTimecard(JSONObject requestObj) {
-		// TODO Auto-generated method stub
-		return null;
+		JSONObject result = new JSONObject();
+		Account account = DatabaseQueries.getSpecificAccount(requestObj.getString("AccountSub"));
+		JSONObject timecardObj = requestObj.getJSONObject("TimecardInfo");
+		String empId = timecardObj.getString("EmployeeId");
+		String payPeriodId = timecardObj.getString("PeriodId");
+		Double regHrs = null;
+		if (timecardObj.has("RegularHours")) {
+			regHrs = timecardObj.getDouble("RegularHours");
+		}
+		Double overHrs = null;
+		if (timecardObj.has("OvertimeHours")) {
+			overHrs = timecardObj.getDouble("OvertimeHours");
+		}
+		Double bonus = null;
+		if (timecardObj.has("BonusPay")) {
+			bonus = timecardObj.getDouble("BonusPay");
+		}
+		Double other = null;
+		if (timecardObj.has("OtherPay")) {
+			other = timecardObj.getDouble("OtherPay");
+		}
+		if (DatabaseQueries.addTimecard(account, empId, payPeriodId, regHrs, overHrs, bonus,
+				other)) {
+			result.put("Success", "Timecard Created");
+		} else {
+			result.put("Failure", "Unable to Create Timecard");
+			result.put("ErrorMessage", "Something went wrong with trying to create this "
+					+ "timecard.");
+		}
+		return result;
 	}
-
 }

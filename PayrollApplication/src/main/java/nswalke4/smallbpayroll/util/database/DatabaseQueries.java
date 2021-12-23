@@ -144,19 +144,18 @@ public class DatabaseQueries {
 	 * NOTE: This does not check if the insertion worked properly...
 	 * 
 	 * @param account - the account to attach the timecard to
-	 * @param employee - the employee to attach the timecard to
-	 * @param payPeriod - the payPeriod to attach the timercard to
+	 * @param employeeId - the id of the employee to attach the timecard to
+	 * @param payPeriod - the id of the payPeriod to attach the timercard to
 	 * @param regHours - the number of regular hours worked (used by 'hourly')
 	 * @param overtimeHours - the number of overtime hours worked (used by 'hourly')
 	 * @param bonusPay - the amount of bonusPay given to the employee
 	 * @param otherPay - the amount of otherPay given to the employee
 	 */
-	public static boolean addTimecard(Account account, Employee employee, PayPeriod payPeriod,
+	public static boolean addTimecard(Account account, String employeeId, String payPeriodId,
 			double regHours, double overtimeHours, double bonusPay, double otherPay) {
 		String insert = "INSERT INTO Timecard VALUES (" + account.getId() + ", \""
-				+ employee.getEmployeeId() + "\", \"" + payPeriod.getPeriodId() + "\", \""
-				+ regHours + "\", \"" + overtimeHours + "\", \"" + bonusPay + "\", \""
-				+ otherPay +"\");";
+				+ employeeId + "\", \"" + payPeriodId + "\", \"" + regHours + "\", \""
+				+ overtimeHours + "\", \"" + bonusPay + "\", \"" + otherPay +"\");";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
 		int insertedRows = db.executeBasicUpdate(insert);
 		db.closeConnection();
