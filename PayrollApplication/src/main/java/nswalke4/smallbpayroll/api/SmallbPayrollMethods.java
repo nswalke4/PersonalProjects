@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import main.java.nswalke4.smallbpayroll.util.Account;
+import main.java.nswalke4.smallbpayroll.util.Employee;
+import main.java.nswalke4.smallbpayroll.util.PayPeriod;
 import main.java.nswalke4.smallbpayroll.util.Timecard;
 import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
 
@@ -15,7 +17,7 @@ import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
  * return's a JSONObject that contains the results of the requested action.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.01
+ * @version 1.02
  */
 public class SmallbPayrollMethods {
 	
@@ -50,13 +52,21 @@ public class SmallbPayrollMethods {
 	 */
 	protected static JSONObject gatherEmployeeTimecards(String employeeId) {
 		JSONObject result = new JSONObject();
-		List<Timecard> timecards = DatabaseQueries.getAllEmployeeTimecards(employeeId);
-		JSONArray timecardArray = new JSONArray();
-		for (Timecard t : timecards) {
-			JSONObject timecardObj = t.makeIntoJSONObject();
-			timecardArray.put(timecardObj);
+		Employee emp = DatabaseQueries.getSpecificEmployee(employeeId);
+		if (emp == null) {
+			result.put("Failure", "Invalid EmployeeId");
+			result.put("ErrorMessage", "There were no employees found in the database matching the"
+					+ " given \"EmployeeId\" parameter.");
+		} else {
+			result = emp.makeIntoJSONObject();
+			List<Timecard> timecards = DatabaseQueries.getAllEmployeeTimecards(emp);
+			JSONArray timecardArray = new JSONArray();
+			for (Timecard t : timecards) {
+				JSONObject timecardObj = t.makeIntoJSONObject();
+				timecardArray.put(timecardObj);
+			}
+			result.put("Timecards", timecardArray);
 		}
-		result.put("EmployeeTimecards", timecardArray);
 		return result;
 	}
 
@@ -70,13 +80,22 @@ public class SmallbPayrollMethods {
 	 */
 	protected static JSONObject gatherPayPeriodTimecards(String payPeriodId) {
 		JSONObject result = new JSONObject();
-		List<Timecard> timecards = DatabaseQueries.getAllPayPeriodTimecards(payPeriodId);
-		JSONArray timecardArray = new JSONArray();
-		for (Timecard t : timecards) {
-			JSONObject timecardObj = t.makeIntoJSONObject();
-			timecardArray.put(timecardObj);
+		PayPeriod payPeriod = DatabaseQueries.getSpecificPayPeriod(payPeriodId);
+		if (payPeriod == null) {
+			result.put("Failure", "Invalid PayPeriodId");
+			result.put("ErrorMessage", "There were no pay periods found in the database matching "
+					+ "the given \"PayPeriodId\" parameter.");
+		} else {
+			result = payPeriod.makeIntoJSONObject();
+			List<Timecard> timecards = DatabaseQueries.getAllPayPeriodTimecards(payPeriod);
+			JSONArray timecardArray = new JSONArray();
+			for (Timecard t : timecards) {
+				JSONObject timecardObj = t.makeIntoJSONObject();
+				timecardArray.put(timecardObj);
+			}
+			result.put("Timecards", timecardArray);
+		
 		}
-		result.put("PayPeriodTimecards", timecardArray);
 		return result;
 	}
 
