@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,10 @@ import org.json.JSONObject;
  * @author Nicholas Walker (nswalke4@asu.edu)
  * @version 1.03
  */
+@WebServlet(
+		name = "Small-b Payroll",
+		description = "This is the servlet for the Small-b Payroll Application.",
+		urlPatterns = "/SmallbPayroll")
 public class SmallbPayrollApi extends HttpServlet {
 	
 	// Class Variables
