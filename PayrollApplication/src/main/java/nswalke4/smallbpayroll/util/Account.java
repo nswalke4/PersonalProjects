@@ -15,7 +15,7 @@ import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
  * Payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.07
+ * @version 1.08
  */
 public class Account {
 
@@ -45,9 +45,7 @@ public class Account {
 		this.sub = pSub;
 		this.periodType = pPeriodType;
 		this.employees = new HashMap<String, Employee>();
-		this.updateEmployees();
 		this.payPeriods = new HashMap<String, PayPeriod>();
-		this.updatePayPeriods();
 	}
 
 	// Getters
@@ -130,11 +128,7 @@ public class Account {
 	public String generateEmployeeID() {
 		String empId = String.valueOf(this.id);
 		empId += "-E-";
-		int empNum = 1;
-		this.updateEmployees();
-		if (!employees.isEmpty()) {
-			empNum += employees.size();
-		}
+		int empNum = DatabaseQueries.getNumEmployees(this) + 1;
 		if (empNum < 10) {
 			empId += "000";
 		} else if (empNum < 100) {
@@ -182,11 +176,7 @@ public class Account {
 	public String generatePayPeriodID() {
 		String ppId = String.valueOf(this.id);
 		ppId += "-P-";
-		int ppNum = 1;
-		this.updatePayPeriods();
-		if (!payPeriods.isEmpty()) {
-			ppNum += payPeriods.size();
-		}
+		int ppNum = DatabaseQueries.getNumPayPeriods(this) + 1;
 		if (ppNum < 10) {
 			ppId += "000";
 		} else if (ppNum < 100) {
@@ -244,12 +234,12 @@ public class Account {
 		result.put("Email", this.getEmail());
 		result.put("PeriodType", this.getPeriodType());
 		JSONArray employeesArray = new JSONArray();
-		for (HashMap.Entry<String, Employee> empMap : employees.entrySet()) {
+		for (HashMap.Entry<String, Employee> empMap : this.getEmployees().entrySet()) {
 			employeesArray.put(empMap.getValue().makeIntoJSONObject());
 		}
 		result.put("Employees", employeesArray);
 		JSONArray payPeriodsArray = new JSONArray();
-		for (HashMap.Entry<String, PayPeriod> payPeriodMap : payPeriods.entrySet()) {
+		for (HashMap.Entry<String, PayPeriod> payPeriodMap : this.getPayPeriods().entrySet()) {
 			payPeriodsArray.put(payPeriodMap.getValue().makeIntoJSONObject());
 		}
 		result.put("PayPeriods", payPeriodsArray);
