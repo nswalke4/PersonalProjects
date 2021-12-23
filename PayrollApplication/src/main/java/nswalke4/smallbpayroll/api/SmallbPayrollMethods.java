@@ -1,6 +1,13 @@
 package main.java.nswalke4.smallbpayroll.api;
 
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import main.java.nswalke4.smallbpayroll.util.Account;
+import main.java.nswalke4.smallbpayroll.util.Timecard;
+import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
 
 /**
  * The class contains static methods that are used in the back-end of the Smallb Payroll
@@ -22,7 +29,14 @@ public class SmallbPayrollMethods {
 	 */
 	protected static JSONObject gatherAccountInformation(String accountSub) {
 		JSONObject result = new JSONObject();
-		// #TODO Gather information about the account and attached tables to create a JSONObject
+		Account account = DatabaseQueries.getSpecificAccount(accountSub);
+		if (account == null) {
+			result.put("Failure", "Invalid AccountSub");
+			result.put("ErrorMessage", "The given \"AccountSub\" was not found tied to a valid "
+					+ "Smallb Payroll Account.");
+		} else {
+			result.put("Account", account.makeIntoJSONObject());
+		}
 		return result;
 	}
 
@@ -35,8 +49,15 @@ public class SmallbPayrollMethods {
 	 *           why the requested method failed
 	 */
 	protected static JSONObject gatherEmployeeTimecards(String employeeId) {
-		// TODO Auto-generated method stub
-		return null;
+		JSONObject result = new JSONObject();
+		List<Timecard> timecards = DatabaseQueries.getAllEmployeeTimecards(employeeId);
+		JSONArray timecardArray = new JSONArray();
+		for (Timecard t : timecards) {
+			JSONObject timecardObj = t.makeIntoJSONObject();
+			timecardArray.put(timecardObj);
+		}
+		result.put("EmployeeTimecards", timecardArray);
+		return result;
 	}
 
 	/**
@@ -48,8 +69,15 @@ public class SmallbPayrollMethods {
 	 *           why the requested method failed
 	 */
 	protected static JSONObject gatherPayPeriodTimecards(String payPeriodId) {
-		// TODO Auto-generated method stub
-		return null;
+		JSONObject result = new JSONObject();
+		List<Timecard> timecards = DatabaseQueries.getAllPayPeriodTimecards(payPeriodId);
+		JSONArray timecardArray = new JSONArray();
+		for (Timecard t : timecards) {
+			JSONObject timecardObj = t.makeIntoJSONObject();
+			timecardArray.put(timecardObj);
+		}
+		result.put("PayPeriodTimecards", timecardArray);
+		return result;
 	}
 
 	/**

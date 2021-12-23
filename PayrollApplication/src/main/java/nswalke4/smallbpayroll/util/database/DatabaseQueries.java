@@ -21,7 +21,7 @@ import main.java.nswalke4.smallbpayroll.util.Timecard;
  * insertion to be sent through, keeping the connection time as minimal as possible.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.07
+ * @version 1.08
  */
 public class DatabaseQueries {
 
@@ -317,6 +317,41 @@ public class DatabaseQueries {
 	}
 	
 	/**
+	 * Queries the database to gather a specific employee using the given "employeeId"
+	 * string to find the specific employee, and then return's the given hourly or salary
+	 * employee object.
+	 * 
+	 * @param employeeId - the id of the employee to find in the database
+	 * @return - the Employee object tied to the given employeeId string (or null)
+	 */
+	public static Employee getSpecificEmployee(String employeeId) {
+		Employee result = null;
+		String query ="SELECT * FROM ((Employee AS E LEFT JOIN Hourly_Employee AS H ON E.Emp_Id = "
+				+ "H.Emp_Id) LEFT JOIN Salary_Employee AS S ON E.Emp_Id = S.Emp_Id)"
+				+ "WHERE E.Emp_Id = \"" + employeeId + "\";";
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		ResultSet rs = db.executeBasicQuery(query);
+		try {
+			while (rs.next()) {
+				if (rs.getString("Emp_Type").equalsIgnoreCase("hourly")) {
+					result = new HourlyEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"), 
+							rs.getString("Last_Name"), rs.getString("Phone_Num"),
+							rs.getDouble("Rate"));
+				} else {
+					result = new SalaryEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"), 
+							rs.getString("Last_Name"), rs.getString("Phone_Num"),
+							rs.getDouble("Period_Rate"));
+				}
+			}
+		} catch (SQLException sqlex) {
+			System.out.println("[FAILURE] Something went wrong while trying to read the "
+					+ "results...");
+			sqlex.printStackTrace();
+		}
+		db.closeConnection();
+		return result;
+	}
+	/**
 	 * Queries the database to gather all of the timecard tuples attached to the given
 	 * employee, creates new Timecard object for each of the tuples, and then returns an
 	 * ArrayList of all of the Timecards attached to the given employee.
@@ -346,6 +381,31 @@ public class DatabaseQueries {
 		return result;
 	}
 	
+	/**
+	 * Queries the database to gather a specific pay period using the give "payPeriodId"
+	 * string to find the specific pay period, and then return's the pay period object.
+	 * 
+	 * @param payPeriodId - the id of the pay period to find in the database
+	 * @return - the PayPeriod object tied to the given payPeriodId string (or null)
+	 */
+	public static PayPeriod getSpecificPayPeriod(String payPeriodId) {
+		PayPeriod result = null;
+		String query = "";
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		ResultSet rs = db.executeBasicQuery(query);
+		try {
+			while (rs.next()) {
+				result = new PayPeriod(rs.getString("Period_Id"), 
+						rs.getDate("Start_Date"), rs.getDate("End_Date"));
+			}
+		} catch (SQLException sqlex) {
+			System.out.println("[FAILURE] Something went wrong while trying to read the "
+					+ "results...");
+			sqlex.printStackTrace();
+		}
+		db.closeConnection();
+		return result;
+	}
 	/**
 	 * Queries the database to gather all of the timecard tuples attached to the given
 	 * pay period, creates new Timecard object for each of the tuples, and then returns an
