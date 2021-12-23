@@ -52,9 +52,13 @@ public class SmallbPayrollApi extends HttpServlet {
 		
 			case "GetAccountInfo":
 				if (requestObj.has("AccountSub")) {
-					response.setStatus(HttpServletResponse.SC_OK);
 					responseObj = SmallbPayrollMethods.gatherAccountInformation(requestObj
 							.getString("AccountSub"));
+					if (responseObj.has("Failure")) {
+						response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					} else {
+						response.setStatus(HttpServletResponse.SC_OK);
+					}
 				} else {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 					responseObj.put("Failure", "Invalid Parameters");
@@ -65,9 +69,13 @@ public class SmallbPayrollApi extends HttpServlet {
 				
 			case "GetEmployeeTimecards":
 				if (requestObj.has("EmployeeId")) {
-					response.setStatus(HttpServletResponse.SC_OK);
 					responseObj = SmallbPayrollMethods.gatherEmployeeTimecards(requestObj
 							.getString("EmployeeId"));
+					if (responseObj.has("Failure")) {
+						response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					} else {
+						response.setStatus(HttpServletResponse.SC_OK);
+					}
 				} else {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 					responseObj.put("Failure", "Invalid Parameters");
@@ -78,9 +86,13 @@ public class SmallbPayrollApi extends HttpServlet {
 				
 			case "GetPayPeriodTimecards":
 				if (requestObj.has("PayPeriodId")) {
-					response.setStatus(HttpServletResponse.SC_OK);
 					responseObj = SmallbPayrollMethods.gatherPayPeriodTimecards(requestObj
 							.getString("PayPeriodId"));
+					if (responseObj.has("Failure")) {
+						response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					} else {
+						response.setStatus(HttpServletResponse.SC_OK);
+					}
 				} else {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 					responseObj.put("Failure", "Invalid Parameters");
