@@ -21,7 +21,7 @@ import main.java.nswalke4.smallbpayroll.util.Timecard;
  * insertion to be sent through, keeping the connection time as minimal as possible.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.08
+ * @version 1.09
  */
 public class DatabaseQueries {
 
@@ -377,6 +377,32 @@ public class DatabaseQueries {
 		db.closeConnection();
 		return result;
 	}
+	
+	/**
+	 * Queries the database to gather the number of Timecards that are attached
+	 * to the given Employee and returns the result.
+	 * 
+	 * @param employee - the Employee object that the timecards are tied to
+	 * @return - an integer representing the number of timecards the employee has
+	 */
+	public static int getNumEmployeeTimecards(Employee employee) {
+		int result = 0;
+		String query = "SELECT COUNT(*) AS Timecard_Count FROM Timecard WHERE Emp_Id = "
+				+ employee.getEmployeeId() + ";";
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		ResultSet rs = db.executeBasicQuery(query);
+		try {
+			while (rs.next()) {
+				result = rs.getInt("Timecard_Count"); 
+			}
+		} catch (SQLException sqlex) {
+			System.out.println("[FAILURE] Something went wrong while trying to read the "
+					+ "results...");
+			sqlex.printStackTrace();
+		}
+		db.closeConnection();
+		return result;
+	}
 
 	/**
 	 * Queries the database to gather all of the timecard tuples attached to the given
@@ -424,6 +450,32 @@ public class DatabaseQueries {
 			while (rs.next()) {
 				result = new PayPeriod(rs.getString("Period_Id"), 
 						rs.getDate("Start_Date"), rs.getDate("End_Date"));
+			}
+		} catch (SQLException sqlex) {
+			System.out.println("[FAILURE] Something went wrong while trying to read the "
+					+ "results...");
+			sqlex.printStackTrace();
+		}
+		db.closeConnection();
+		return result;
+	}
+	
+	/**
+	 * Queries the database to gather the number of Timecards that are attached
+	 * to the given Pay Period and returns the result.
+	 * 
+	 * @param payPeriod - the Pay Period object that the timecards are tied to
+	 * @return - an integer representing the number of timecards the pay period has
+	 */
+	public static int getNumPayPeriodTimecards(PayPeriod payPeriod) {
+		int result = 0;
+		String query = "SELECT COUNT(*) AS Timecard_Count FROM Timecard WHERE Period_Id = "
+				+ payPeriod.getPeriodId() + ";";
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		ResultSet rs = db.executeBasicQuery(query);
+		try {
+			while (rs.next()) {
+				result = rs.getInt("Timecard_Count"); 
 			}
 		} catch (SQLException sqlex) {
 			System.out.println("[FAILURE] Something went wrong while trying to read the "
