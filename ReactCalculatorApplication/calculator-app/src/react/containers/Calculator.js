@@ -14,30 +14,30 @@ const Calculator = () => {
                 <div className="button-top-row">
                     <AllClearButton />
                     <ClearButton />
-                    <OtherButton value="&divide;" />
+                    <OtherButton action="divide" />
                 </div>
                 <div className="button-second-row">
                     <NumberButton value="7" />
                     <NumberButton value="8" />
                     <NumberButton value="9" />
-                    <OtherButton value="&times;" />
+                    <OtherButton action="multiply" />
                 </div>
                 <div className="button-third-row">
                     <NumberButton value="4" />
                     <NumberButton value="5" />
                     <NumberButton value="6" />
-                    <OtherButton value="-" />
+                    <OtherButton action="subtract" />
                 </div>
                 <div className="button-fourth-row">
                     <NumberButton value="1" />
                     <NumberButton value="2" />
                     <NumberButton value="3" />
-                    <OtherButton value="+" />
+                    <OtherButton action="add" />
                 </div>
                 <div className="button-bottom-row">
                     <NumberButton value="0" />
                     <NumberButton value="." />
-                    <OtherButton value="=" />
+                    <OtherButton action="equal" />
                 </div>
             </div>
         </div>
