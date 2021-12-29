@@ -43,7 +43,7 @@ const Goal = () => {
                 </div>
             </div>
             <div className="about-developer">
-                About the developer...
+                <p>About the developer...</p>
             </div>
         </div>
     )

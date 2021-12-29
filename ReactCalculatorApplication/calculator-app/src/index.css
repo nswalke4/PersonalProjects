@@ -16,7 +16,7 @@ code {
     monospace;
 }
 
-.App {
+.app {
   background-color: #8c1d40;
 }
 
@@ -34,7 +34,7 @@ code {
 }
 
 .about-project p{
-  font-size: 36px;
+  font-size: 28px;
   text-align: left;
   width:70%;
   margin: auto;

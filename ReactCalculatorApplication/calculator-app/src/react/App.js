@@ -6,7 +6,7 @@ import Calculator from './containers/Calculator'
 function App() {
   return (
     // <Goal />
-    <div>
+    <div className='app'>
       <AboutProject />
       <Calculator />
       <AboutDeveloper />

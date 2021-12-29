@@ -1,4 +1,4 @@
-const OtherButton = () => {
+const Screen = () => {
     return (
         <div>
             
@@ -6,4 +6,4 @@ const OtherButton = () => {
     )
 }
 
-export default OtherButton
+export default Screen
