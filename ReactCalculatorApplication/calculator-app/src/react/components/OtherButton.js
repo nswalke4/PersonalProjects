@@ -1,8 +1,6 @@
-const OtherButton = () => {
+const OtherButton = ({ value }) => {
     return (
-        <div>
-            
-        </div>
+        <button className="other-button">{value}</button>
     )
 }
 

@@ -1,8 +1,6 @@
-const NumberButton = () => {
+const NumberButton = ({ value }) => {
     return (
-        <div>
-            
-        </div>
+        <button className="number-button">{value}</button>
     )
 }
 

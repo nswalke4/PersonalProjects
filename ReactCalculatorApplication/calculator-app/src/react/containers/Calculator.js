@@ -8,7 +8,7 @@ const Calculator = () => {
     return (
         <div className="calculator-group">
             <div className="screen-group">
-                <Screen />
+                <Screen expression="43+17" result="60"/>
             </div>
             <div className="button-group">
                 <div className="button-top-row">
@@ -37,7 +37,7 @@ const Calculator = () => {
                 <div className="button-bottom-row">
                     <NumberButton value="0" />
                     <NumberButton value="." />
-                    <OtherButton value="&equals;" />
+                    <OtherButton value="=" />
                 </div>
             </div>
         </div>

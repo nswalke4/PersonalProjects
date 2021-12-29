@@ -1,8 +1,6 @@
 const AllClearButton = () => {
     return (
-        <div>
-            
-        </div>
+        <button className="all-clear-button">AC</button>
     )
 }
 
