@@ -8,7 +8,7 @@ const Calculator = () => {
     return (
         <div className="calculator-group">
             <div className="screen-group">
-                <Screen expression="43+17" result="60" />
+                <Screen topRow="43+17" bottomRow="60" />
             </div>
             <div className="button-group">
                 <div className="button-top-row">

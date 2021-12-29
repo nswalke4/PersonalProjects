@@ -1,9 +1,9 @@
-const Screen = ({ expression, result }) => {
+const Screen = ({ topRow, bottomRow }) => {
     return (
         <div className="screen">
-            <p className="screen-top">{expression}</p>
+            <p className="screen-top">{topRow}</p>
             <hr />
-            <p className="screen-bottom">{result}</p>
+            <p className="screen-bottom">{bottomRow}</p>
         </div>
     );
 };
