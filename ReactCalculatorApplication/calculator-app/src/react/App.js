@@ -1,8 +1,16 @@
-import Goal from './Goal'
+// import Goal from './Goal'
+import AboutDeveloper from './containers/AboutDeveloper'
+import AboutProject from './containers/AboutProject'
+import Calculator from './containers/Calculator'
 
 function App() {
   return (
-    <Goal />
+    // <Goal />
+    <div>
+      <AboutProject />
+      <Calculator />
+      <AboutDeveloper />
+    </div>
   );
 }
 
