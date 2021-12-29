@@ -1,158 +1,158 @@
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+        "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 .app {
-  background-color: #8c1d40;
+    background-color: #8c1d40;
 }
 
 .about-project {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  background-color: #ffc627;
-  padding-top: 15px;
-  padding-bottom: 15px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode",
+        Geneva, Verdana, sans-serif;
+    background-color: #ffc627;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
-.about-project h1{
-  font-size: 52px;
-  text-align: center;
-  padding-bottom: 25px;
+.about-project h1 {
+    font-size: 52px;
+    text-align: center;
+    padding-bottom: 25px;
 }
 
-.about-project p{
-  font-size: 28px;
-  text-align: left;
-  width:70%;
-  margin: auto;
+.about-project p {
+    font-size: 28px;
+    text-align: left;
+    width: 70%;
+    margin: auto;
 }
 
 .calculator-group {
-  width: 600px;
-  margin: auto;
-  border-width: 5px;
-  border-style: dashed;
-  margin-top: 30px;
-  margin-bottom: 30px;
+    width: 600px;
+    margin: auto;
+    border-width: 5px;
+    border-style: dashed;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .screen-group {
-  background-color: #444444;
-  border-radius: 15px;
-  height: 250px;
-  position: relative;
+    background-color: #444444;
+    border-radius: 15px;
+    height: 250px;
+    position: relative;
 }
 
 .screen {
-  background-color: #dddddd;
-  border-width: 5px;
-  width: 550px;
-  height: 200px;
-  position: absolute;
-  top: 25px;
-  left: 25px;
+    background-color: #dddddd;
+    border-width: 5px;
+    width: 550px;
+    height: 200px;
+    position: absolute;
+    top: 25px;
+    left: 25px;
 }
 
-.screen-top{
-  font-size: 50px;
-  font-weight: normal;
-  line-height: 90px;
-  text-align: left;
-  padding-left: 10px;
+.screen-top {
+    font-size: 50px;
+    font-weight: normal;
+    line-height: 90px;
+    text-align: left;
+    padding-left: 10px;
 }
 
-.screen-bottom{
-  font-size: 70px;
-  font-weight: bold;
-  line-height: 109px;
-  text-align: right;
-  padding-right: 10px;
+.screen-bottom {
+    font-size: 70px;
+    font-weight: bold;
+    line-height: 109px;
+    text-align: right;
+    padding-right: 10px;
 }
 
 .button-group {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
 }
 
-.button-group button{
-  font-family: "Lucida Console", Monaco, monospace;
-  font-size: 80px;
-  font-weight: 700;
-  text-align: center;
-  border-radius: 12px;
-  border-color: #000000;
-  height: 150px;
-  width: 150px;
+.button-group button {
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 80px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 12px;
+    border-color: #000000;
+    height: 150px;
+    width: 150px;
 }
 
 .button-top-row {
-  display: flex;
-  flex-flow: row;
-  flex: none;
+    display: flex;
+    flex-flow: row;
+    flex: none;
 }
 
 .button-top-row .other-button {
-  order: 3;
+    order: 3;
 }
 
 .button-bottom-row {
-  display: flex;
-  flex-flow: row;
-  flex: none;
+    display: flex;
+    flex-flow: row;
+    flex: none;
 }
 
 .button-bottom-row .other-button {
-  flex-grow: 2;
+    flex-grow: 2;
 }
 
 .all-clear-button {
-  color: #000000;
-  background-color: #c20000;
-  flex-grow: 2;
-  order: 1;
+    color: #000000;
+    background-color: #c20000;
+    flex-grow: 2;
+    order: 1;
 }
 
 .clear-button {
-  color: #c20000;
-  background-color: #444444;
-  order: 2;
+    color: #c20000;
+    background-color: #444444;
+    order: 2;
 }
 
 .number-button {
-  color: #dddddd;
-  background-color: #444444;
+    color: #dddddd;
+    background-color: #444444;
 }
 
 .other-button {
-  color: #ffc627;
-  background-color: #444444;
+    color: #ffc627;
+    background-color: #444444;
 }
 
 .about-developer {
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 16px;
-  color: #8c1d40;
-  background-color: #ffc627;
-  text-align: center;
-  padding-top: 30px;
-  padding-bottom: 30px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode",
+        Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    color: #8c1d40;
+    background-color: #ffc627;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
-.about-developer p{
-  width: 500px;
-  margin: auto;
+.about-developer p {
+    width: 500px;
+    margin: auto;
 }

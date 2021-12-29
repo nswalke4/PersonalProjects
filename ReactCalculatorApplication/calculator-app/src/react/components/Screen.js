@@ -5,7 +5,7 @@ const Screen = ({ expression, result }) => {
             <hr />
             <p className="screen-bottom">{result}</p>
         </div>
-    )
-}
+    );
+};
 
-export default Screen
+export default Screen;
