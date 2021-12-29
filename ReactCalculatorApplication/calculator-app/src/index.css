@@ -57,8 +57,6 @@ code {
 }
 
 .screen {
-    background-color: #dddddd;
-    border-width: 5px;
     width: 550px;
     height: 200px;
     position: absolute;
@@ -66,20 +64,27 @@ code {
     left: 25px;
 }
 
-.screen-top {
+.screen input {
+    background-color: #dddddd;
+    width: 536px;
+}
+
+#screen-top {
     font-size: 50px;
     font-weight: normal;
     line-height: 90px;
     text-align: left;
     padding-left: 10px;
+    height: 85px;
 }
 
-.screen-bottom {
+#screen-bottom {
     font-size: 70px;
     font-weight: bold;
-    line-height: 109px;
+    line-height: 110px;
     text-align: right;
     padding-right: 10px;
+    height: 107px;
 }
 
 .button-group {
