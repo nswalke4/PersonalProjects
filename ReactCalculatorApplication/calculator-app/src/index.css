@@ -15,24 +15,29 @@ code {
 }
 
 .app {
-    background-color: #8c1d40;
+    background-color: #d1e8e2;
 }
 
 .about-project {
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode",
         Geneva, Verdana, sans-serif;
-    background-color: #ffc627;
+    background-color: #116466;
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
 .about-project h1 {
+    color: #ffcb9a;
     font-size: 52px;
+    font-style: italic;
+    font-variant: small-caps;
     text-align: center;
     padding-bottom: 25px;
 }
 
 .about-project p {
+    color: #d9b08c;
+    font-weight: 500;
     font-size: 28px;
     text-align: left;
     width: 70%;
@@ -50,7 +55,7 @@ code {
 }
 
 .screen-group {
-    background-color: #444444;
+    background-color: #2c3531;
     border-radius: 15px;
     height: 250px;
     position: relative;
@@ -65,7 +70,7 @@ code {
 }
 
 .screen input {
-    background-color: #dddddd;
+    background-color: #d1e8e2;
     width: 536px;
 }
 
@@ -142,12 +147,12 @@ code {
 }
 
 .number-button {
-    color: #dddddd;
+    color: #d1e8e2;
     background-color: #444444;
 }
 
 .other-button {
-    color: #ffc627;
+    color: #ffcb9a;
     background-color: #444444;
 }
 
@@ -155,8 +160,8 @@ code {
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode",
         Geneva, Verdana, sans-serif;
     font-size: 16px;
-    color: #8c1d40;
-    background-color: #ffc627;
+    color: #ffcb9a;
+    background-color: #116466;
     text-align: center;
     padding-top: 30px;
     padding-bottom: 30px;
