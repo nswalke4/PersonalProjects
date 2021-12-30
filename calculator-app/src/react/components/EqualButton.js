@@ -1,10 +1,6 @@
-const EqualButton = () => {
-    const clickAction = () => {
-        console.log("Equals...");
-    };
-
+const EqualButton = ({ calculate }) => {
     return (
-        <button className="equal-button" onClick={clickAction}>
+        <button className="equal-button" onClick={calculate}>
             =
         </button>
     );

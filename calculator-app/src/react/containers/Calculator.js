@@ -7,42 +7,126 @@ import Screen from "../components/Screen";
 import { useState } from "react";
 
 const Calculator = () => {
-    const [history, setHistory] = useState(["43+17"]);
-    const [current, setCurrent] = useState(["60"]);
+    const [historyScreen, setHistoryScreen] = useState({
+        text: "-",
+        clearedOnce: false,
+    });
+
+    const [currentScreen, setCurrentScreen] = useState({
+        text: "0",
+        final: true,
+    });
+
+    const addToScreen = (value) => {
+        if (historyScreen.clearedOnce) {
+            setHistoryScreen({
+                text: historyScreen.text,
+                clearedOnce: false,
+            });
+        }
+        console.log({ value });
+        if (currentScreen.final) {
+            setCurrentScreen({
+                text: value,
+                final: false,
+            });
+        } else {
+            const newStr = currentScreen.text + value;
+            setCurrentScreen({
+                text: newStr,
+                final: false,
+            });
+        }
+        console.log(currentScreen);
+    };
+
+    const calculate = (equationText) => {};
+
+    const calculateResult = () => {
+        setHistoryScreen({
+            text: currentScreen.text,
+            clearedOnce: false,
+        });
+        setCurrentScreen({
+            text: calculate(currentScreen.text),
+            final: true,
+        });
+    };
+
+    const deleteFromScreen = () => {
+        if (historyScreen.clearedOnce) {
+            setHistoryScreen({
+                text: historyScreen.text,
+                clearedOnce: false,
+            });
+        }
+        if (currentScreen.text.length !== 0) {
+            if (currentScreen.text.length === 1) {
+                setCurrentScreen({
+                    text: "0",
+                    final: true,
+                });
+            } else {
+                const newStr = currentScreen.text.substring(0, currentScreen.text.length - 1);
+                setCurrentScreen({
+                    text: newStr,
+                    final: false,
+                });
+            }
+        }
+    };
+
+    const resetAll = () => {
+        setCurrentScreen({
+            text: "0",
+            final: true,
+        });
+        if (historyScreen.clearedOnce) {
+            setHistoryScreen({
+                text: "-",
+                clearedOnce: false,
+            });
+        } else {
+            setHistoryScreen({
+                text: historyScreen.text,
+                clearedOnce: true,
+            });
+        }
+    };
 
     return (
         <div className="calculator-group">
             <div className="screen-group">
-                <Screen topRow={history} bottomRow={current} />
+                <Screen topRow={historyScreen.text} bottomRow={currentScreen.text} />
             </div>
             <div className="button-group">
                 <div className="button-top-row">
-                    <AllClearButton />
-                    <ClearButton />
-                    <OperationButton action="divide" />
+                    <AllClearButton reset={resetAll} />
+                    <ClearButton clearOne={deleteFromScreen} />
+                    <OperationButton action="divide" insert={addToScreen} />
                 </div>
                 <div className="button-second-row">
-                    <NumberButton value="7" />
-                    <NumberButton value="8" />
-                    <NumberButton value="9" />
-                    <OperationButton action="multiply" />
+                    <NumberButton value="7" insert={addToScreen} />
+                    <NumberButton value="8" insert={addToScreen} />
+                    <NumberButton value="9" insert={addToScreen} />
+                    <OperationButton action="multiply" insert={addToScreen} />
                 </div>
                 <div className="button-third-row">
-                    <NumberButton value="4" />
-                    <NumberButton value="5" />
-                    <NumberButton value="6" />
-                    <OperationButton action="subtract" />
+                    <NumberButton value="4" insert={addToScreen} />
+                    <NumberButton value="5" insert={addToScreen} />
+                    <NumberButton value="6" insert={addToScreen} />
+                    <OperationButton action="subtract" insert={addToScreen} />
                 </div>
                 <div className="button-fourth-row">
-                    <NumberButton value="1" />
-                    <NumberButton value="2" />
-                    <NumberButton value="3" />
-                    <OperationButton action="add" />
+                    <NumberButton value="1" insert={addToScreen} />
+                    <NumberButton value="2" insert={addToScreen} />
+                    <NumberButton value="3" insert={addToScreen} />
+                    <OperationButton action="add" insert={addToScreen} />
                 </div>
                 <div className="button-bottom-row">
-                    <NumberButton value="0" />
-                    <NumberButton value="." />
-                    <EqualButton />
+                    <NumberButton value="0" insert={addToScreen} />
+                    <NumberButton value="." insert={addToScreen} />
+                    <EqualButton calculate={calculateResult} />
                 </div>
             </div>
         </div>

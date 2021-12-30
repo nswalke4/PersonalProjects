@@ -1,4 +1,4 @@
-const OperationButton = ({ action }) => {
+const OperationButton = ({ action, insert }) => {
     let value;
 
     switch (action) {
@@ -19,12 +19,8 @@ const OperationButton = ({ action }) => {
             break;
     }
 
-    const clickAction = () => {
-        console.log({ action });
-    };
-
     return (
-        <button className="operation-button" onClick={clickAction}>
+        <button className="operation-button" onClick={() => insert(value)}>
             {value}
         </button>
     );

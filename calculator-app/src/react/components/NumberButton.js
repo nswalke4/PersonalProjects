@@ -1,10 +1,6 @@
-const NumberButton = ({ value }) => {
-    const clickAction = () => {
-        console.log({value})
-    }
-    
+const NumberButton = ({ value, insert }) => {
     return (
-        <button className="number-button" onClick={clickAction}>
+        <button className="number-button" onClick={() => insert(value)}>
             {value}
         </button>
     );
