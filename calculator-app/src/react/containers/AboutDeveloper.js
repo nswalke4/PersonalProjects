@@ -4,7 +4,7 @@ const AboutDeveloper = () => {
             <p>
                 Developer: Nicholas Walker (<a href="mailto:nswalke4@asu.edu">nswalke4@asu.edu</a>)
                 <br />
-                Published on: 12/30/2021 || Version: 1.0.1
+                Published on: 12/30/2021 &nbsp;&nbsp;&nbsp;| |&nbsp;&nbsp;&nbsp; Version: 1.0.1
             </p>
         </div>
     );

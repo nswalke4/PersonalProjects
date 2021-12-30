@@ -38,10 +38,10 @@ code {
 .about-project p {
     color: #d9b08c;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 18px;
     text-align: justify;
     line-height: 1.6em;
-    width: 70%;
+    width: 80%;
     margin: auto;
 }
 
