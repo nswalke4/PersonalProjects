@@ -115,13 +115,20 @@ code {
     width: 150px;
 }
 
+.button-group button:active {
+    -webkit-box-shadow: inset 0px 0px 7px #d1e8e2;
+    -moz-box-shadow: inset 0px 0px 7px #d1e8e2;
+    box-shadow: inset 0px 0px 7px #d1e8e2;
+    outline: none;
+}
+
 .button-top-row {
     display: flex;
     flex-flow: row;
     flex: none;
 }
 
-.button-top-row .other-button {
+.button-top-row .operation-button {
     order: 3;
 }
 
@@ -160,7 +167,7 @@ code {
     background-color: #444444;
 }
 
-.other-button {
+.operation-button {
     color: #d1e8e2;
     background-color: #2c3531;
 }

@@ -1,5 +1,13 @@
 const AllClearButton = () => {
-    return <button className="all-clear-button">AC</button>;
+    const clickAction = () => {
+        console.log("All Clear");
+    };
+
+    return (
+        <button className="all-clear-button" onClick={clickAction}>
+            AC
+        </button>
+    );
 };
 
 export default AllClearButton;

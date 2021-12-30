@@ -1,5 +1,13 @@
 const NumberButton = ({ value }) => {
-    return <button className="number-button">{value}</button>;
+    const clickAction = () => {
+        console.log({value})
+    }
+    
+    return (
+        <button className="number-button" onClick={clickAction}>
+            {value}
+        </button>
+    );
 };
 
 export default NumberButton;

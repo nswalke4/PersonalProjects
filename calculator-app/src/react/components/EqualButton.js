@@ -1,5 +1,13 @@
 const EqualButton = () => {
-    return <button className="equal-button">=</button>;
+    const clickAction = () => {
+        console.log("Equals...");
+    };
+
+    return (
+        <button className="equal-button" onClick={clickAction}>
+            =
+        </button>
+    );
 };
 
 export default EqualButton;

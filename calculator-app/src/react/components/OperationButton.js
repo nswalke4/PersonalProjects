@@ -1,4 +1,4 @@
-const OtherButton = ({ action }) => {
+const OperationButton = ({ action }) => {
     let value;
 
     switch (action) {
@@ -19,7 +19,15 @@ const OtherButton = ({ action }) => {
             break;
     }
 
-    return <button className="other-button">{value}</button>;
+    const clickAction = () => {
+        console.log({ action });
+    };
+
+    return (
+        <button className="operation-button" onClick={clickAction}>
+            {value}
+        </button>
+    );
 };
 
-export default OtherButton;
+export default OperationButton;
