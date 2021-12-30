@@ -1,6 +1,7 @@
 const AboutProject = () => {
     return (
         <div className="about-project">
+            <h2>Nicholas Walker's</h2>
             <h1>Basic Calculator Application</h1>
             <p>
                 Thank you for visiting this web application! This project was completed to become a

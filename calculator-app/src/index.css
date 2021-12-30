@@ -26,6 +26,12 @@ code {
     padding-bottom: 15px;
 }
 
+.about-project h2 {
+    color: #5d001e;
+    font-size: 24px;
+    text-align: center;
+}
+
 .about-project h1 {
     color: #5d001e;
     font-size: 52px;
