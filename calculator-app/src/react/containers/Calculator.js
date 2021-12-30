@@ -1,5 +1,6 @@
 import AllClearButton from "../components/AllClearButton";
 import ClearButton from "../components/ClearButton";
+import EqualButton from "../components/EqualButton";
 import NumberButton from "../components/NumberButton";
 import OtherButton from "../components/OtherButton";
 import Screen from "../components/Screen";
@@ -37,7 +38,7 @@ const Calculator = () => {
                 <div className="button-bottom-row">
                     <NumberButton value="0" />
                     <NumberButton value="." />
-                    <OtherButton action="equal" />
+                    <EqualButton />
                 </div>
             </div>
         </div>

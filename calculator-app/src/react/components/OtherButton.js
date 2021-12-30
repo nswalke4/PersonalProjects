@@ -14,9 +14,6 @@ const OtherButton = ({ action }) => {
         case "add":
             value = "+";
             break;
-        case "equal":
-            value = "=";
-            break;
         default:
             value = "??";
             break;
