@@ -2,8 +2,9 @@ const AboutDeveloper = () => {
     return (
         <div className="about-developer">
             <p>
-                About the developer: Esse minim Lorem pariatur nostrud et culpa tempor dolor
-                excepteur fugiat ipsum aliqua minim.
+                Developer: Nicholas Walker (<a href="mailto:nswalke4@asu.edu">nswalke4@asu.edu</a>)
+                <br />
+                Published on: 12/30/2021 || Version: 1.0.1
             </p>
         </div>
     );

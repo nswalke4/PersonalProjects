@@ -27,7 +27,7 @@ code {
 }
 
 .about-project h1 {
-    color: #ffcb9a;
+    color: #5d001e;
     font-size: 52px;
     font-style: italic;
     font-variant: small-caps;
@@ -38,8 +38,9 @@ code {
 .about-project p {
     color: #d9b08c;
     font-weight: 500;
-    font-size: 28px;
-    text-align: left;
+    font-size: 20px;
+    text-align: justify;
+    line-height: 1.6em;
     width: 70%;
     margin: auto;
 }
@@ -170,4 +171,17 @@ code {
 .about-developer p {
     width: 500px;
     margin: auto;
+}
+
+.about-developer a {
+    text-decoration: none;
+    color: #d9b08c;
+}
+
+.about-developer a:hover {
+    color: #5d001e;
+}
+
+.about-developer a:visited {
+    color: #2c3531;
 }
