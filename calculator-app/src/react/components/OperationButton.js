@@ -1,6 +1,5 @@
 const OperationButton = ({ action, insert }) => {
     let value;
-
     switch (action) {
         case "divide":
             value = "÷";

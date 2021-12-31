@@ -24,7 +24,6 @@ const Calculator = () => {
                 clearedOnce: false,
             });
         }
-        console.log({ value });
         if (currentScreen.final) {
             setCurrentScreen({
                 text: value,
@@ -37,10 +36,57 @@ const Calculator = () => {
                 final: false,
             });
         }
-        console.log(currentScreen);
     };
 
-    const calculate = (equationText) => {};
+    const calculate = (equationText) => {
+        const { values, operations, error } = parseEquation(equationText);
+        if (error || values.length !== operations.length + 1) {
+            return "Syntax Error";
+        }
+        const secVals = [];
+        const secOps = [];
+        // First run through only handles multiplication/division
+        while (operations.length > 0) {
+            const curOp = operations[0];
+            if (curOp === "div") {
+                const res = values[0] / values[1];
+                operations.shift();
+                values.shift();
+                values.shift();
+                values.unshift(res);
+            } else if (curOp === "mul") {
+                const res = values[0] * values[1];
+                operations.shift();
+                values.shift();
+                values.shift();
+                values.unshift(res);
+            } else {
+                secVals.push(values.shift());
+                secOps.push(operations.shift());
+            }
+        }
+        // Add remaining value to secVals
+        secVals.push(values.pop());
+        // Complete addition/subtraction
+        while (secOps.length > 0) {
+            const curOp = secOps[0];
+            let res;
+            if (curOp === "add") {
+                res = secVals[0] + secVals[1];
+            } else {
+                res = secVals[0] - secVals[1];
+            }
+            secOps.shift();
+            secVals.shift();
+            secVals.shift();
+            secVals.unshift(res);
+        }
+        if (Number.isInteger(secVals[0])) {
+            return secVals[0];
+        } else {
+            return parseFloat(secVals[0].toPrecision(9));
+        }
+    };
 
     const calculateResult = () => {
         setHistoryScreen({
@@ -74,6 +120,49 @@ const Calculator = () => {
                 });
             }
         }
+    };
+
+    const parseEquation = (equationText) => {
+        const values = [];
+        const operations = [];
+        let error = false;
+        let start = 0;
+        for (let i = 0; i < equationText.length - 1; i++) {
+            const cur = equationText[i];
+            if (isNaN(equationText.substring(start, i + 1))) {
+                if (cur === "-" && start === i) {
+                } else {
+                    if (cur === ".") {
+                        error = true;
+                    }
+                    values.push(Number(equationText.substring(start, i)));
+                    if (cur === "+") {
+                        operations.push("add");
+                    } else if (cur === "-") {
+                        operations.push("sub");
+                    } else if (cur === "×") {
+                        operations.push("mul");
+                    } else if (cur === "÷") {
+                        operations.push("div");
+                    }
+                    start = i + 1;
+                }
+            }
+        }
+        const lastChar = equationText[equationText.length - 1];
+        if (isNaN(lastChar)) {
+            if (lastChar === "×") {
+                operations.push("mul");
+                const val = equationText.substring(start, equationText.length - 1);
+                values.push(Number(val));
+                values.push(Number(val));
+            } else {
+                error = true;
+            }
+        } else {
+            values.push(Number(equationText.substring(start)));
+        }
+        return { values, operations, error };
     };
 
     const resetAll = () => {

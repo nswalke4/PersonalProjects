@@ -89,6 +89,8 @@ code {
 .screen input {
     background-color: #d1e8e2;
     width: 536px;
+    overflow: scroll;
+    text-overflow: ellipsis;
 }
 
 #screen-top {
