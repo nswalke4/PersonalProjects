@@ -1,6 +1,8 @@
 package nswalke4.smallbpayroll.api;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletConfig;
@@ -42,110 +44,133 @@ public class SmallbPayrollApi extends HttpServlet {
 		super.init(config);
 	}
 
-	/**
-	 * Handles all of the requests that come in via a "get" request.
-	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType(JSON_CONTENT);
-		JSONObject responseObj = new JSONObject();
-		try {
-			if (!request.getContentType().equals(JSON_CONTENT)) {
-				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-				responseObj.put("Failure", "Invalid Content Type");
-				responseObj.put("ErrorMessage",
-						"The content type of the request cannot be properly "
-								+ "handled.  Currently, this server can only accept \""
-								+ JSON_CONTENT + "\"" + " as the request content-type.");
-			} else {
-				JSONObject requestObj =
-						new JSONObject(request.getReader().lines().collect(Collectors.joining()));
-				if (!requestObj.has("Method")) {
-					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-					responseObj.put("Failure", "Invalid Parameters");
-					responseObj.put("ErrorMessage",
-							"The \"Method\" parameter is required in order to "
-									+ "properly execute the requested command.");
-				} else {
-					String method = requestObj.getString("Method");
-					switch (method) {
-
-						case "GetAccountInfo":
-							if (requestObj.has("AccountSub")) {
-								responseObj = SmallbPayrollMethods.gatherAccountInformation(
-										requestObj.getString("AccountSub"));
-								if (responseObj.has("Failure")) {
-									response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-								} else {
-									response.setStatus(HttpServletResponse.SC_OK);
-								}
-							} else {
-								response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-								responseObj.put("Failure", "Invalid Parameters");
-								responseObj.put("ErrorMessage",
-										"Value for \"AccountSub\" was not found and is"
-												+ " a required parameter for this method");
-							}
-							break;
-
-						case "GetEmployeeTimecards":
-							if (requestObj.has("EmployeeId")) {
-								responseObj = SmallbPayrollMethods.gatherEmployeeTimecards(
-										requestObj.getString("EmployeeId"));
-								if (responseObj.has("Failure")) {
-									response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-								} else {
-									response.setStatus(HttpServletResponse.SC_OK);
-								}
-							} else {
-								response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-								responseObj.put("Failure", "Invalid Parameters");
-								responseObj.put("ErrorMessage",
-										"Value for \"EmployeeId\" was not found and is"
-												+ " a required parameter for this method");
-							}
-							break;
-
-						case "GetPayPeriodTimecards":
-							if (requestObj.has("PayPeriodId")) {
-								responseObj = SmallbPayrollMethods.gatherPayPeriodTimecards(
-										requestObj.getString("PayPeriodId"));
-								if (responseObj.has("Failure")) {
-									response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-								} else {
-									response.setStatus(HttpServletResponse.SC_OK);
-								}
-							} else {
-								response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-								responseObj.put("Failure", "Invalid Parameters");
-								responseObj.put("ErrorMessage",
-										"Value for \"PayPeriodId\" was not found and is"
-												+ " a required parameter for this method");
-							}
-							break;
-
-						default:
-							response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-							responseObj.put("Failure", "Method Not Found");
-							responseObj.put("ErrorMessage",
-									"The client's requested \"get\" method was not "
-											+ "found as a valid method on this server.");
-							break;
-
-					}
-				}
-
-			}
-		} catch (NullPointerException npe) {
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			responseObj.put("Failure", "No Content");
-			responseObj.put("ErrorMessage",
-					"The request that was made to the server contained no content in either the header or in the body.  Requests to this servlet must contain a \"content-type\" header, and the body must contain a \"Method\" parameter, plus any additional parameters that are necessary for the requested method.");
+		Enumeration<String> headers = request.getHeaderNames();
+		System.out.println("Headers:");
+		while (headers.hasMoreElements()) {
+			String head = headers.nextElement();
+			System.out.println(head);
+		}
+		System.out.println("\nBody:");
+		Map<String, String[]> paramMap = request.getParameterMap();
+		for (Map.Entry<String, String[]> entry : paramMap.entrySet()) {
+			System.out.println(entry.getKey() + ": " + entry.getValue()[0]);
 		}
 
-		response.getWriter().println(responseObj.toString());
 	}
+
+	/**
+	 * Handles all of the requests that come in via a "get" request.
+	 */
+	// @Override
+	// public void doGet(HttpServletRequest request, HttpServletResponse response)
+	// throws ServletException, IOException {
+	// response.setContentType(JSON_CONTENT);
+	// JSONObject responseObj = new JSONObject();
+	// try {
+	// if (!request.getContentType().equals(JSON_CONTENT)) {
+	// response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+	// responseObj.put("Failure", "Invalid Content Type");
+	// responseObj.put("ErrorMessage",
+	// "The content type of the request cannot be properly "
+	// + "handled. Currently, this server can only accept \""
+	// + JSON_CONTENT + "\"" + " as the request content-type.");
+	// } else {
+	// JSONObject requestObj =
+	// new JSONObject(request.getReader().lines().collect(Collectors.joining()));
+	// if (!requestObj.has("Method")) {
+	// response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+	// responseObj.put("Failure", "Invalid Parameters");
+	// responseObj.put("ErrorMessage",
+	// "The \"Method\" parameter is required in order to "
+	// + "properly execute the requested command.");
+	// } else {
+	// String method = requestObj.getString("Method");
+	// switch (method) {
+
+	// case "GetAccountInfo":
+	// if (requestObj.has("AccountSub")) {
+	// responseObj = SmallbPayrollMethods.gatherAccountInformation(
+	// requestObj.getString("AccountSub"));
+	// if (responseObj.has("Failure")) {
+	// response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+	// } else {
+	// response.setStatus(HttpServletResponse.SC_OK);
+	// }
+	// } else {
+	// response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+	// responseObj.put("Failure", "Invalid Parameters");
+	// responseObj.put("ErrorMessage",
+	// "Value for \"AccountSub\" was not found and is"
+	// + " a required parameter for this method");
+	// }
+	// break;
+
+	// case "GetEmployeeTimecards":
+	// if (requestObj.has("EmployeeId")) {
+	// responseObj = SmallbPayrollMethods.gatherEmployeeTimecards(
+	// requestObj.getString("EmployeeId"));
+	// if (responseObj.has("Failure")) {
+	// response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+	// } else {
+	// response.setStatus(HttpServletResponse.SC_OK);
+	// }
+	// } else {
+	// response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+	// responseObj.put("Failure", "Invalid Parameters");
+	// responseObj.put("ErrorMessage",
+	// "Value for \"EmployeeId\" was not found and is"
+	// + " a required parameter for this method");
+	// }
+	// break;
+
+	// case "GetPayPeriodTimecards":
+	// if (requestObj.has("PayPeriodId")) {
+	// responseObj = SmallbPayrollMethods.gatherPayPeriodTimecards(
+	// requestObj.getString("PayPeriodId"));
+	// if (responseObj.has("Failure")) {
+	// response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+	// } else {
+	// response.setStatus(HttpServletResponse.SC_OK);
+	// }
+	// } else {
+	// response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+	// responseObj.put("Failure", "Invalid Parameters");
+	// responseObj.put("ErrorMessage",
+	// "Value for \"PayPeriodId\" was not found and is"
+	// + " a required parameter for this method");
+	// }
+	// break;
+
+	// default:
+	// response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+	// responseObj.put("Failure", "Method Not Found");
+	// responseObj.put("ErrorMessage",
+	// "The client's requested \"get\" method was not "
+	// + "found as a valid method on this server.");
+	// break;
+
+	// }
+	// }
+
+	// }
+	// } catch (NullPointerException npe) {
+	// response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+	// responseObj.put("Failure", "No Content");
+	// responseObj.put("ErrorMessage",
+	// "The request that was made to the server contained no content in either the header or in the
+	// body. Requests to this servlet must contain a \"content-type\" header, and the body must
+	// contain a \"Method\" parameter, plus any additional parameters that are necessary for the
+	// requested method.");
+	// responseObj.put("NPE Cause", npe.getCause());
+	// responseObj.put("NPE Localized Message", npe.getLocalizedMessage());
+	// responseObj.put("NPE Message", npe.getMessage());
+	// }
+
+	// response.getWriter().println(responseObj.toString());
+	// }
 
 	/**
 	 * Handles all of the requests that come in via a "post" request.
