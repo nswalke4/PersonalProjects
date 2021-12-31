@@ -41,6 +41,16 @@ code {
     padding-bottom: 25px;
 }
 
+.about-project h3 {
+    color: #5d001e;
+    text-align: center;
+    cursor: pointer;
+}
+
+.about-project h3:hover {
+    color: #d9b08c;
+}
+
 .about-project p {
     color: #d9b08c;
     font-weight: 500;
