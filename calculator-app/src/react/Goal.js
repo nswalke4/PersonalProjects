@@ -13,7 +13,7 @@ const Goal = () => {
                 </div>
                 <div className="button-group">
                     <div className="button-top-row">
-                        <button className="all-clear-button">AC</button> 
+                        <button className="all-clear-button">AC</button>
                         <button className="clear-button">C</button>
                         <button className="other-button">/</button>
                     </div>
@@ -46,7 +46,7 @@ const Goal = () => {
                 <p>About the developer...</p>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Goal
+export default Goal;
