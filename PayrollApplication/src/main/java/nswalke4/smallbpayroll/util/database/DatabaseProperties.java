@@ -2,33 +2,31 @@ package main.java.nswalke4.smallbpayroll.util.database;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Creates an properties object from the database properties file and stores
- * the key/value pairs as class parameters accessable through getter methods.
+ * Creates an properties object from the database properties file and stores the key/value pairs as
+ * class parameters accessable through getter methods.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
  * @version 1.01
  */
 public class DatabaseProperties {
-	
+
 	// Class Varialbes
-	private final String FILE_NAME = "database.properties";
+	private final String FILE_NAME = "src/main/resources/database.properties";
 	private static String username;
 	private static String password;
 	private static String readDb;
 	private static String writeDb;
 	private static String driver;
-	
+
 	// Constructor
 	/**
-	 * Creates the database properties object and sets up all of the different
-	 * parameters to match the key/value pairs listed in properties file.
-	 * NOTE: This constructor must be called prior to using any of the getter
-	 * methods that follow.
+	 * Creates the database properties object and sets up all of the different parameters to match
+	 * the key/value pairs listed in properties file. NOTE: This constructor must be called prior to
+	 * using any of the getter methods that follow.
 	 */
 	public DatabaseProperties() {
 		FileInputStream fis = null;
@@ -77,7 +75,7 @@ public class DatabaseProperties {
 	}
 
 	/**
-	 * @return the url of the read-only database 
+	 * @return the url of the read-only database
 	 */
 	public static String getReadDb() {
 		return readDb;

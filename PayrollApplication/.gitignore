@@ -20,3 +20,6 @@
 .gradle
 /build/
 /bin/
+
+### VSCode ###
+.vscode
