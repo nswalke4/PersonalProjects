@@ -1,13 +1,13 @@
-package main.java.nswalke4.smallbpayroll.util.database;
+package nswalke4.smallbpayroll.util.database;
 
 import java.sql.Date;
 import java.sql.Types;
 import java.util.List;
 
-import main.java.nswalke4.smallbpayroll.util.Account;
-import main.java.nswalke4.smallbpayroll.util.Employee;
-import main.java.nswalke4.smallbpayroll.util.PayPeriod;
-import main.java.nswalke4.smallbpayroll.util.Timecard;
+import nswalke4.smallbpayroll.util.Account;
+import nswalke4.smallbpayroll.util.Employee;
+import nswalke4.smallbpayroll.util.PayPeriod;
+import nswalke4.smallbpayroll.util.Timecard;
 
 /**
  * This basic class handles the ability to "test" the connection to the Payroll database and check

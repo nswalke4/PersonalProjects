@@ -1,4 +1,4 @@
-package main.java.nswalke4.smallbpayroll.util.database;
+package nswalke4.smallbpayroll.util.database;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -6,19 +6,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.nswalke4.smallbpayroll.util.Account;
-import main.java.nswalke4.smallbpayroll.util.Employee;
-import main.java.nswalke4.smallbpayroll.util.HourlyEmployee;
-import main.java.nswalke4.smallbpayroll.util.PayPeriod;
-import main.java.nswalke4.smallbpayroll.util.SalaryEmployee;
-import main.java.nswalke4.smallbpayroll.util.Timecard;
+import nswalke4.smallbpayroll.util.Account;
+import nswalke4.smallbpayroll.util.Employee;
+import nswalke4.smallbpayroll.util.HourlyEmployee;
+import nswalke4.smallbpayroll.util.PayPeriod;
+import nswalke4.smallbpayroll.util.SalaryEmployee;
+import nswalke4.smallbpayroll.util.Timecard;
 
 /**
- * This class is an static class, giving the users the ability to access any of these
- * commands without the necessity of creating a "DatabaseQueries" object.  This handles
- * the entire communication process with the database to ensure that the query/insertion
- * is handled properly, and only opens/closes the connection for that specific query/
- * insertion to be sent through, keeping the connection time as minimal as possible.
+ * This class is an static class, giving the users the ability to access any of these commands
+ * without the necessity of creating a "DatabaseQueries" object. This handles the entire
+ * communication process with the database to ensure that the query/insertion is handled properly,
+ * and only opens/closes the connection for that specific query/ insertion to be sent through,
+ * keeping the connection time as minimal as possible.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
  * @version 1.09
@@ -27,8 +27,8 @@ public class DatabaseQueries {
 
 	// Insertion Methods
 	/**
-	 * Inserts the given information into the database as a new Account tuple.
-	 * NOTE: This does not check if the insertion worked properly...
+	 * Inserts the given information into the database as a new Account tuple. NOTE: This does not
+	 * check if the insertion worked properly...
 	 * 
 	 * @param name - the business name / name of the account object/tuple
 	 * @param email - the email associated with the account
@@ -48,12 +48,11 @@ public class DatabaseQueries {
 			return false;
 		}
 	}
-	
+
 	/**
-	 * Inserts the given information plus the calculated employeeId into the
-	 * database as a new Employee and Hourly_Employee tuple that should be
-	 * attached to the given Account object.
-	 * NOTE: This does not check if the insertion worked properly...
+	 * Inserts the given information plus the calculated employeeId into the database as a new
+	 * Employee and Hourly_Employee tuple that should be attached to the given Account object. NOTE:
+	 * This does not check if the insertion worked properly...
 	 * 
 	 * @param account - the account to insert the employee into
 	 * @param firstName - the first name of the employee
@@ -64,9 +63,9 @@ public class DatabaseQueries {
 	public static boolean addHourlyEmployee(Account account, String firstName, String lastName,
 			String phoneNum, double payRate) {
 		String empId = account.generateEmployeeID();
-		String insertEmp = "INSERT INTO Employee VALUES (" + account.getId() + ", \"" + empId
-				+ "\", \"" + firstName + "\", \"" + lastName + "\", \"" + phoneNum
-				+ "\", 'HOURLY');";
+		String insertEmp =
+				"INSERT INTO Employee VALUES (" + account.getId() + ", \"" + empId + "\", \""
+						+ firstName + "\", \"" + lastName + "\", \"" + phoneNum + "\", 'HOURLY');";
 		String insertHrly = "INSERT INTO Hourly_Employee VALUES (" + account.getId() + ", \""
 				+ empId + "\", " + payRate + ");";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
@@ -80,12 +79,11 @@ public class DatabaseQueries {
 			return false;
 		}
 	}
-	
+
 	/**
-	 * Inserts the given information plus the calculated employeeId into the
-	 * database as a new Employee and Salary_Employee tuple that should be
-	 * attached to the given Account object.
-	 * NOTE: This does not check if the insertion worked properly...
+	 * Inserts the given information plus the calculated employeeId into the database as a new
+	 * Employee and Salary_Employee tuple that should be attached to the given Account object. NOTE:
+	 * This does not check if the insertion worked properly...
 	 * 
 	 * @param account - the account to insert the employee into
 	 * @param firstName - the first name of the employee
@@ -96,9 +94,9 @@ public class DatabaseQueries {
 	public static boolean addSalaryEmployee(Account account, String firstName, String lastName,
 			String phoneNum, double payRate) {
 		String empId = account.generateEmployeeID();
-		String insertEmp = "INSERT INTO Employee VALUES (" + account.getId() + ", \"" + empId
-				+ "\", \"" + firstName + "\", \"" + lastName + "\", \"" + phoneNum
-				+ "\", 'SALARY');";
+		String insertEmp =
+				"INSERT INTO Employee VALUES (" + account.getId() + ", \"" + empId + "\", \""
+						+ firstName + "\", \"" + lastName + "\", \"" + phoneNum + "\", 'SALARY');";
 		String insertSlry = "INSERT INTO Salary_Employee VALUES (" + account.getId() + ", \""
 				+ empId + "\", " + payRate + ");";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
@@ -112,12 +110,11 @@ public class DatabaseQueries {
 			return false;
 		}
 	}
-	
+
 	/**
-	 * Inserts the given information plus the calculated endDate into the
-	 * database as a new PayPeriod tuple that should be attached to the given
-	 * Account object.
-	 * NOTE: This does not check if the insertion worked properly...
+	 * Inserts the given information plus the calculated endDate into the database as a new
+	 * PayPeriod tuple that should be attached to the given Account object. NOTE: This does not
+	 * check if the insertion worked properly...
 	 * 
 	 * @param account - the account to attach the payPeriod to
 	 * @param startDate - the start date of the payPeriod
@@ -136,12 +133,11 @@ public class DatabaseQueries {
 			return false;
 		}
 	}
-	
+
 	/**
-	 * Inserts the given information into the database as a new Timecard tuple
-	 * that should be attached to the given Account, Employee, and PayPeriod
-	 * object.
-	 * NOTE: This does not check if the insertion worked properly...
+	 * Inserts the given information into the database as a new Timecard tuple that should be
+	 * attached to the given Account, Employee, and PayPeriod object. NOTE: This does not check if
+	 * the insertion worked properly...
 	 * 
 	 * @param account - the account to attach the timecard to
 	 * @param employeeId - the id of the employee to attach the timecard to
@@ -153,9 +149,9 @@ public class DatabaseQueries {
 	 */
 	public static boolean addTimecard(Account account, String employeeId, String payPeriodId,
 			double regHours, double overtimeHours, double bonusPay, double otherPay) {
-		String insert = "INSERT INTO Timecard VALUES (" + account.getId() + ", \""
-				+ employeeId + "\", \"" + payPeriodId + "\", \"" + regHours + "\", \""
-				+ overtimeHours + "\", \"" + bonusPay + "\", \"" + otherPay +"\");";
+		String insert = "INSERT INTO Timecard VALUES (" + account.getId() + ", \"" + employeeId
+				+ "\", \"" + payPeriodId + "\", \"" + regHours + "\", \"" + overtimeHours + "\", \""
+				+ bonusPay + "\", \"" + otherPay + "\");";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
 		int insertedRows = db.executeBasicUpdate(insert);
 		db.closeConnection();
@@ -165,12 +161,11 @@ public class DatabaseQueries {
 			return false;
 		}
 	}
-	
+
 	// Query Methods
 	/**
-	 * Queries the database to gather all of the accounts tied to the database,
-	 * creates Account Objects for each of them, and then returns an ArrayList
-	 * of all of those Accounts.
+	 * Queries the database to gather all of the accounts tied to the database, creates Account
+	 * Objects for each of them, and then returns an ArrayList of all of those Accounts.
 	 * 
 	 * @return - the ArrayList of all of the Account tuples in the database
 	 */
@@ -181,24 +176,23 @@ public class DatabaseQueries {
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
-				Account act = new Account(rs.getInt("Account_Id"), rs.getString("Name"), 
-						rs.getString("Email"), rs.getString("Account_Sub"), 
+				Account act = new Account(rs.getInt("Account_Id"), rs.getString("Name"),
+						rs.getString("Email"), rs.getString("Account_Sub"),
 						PayPeriod.PayPeriodType.valueOf(rs.getString("Pay_Period")));
 				result.add(act);
 			}
 		} catch (SQLException sqlex) {
-			System.out.println("[FAILURE] Something went wrong while trying to read the "
-					+ "results...");
+			System.out.println(
+					"[FAILURE] Something went wrong while trying to read the " + "results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();
 		return result;
 	}
-	
+
 	/**
-	 * Queries the database to gather a specific account using the account's
-	 * sub (which is generated by the AWS Cognito sign-in page) as the lookup
-	 * parameter from the Payroll database.
+	 * Queries the database to gather a specific account using the account's sub (which is generated
+	 * by the AWS Cognito sign-in page) as the lookup parameter from the Payroll database.
 	 * 
 	 * @param sub - the AWS Cognito generated "sub" id to lookup the account tuple
 	 * @return - the Account object that matches the given "sub" in the database
@@ -210,22 +204,22 @@ public class DatabaseQueries {
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
-				result = new Account(rs.getInt("Account_Id"), rs.getString("Name"), 
-						rs.getString("Email"), rs.getString("Account_Sub"), 
+				result = new Account(rs.getInt("Account_Id"), rs.getString("Name"),
+						rs.getString("Email"), rs.getString("Account_Sub"),
 						PayPeriod.PayPeriodType.valueOf(rs.getString("Pay_Period")));
 			}
 		} catch (SQLException sqlex) {
-			System.out.println("[FAILURE] Something went wrong while trying to read the "
-					+ "results...");
+			System.out.println(
+					"[FAILURE] Something went wrong while trying to read the " + "results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();
 		return result;
 	}
-	
+
 	/**
-	 * Queries the database to gather the number of Employee accounts attached
-	 * to the given Account and returns the result.
+	 * Queries the database to gather the number of Employee accounts attached to the given Account
+	 * and returns the result.
 	 * 
 	 * @param account - the Account object that the employees are tied to
 	 * @return - an integer representing the number of Employees the account has
@@ -238,22 +232,21 @@ public class DatabaseQueries {
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
-				result = rs.getInt("Emp_Count"); 
+				result = rs.getInt("Emp_Count");
 			}
 		} catch (SQLException sqlex) {
-			System.out.println("[FAILURE] Something went wrong while trying to read the "
-					+ "results...");
+			System.out.println(
+					"[FAILURE] Something went wrong while trying to read the " + "results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();
 		return result;
 	}
-	
+
 	/**
-	 * Queries the database to gather all of the Employee accounts attached
-	 * to the given Account, creates the HourlyEmployee or SalaryEmployee
-	 * object representation based on the "emp_type" attribute, and then adds
-	 * each employee to an ArrayList to be returned as the result.
+	 * Queries the database to gather all of the Employee accounts attached to the given Account,
+	 * creates the HourlyEmployee or SalaryEmployee object representation based on the "emp_type"
+	 * attribute, and then adds each employee to an ArrayList to be returned as the result.
 	 * 
 	 * @param account - the Account object that the employees are tied to
 	 * @return - an ArrayList of all of the employees attached to the given account
@@ -269,28 +262,28 @@ public class DatabaseQueries {
 			while (rs.next()) {
 				Employee emp = null;
 				if (rs.getString("Emp_Type").equalsIgnoreCase("hourly")) {
-					emp = new HourlyEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"), 
+					emp = new HourlyEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"),
 							rs.getString("Last_Name"), rs.getString("Phone_Num"),
 							rs.getDouble("Rate"));
 				} else {
-					emp = new SalaryEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"), 
+					emp = new SalaryEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"),
 							rs.getString("Last_Name"), rs.getString("Phone_Num"),
 							rs.getDouble("Period_Rate"));
 				}
 				result.add(emp);
 			}
 		} catch (SQLException sqlex) {
-			System.out.println("[FAILURE] Something went wrong while trying to read the "
-					+ "results...");
+			System.out.println(
+					"[FAILURE] Something went wrong while trying to read the " + "results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();
 		return result;
 	}
-	
+
 	/**
-	 * Queries the database to gather the number of Pay Periods that are attached
-	 * to the given Account and returns the result.
+	 * Queries the database to gather the number of Pay Periods that are attached to the given
+	 * Account and returns the result.
 	 * 
 	 * @param account - the Account object that the pay periods are tied to
 	 * @return - an integer representing the number of pay periods the account has
@@ -303,21 +296,21 @@ public class DatabaseQueries {
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
-				result = rs.getInt("Pay_Period_Count"); 
+				result = rs.getInt("Pay_Period_Count");
 			}
 		} catch (SQLException sqlex) {
-			System.out.println("[FAILURE] Something went wrong while trying to read the "
-					+ "results...");
+			System.out.println(
+					"[FAILURE] Something went wrong while trying to read the " + "results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();
 		return result;
 	}
-	
+
 	/**
-	 * Queries the database to gather all of the different Pay Periods associated with
-	 * the given account, creates PayPeriod object for each of the tuples, and then
-	 * returns an array list of all of those PayPeriod objects.
+	 * Queries the database to gather all of the different Pay Periods associated with the given
+	 * account, creates PayPeriod object for each of the tuples, and then returns an array list of
+	 * all of those PayPeriod objects.
 	 * 
 	 * @param account - the account that the PayPeriods are tied to
 	 * @return - an ArrayList of PayPeriods that are all attached to the given account
@@ -329,30 +322,29 @@ public class DatabaseQueries {
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
-				PayPeriod period = new PayPeriod(rs.getString("Period_Id"), 
+				PayPeriod period = new PayPeriod(rs.getString("Period_Id"),
 						rs.getDate("Start_Date"), rs.getDate("End_Date"));
 				result.add(period);
 			}
 		} catch (SQLException sqlex) {
-			System.out.println("[FAILURE] Something went wrong while trying to read the "
-					+ "results...");
+			System.out.println(
+					"[FAILURE] Something went wrong while trying to read the " + "results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();
 		return result;
 	}
-	
+
 	/**
-	 * Queries the database to gather a specific employee using the given "employeeId"
-	 * string to find the specific employee, and then return's the given hourly or salary
-	 * employee object.
+	 * Queries the database to gather a specific employee using the given "employeeId" string to
+	 * find the specific employee, and then return's the given hourly or salary employee object.
 	 * 
 	 * @param employeeId - the id of the employee to find in the database
 	 * @return - the Employee object tied to the given employeeId string (or null)
 	 */
 	public static Employee getSpecificEmployee(String employeeId) {
 		Employee result = null;
-		String query ="SELECT * FROM ((Employee AS E LEFT JOIN Hourly_Employee AS H ON E.Emp_Id = "
+		String query = "SELECT * FROM ((Employee AS E LEFT JOIN Hourly_Employee AS H ON E.Emp_Id = "
 				+ "H.Emp_Id) LEFT JOIN Salary_Employee AS S ON E.Emp_Id = S.Emp_Id)"
 				+ "WHERE E.Emp_Id = \"" + employeeId + "\";";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
@@ -360,27 +352,27 @@ public class DatabaseQueries {
 		try {
 			while (rs.next()) {
 				if (rs.getString("Emp_Type").equalsIgnoreCase("hourly")) {
-					result = new HourlyEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"), 
+					result = new HourlyEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"),
 							rs.getString("Last_Name"), rs.getString("Phone_Num"),
 							rs.getDouble("Rate"));
 				} else {
-					result = new SalaryEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"), 
+					result = new SalaryEmployee(rs.getString("Emp_Id"), rs.getString("First_Name"),
 							rs.getString("Last_Name"), rs.getString("Phone_Num"),
 							rs.getDouble("Period_Rate"));
 				}
 			}
 		} catch (SQLException sqlex) {
-			System.out.println("[FAILURE] Something went wrong while trying to read the "
-					+ "results...");
+			System.out.println(
+					"[FAILURE] Something went wrong while trying to read the " + "results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();
 		return result;
 	}
-	
+
 	/**
-	 * Queries the database to gather the number of Timecards that are attached
-	 * to the given Employee and returns the result.
+	 * Queries the database to gather the number of Timecards that are attached to the given
+	 * Employee and returns the result.
 	 * 
 	 * @param employee - the Employee object that the timecards are tied to
 	 * @return - an integer representing the number of timecards the employee has
@@ -393,11 +385,11 @@ public class DatabaseQueries {
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
-				result = rs.getInt("Timecard_Count"); 
+				result = rs.getInt("Timecard_Count");
 			}
 		} catch (SQLException sqlex) {
-			System.out.println("[FAILURE] Something went wrong while trying to read the "
-					+ "results...");
+			System.out.println(
+					"[FAILURE] Something went wrong while trying to read the " + "results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();
@@ -405,38 +397,38 @@ public class DatabaseQueries {
 	}
 
 	/**
-	 * Queries the database to gather all of the timecard tuples attached to the given
-	 * employee, creates new Timecard object for each of the tuples, and then returns an
-	 * ArrayList of all of the Timecards attached to the given employee.
+	 * Queries the database to gather all of the timecard tuples attached to the given employee,
+	 * creates new Timecard object for each of the tuples, and then returns an ArrayList of all of
+	 * the Timecards attached to the given employee.
 	 * 
 	 * @param employee - the employee to gather all Timecards from
 	 * @return - an ArrayList of all of the Timecards attached to the given employee
 	 */
 	public static List<Timecard> getAllEmployeeTimecards(Employee employee) {
 		List<Timecard> result = new ArrayList<Timecard>();
-		String query = "SELECT * FROM Timecard WHERE Emp_Id = \"" + employee.getEmployeeId()
-			+ "\";";
+		String query =
+				"SELECT * FROM Timecard WHERE Emp_Id = \"" + employee.getEmployeeId() + "\";";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
-				Timecard tc = new Timecard(rs.getString("Emp_Id"), rs.getString("Period_Id"), 
+				Timecard tc = new Timecard(rs.getString("Emp_Id"), rs.getString("Period_Id"),
 						rs.getDouble("Regular_Hours"), rs.getDouble("Overtime_Hours"),
 						rs.getDouble("Bonus_Pay"), rs.getDouble("Other_Pay"));
 				result.add(tc);
 			}
 		} catch (SQLException sqlex) {
-			System.out.println("[FAILURE] Something went wrong while trying to read the "
-					+ "results...");
+			System.out.println(
+					"[FAILURE] Something went wrong while trying to read the " + "results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();
 		return result;
 	}
-	
+
 	/**
-	 * Queries the database to gather a specific pay period using the give "payPeriodId"
-	 * string to find the specific pay period, and then return's the pay period object.
+	 * Queries the database to gather a specific pay period using the give "payPeriodId" string to
+	 * find the specific pay period, and then return's the pay period object.
 	 * 
 	 * @param payPeriodId - the id of the pay period to find in the database
 	 * @return - the PayPeriod object tied to the given payPeriodId string (or null)
@@ -448,21 +440,21 @@ public class DatabaseQueries {
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
-				result = new PayPeriod(rs.getString("Period_Id"), 
-						rs.getDate("Start_Date"), rs.getDate("End_Date"));
+				result = new PayPeriod(rs.getString("Period_Id"), rs.getDate("Start_Date"),
+						rs.getDate("End_Date"));
 			}
 		} catch (SQLException sqlex) {
-			System.out.println("[FAILURE] Something went wrong while trying to read the "
-					+ "results...");
+			System.out.println(
+					"[FAILURE] Something went wrong while trying to read the " + "results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();
 		return result;
 	}
-	
+
 	/**
-	 * Queries the database to gather the number of Timecards that are attached
-	 * to the given Pay Period and returns the result.
+	 * Queries the database to gather the number of Timecards that are attached to the given Pay
+	 * Period and returns the result.
 	 * 
 	 * @param payPeriod - the Pay Period object that the timecards are tied to
 	 * @return - an integer representing the number of timecards the pay period has
@@ -475,11 +467,11 @@ public class DatabaseQueries {
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
-				result = rs.getInt("Timecard_Count"); 
+				result = rs.getInt("Timecard_Count");
 			}
 		} catch (SQLException sqlex) {
-			System.out.println("[FAILURE] Something went wrong while trying to read the "
-					+ "results...");
+			System.out.println(
+					"[FAILURE] Something went wrong while trying to read the " + "results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();
@@ -487,29 +479,29 @@ public class DatabaseQueries {
 	}
 
 	/**
-	 * Queries the database to gather all of the timecard tuples attached to the given
-	 * pay period, creates new Timecard object for each of the tuples, and then returns an
-	 * ArrayList of all of the Timecards attached to the given pay period.
+	 * Queries the database to gather all of the timecard tuples attached to the given pay period,
+	 * creates new Timecard object for each of the tuples, and then returns an ArrayList of all of
+	 * the Timecards attached to the given pay period.
 	 * 
 	 * @param payPeriod - the payPeriod to gather all Timecards from
 	 * @return - an ArrayList of all of the Timecards attached to the given payPeriod
 	 */
 	public static List<Timecard> getAllPayPeriodTimecards(PayPeriod payPeriod) {
 		List<Timecard> result = new ArrayList<Timecard>();
-		String query = "SELECT * FROM Timecard WHERE Period_Id = \"" + payPeriod.getPeriodId()
-			+ "\";";
+		String query =
+				"SELECT * FROM Timecard WHERE Period_Id = \"" + payPeriod.getPeriodId() + "\";";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
-				Timecard tc = new Timecard(rs.getString("Emp_Id"), rs.getString("Period_Id"), 
+				Timecard tc = new Timecard(rs.getString("Emp_Id"), rs.getString("Period_Id"),
 						rs.getDouble("Regular_Hours"), rs.getDouble("Overtime_Hours"),
 						rs.getDouble("Bonus_Pay"), rs.getDouble("Other_Pay"));
 				result.add(tc);
 			}
 		} catch (SQLException sqlex) {
-			System.out.println("[FAILURE] Something went wrong while trying to read the "
-					+ "results...");
+			System.out.println(
+					"[FAILURE] Something went wrong while trying to read the " + "results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();

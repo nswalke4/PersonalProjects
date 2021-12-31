@@ -1,4 +1,4 @@
-package main.java.nswalke4.smallbpayroll.util.database;
+package nswalke4.smallbpayroll.util.database;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

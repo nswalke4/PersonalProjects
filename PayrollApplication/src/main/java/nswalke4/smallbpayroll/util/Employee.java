@@ -1,10 +1,10 @@
-package main.java.nswalke4.smallbpayroll.util;
+package nswalke4.smallbpayroll.util;
 
 import org.json.JSONObject;
 
 /**
- * This class contains all of the necessary information for an Employee object
- * based off of the payroll application database.
+ * This class contains all of the necessary information for an Employee object based off of the
+ * payroll application database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
  * @version 1.06
@@ -19,13 +19,12 @@ public class Employee {
 
 	// Constructor
 	/**
-	 * Constructs an Employee object from the given information (includes the phone
-	 * number).
+	 * Constructs an Employee object from the given information (includes the phone number).
 	 * 
 	 * @param pEmployeeId - the id of the Employee object
-	 * @param pFirstName  - the first name of the Employee object
-	 * @param pLastName   - the last name of the Employee object
-	 * @param pPhoneNum   - the phone number of the Employee object (can be null)
+	 * @param pFirstName - the first name of the Employee object
+	 * @param pLastName - the last name of the Employee object
+	 * @param pPhoneNum - the phone number of the Employee object (can be null)
 	 */
 	public Employee(String pEmployeeId, String pFirstName, String pLastName, String pPhoneNum) {
 		this.employeeId = pEmployeeId;
@@ -70,7 +69,7 @@ public class Employee {
 	public String getPhoneNum() {
 		return phoneNum;
 	}
-	
+
 	// Class Methods
 	/**
 	 * Takes the given Employee object and turn's it into a JSONObject.

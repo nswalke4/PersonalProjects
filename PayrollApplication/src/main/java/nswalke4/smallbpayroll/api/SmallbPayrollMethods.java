@@ -1,4 +1,4 @@
-package main.java.nswalke4.smallbpayroll.api;
+package nswalke4.smallbpayroll.api;
 
 import java.sql.Date;
 import java.util.List;
@@ -6,31 +6,31 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import main.java.nswalke4.smallbpayroll.util.Account;
-import main.java.nswalke4.smallbpayroll.util.Employee;
-import main.java.nswalke4.smallbpayroll.util.PayPeriod;
-import main.java.nswalke4.smallbpayroll.util.PayPeriod.PayPeriodType;
-import main.java.nswalke4.smallbpayroll.util.Timecard;
-import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
+import nswalke4.smallbpayroll.util.Account;
+import nswalke4.smallbpayroll.util.Employee;
+import nswalke4.smallbpayroll.util.PayPeriod;
+import nswalke4.smallbpayroll.util.PayPeriod.PayPeriodType;
+import nswalke4.smallbpayroll.util.Timecard;
+import nswalke4.smallbpayroll.util.database.DatabaseQueries;
 
 /**
- * The class contains static methods that are used in the back-end of the Smallb Payroll
- * application to gather information or add new information to the Payroll Database, and
- * return's a JSONObject that contains the results of the requested action.
+ * The class contains static methods that are used in the back-end of the Smallb Payroll application
+ * to gather information or add new information to the Payroll Database, and return's a JSONObject
+ * that contains the results of the requested action.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
  * @version 1.02
  */
 public class SmallbPayrollMethods {
-	
+
 	// Get Methods
 	/**
-	 * Gather's the account tied to the given "accountSub" string and then generates a
-	 * JSONObject response with the account information.
+	 * Gather's the account tied to the given "accountSub" string and then generates a JSONObject
+	 * response with the account information.
 	 * 
 	 * @param accountSub - the AWS Cognito-generated ID used to select the correct account
 	 * @return - a JSONObject with the account information (or a message explaining why the
-	 *           requested method failed
+	 *         requested method failed
 	 */
 	protected static JSONObject gatherAccountInformation(String accountSub) {
 		JSONObject result = new JSONObject();
@@ -46,12 +46,12 @@ public class SmallbPayrollMethods {
 	}
 
 	/**
-	 * Gather's the employee tied to the given "employeeId" string and then generates a
-	 * JSONObject response with the employee's timecards information.
+	 * Gather's the employee tied to the given "employeeId" string and then generates a JSONObject
+	 * response with the employee's timecards information.
 	 * 
 	 * @param employeeId - the ID of the employee to gather the timecards for
-	 * @return - a JSONObject with the employee's timecards information (or a message explaining
-	 *           why the requested method failed
+	 * @return - a JSONObject with the employee's timecards information (or a message explaining why
+	 *         the requested method failed
 	 */
 	protected static JSONObject gatherEmployeeTimecards(String employeeId) {
 		JSONObject result = new JSONObject();
@@ -79,7 +79,7 @@ public class SmallbPayrollMethods {
 	 * 
 	 * @param payPeriodId - the ID of the pay period to gather the timecards for
 	 * @return - a JSONObject with the pay period's timecards information (or a message explaining
-	 *           why the requested method failed
+	 *         why the requested method failed
 	 */
 	protected static JSONObject gatherPayPeriodTimecards(String payPeriodId) {
 		JSONObject result = new JSONObject();
@@ -97,7 +97,7 @@ public class SmallbPayrollMethods {
 				timecardArray.put(timecardObj);
 			}
 			result.put("Timecards", timecardArray);
-		
+
 		}
 		return result;
 	}
@@ -108,9 +108,9 @@ public class SmallbPayrollMethods {
 	 * generates a JSONObject response with the created Account information (or a failure message).
 	 * 
 	 * @param accountObj - a JSONObject that contains the necessary information to create a new
-	 *                     Account
+	 *        Account
 	 * @return - a JSONObject with the new Account information (or a message explaining why the
-	 *           requested method failed
+	 *         requested method failed
 	 */
 	protected static JSONObject createNewAccount(JSONObject accountObj) {
 		JSONObject result = new JSONObject();
@@ -134,9 +134,9 @@ public class SmallbPayrollMethods {
 	 * with the created Employee information (or a failure message).
 	 * 
 	 * @param requestObj - a JSONObject that contains the necessary information to create a new
-	 *                     Employee connected to the given Account
+	 *        Employee connected to the given Account
 	 * @return - a JSONObject with the new Employee's information (or a message explaining why the
-	 *           requested method failed
+	 *         requested method failed
 	 */
 	protected static JSONObject createNewEmployee(JSONObject requestObj) {
 		JSONObject result = new JSONObject();
@@ -156,16 +156,17 @@ public class SmallbPayrollMethods {
 				result.put("Success", "Hourly Employee Created");
 			} else {
 				result.put("Failure", "Unable to Create Employee");
-				result.put("ErrorMessage", "Something went wrong with trying to create this "
-						+ "employee.");
+				result.put("ErrorMessage",
+						"Something went wrong with trying to create this " + "employee.");
 			}
 		} else {
-			if (DatabaseQueries.addSalaryEmployee(account, firstName, lastName, phoneNum, payRate)) {
+			if (DatabaseQueries.addSalaryEmployee(account, firstName, lastName, phoneNum,
+					payRate)) {
 				result.put("Success", "Salary Employee Created");
 			} else {
 				result.put("Failure", "Unable to Create Employee");
-				result.put("ErrorMessage", "Something went wrong with trying to create this "
-						+ "employee.");
+				result.put("ErrorMessage",
+						"Something went wrong with trying to create this " + "employee.");
 			}
 		}
 		return result;
@@ -177,10 +178,10 @@ public class SmallbPayrollMethods {
 	 * "PeriodStartDate" date), and then generates a JSONObject response with the created Pay Period
 	 * information (or a failure message).
 	 * 
-	 * @param requestObj - a JSONObject that contains the necessary information to create a new
-	 *                     Pay Period connected to the given Account
+	 * @param requestObj - a JSONObject that contains the necessary information to create a new Pay
+	 *        Period connected to the given Account
 	 * @return - a JSONObject with the new PayPeriod's information (or a message explaining why the
-	 *           requested method failed
+	 *         requested method failed
 	 */
 	protected static JSONObject createNewPayPeriod(JSONObject requestObj) {
 		JSONObject result = new JSONObject();
@@ -190,8 +191,8 @@ public class SmallbPayrollMethods {
 			result.put("Success", "Pay Period Created");
 		} else {
 			result.put("Failure", "Unable to Create Pay Period");
-			result.put("ErrorMessage", "Something went wrong with trying to create this "
-					+ "pay period.");
+			result.put("ErrorMessage",
+					"Something went wrong with trying to create this " + "pay period.");
 		}
 		return result;
 	}
@@ -203,9 +204,9 @@ public class SmallbPayrollMethods {
 	 * with the created Timecard information (or a failure message).
 	 * 
 	 * @param requestObj - a JSONObject that contains the necessary information to create a new
-	 *                     Timecard connected to the given Account
+	 *        Timecard connected to the given Account
 	 * @return - a JSONObject with the new Timecard information (or a message explaining why the
-	 *           requested method failed
+	 *         requested method failed
 	 */
 	protected static JSONObject createNewTimecard(JSONObject requestObj) {
 		JSONObject result = new JSONObject();
@@ -234,8 +235,8 @@ public class SmallbPayrollMethods {
 			result.put("Success", "Timecard Created");
 		} else {
 			result.put("Failure", "Unable to Create Timecard");
-			result.put("ErrorMessage", "Something went wrong with trying to create this "
-					+ "timecard.");
+			result.put("ErrorMessage",
+					"Something went wrong with trying to create this " + "timecard.");
 		}
 		return result;
 	}

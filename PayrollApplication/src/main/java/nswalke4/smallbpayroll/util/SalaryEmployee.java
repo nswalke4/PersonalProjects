@@ -1,10 +1,10 @@
-package main.java.nswalke4.smallbpayroll.util;
+package nswalke4.smallbpayroll.util;
 
 import org.json.JSONObject;
 
 /**
- * This class represents the Salary Employee object based off of the database
- * schema for the payroll application.
+ * This class represents the Salary Employee object based off of the database schema for the payroll
+ * application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
  * @version 1.04
@@ -19,15 +19,13 @@ public class SalaryEmployee extends Employee {
 	 * Creates an Salary Employee object from the given information.
 	 * 
 	 * @param pEmployeeId - the id of the Salary Employee object
-	 * @param pFirstName  - the first name of the Salary Employee object
-	 * @param pLastName   - the last name of the Salary Employee object
-	 * @param pPhoneNum   - the phone number of the Salary Employee object (can be
-	 *                    null)
-	 * @param pPeriodRate - the rate of pay for a pay period of the Salary Employee
-	 *                    object
+	 * @param pFirstName - the first name of the Salary Employee object
+	 * @param pLastName - the last name of the Salary Employee object
+	 * @param pPhoneNum - the phone number of the Salary Employee object (can be null)
+	 * @param pPeriodRate - the rate of pay for a pay period of the Salary Employee object
 	 */
-	public SalaryEmployee(String pEmployeeId, String pFirstName, String pLastName,
-			String pPhoneNum, double pPeriodRate) {
+	public SalaryEmployee(String pEmployeeId, String pFirstName, String pLastName, String pPhoneNum,
+			double pPeriodRate) {
 		super(pEmployeeId, pFirstName, pLastName, pPhoneNum);
 		this.periodRate = pPeriodRate;
 	}
@@ -41,12 +39,12 @@ public class SalaryEmployee extends Employee {
 	public double getPeriodRate() {
 		return periodRate;
 	}
-	
+
 	// Class Methods
 	/**
-	 * Creates a JSONObject of the Hourly Employee object using the super class's
-	 * method to create the basic object, and then appends the Salary Employee's
-	 * period pay rate to the object before returning it.
+	 * Creates a JSONObject of the Hourly Employee object using the super class's method to create
+	 * the basic object, and then appends the Salary Employee's period pay rate to the object before
+	 * returning it.
 	 * 
 	 * @return - the JSONObject representation of an Salary employee
 	 */

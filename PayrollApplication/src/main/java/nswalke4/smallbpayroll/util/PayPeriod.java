@@ -1,13 +1,12 @@
-package main.java.nswalke4.smallbpayroll.util;
+package nswalke4.smallbpayroll.util;
 
 import java.sql.Date;
 
 import org.json.JSONObject;
 
 /**
- * This class is a representation of the PayPeriod table from the database used
- * for the payroll application, as well as the two enumerators used by the
- * account object in the database.
+ * This class is a representation of the PayPeriod table from the database used for the payroll
+ * application, as well as the two enumerators used by the account object in the database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
  * @version 1.05
@@ -16,8 +15,8 @@ public class PayPeriod {
 
 	// Enumerator
 	/**
-	 * This enumerator represents all of the different possible pay-period types
-	 * that can be used with this payroll application.
+	 * This enumerator represents all of the different possible pay-period types that can be used
+	 * with this payroll application.
 	 */
 	public enum PayPeriodType {
 		WEEKLY, BIWEEKLY

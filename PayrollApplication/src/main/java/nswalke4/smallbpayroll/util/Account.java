@@ -1,4 +1,4 @@
-package main.java.nswalke4.smallbpayroll.util;
+package nswalke4.smallbpayroll.util;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -8,11 +8,10 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import main.java.nswalke4.smallbpayroll.util.database.DatabaseQueries;
+import nswalke4.smallbpayroll.util.database.DatabaseQueries;
 
 /**
- * This class contains the Account object that is used in the database for the
- * Payroll application.
+ * This class contains the Account object that is used in the database for the Payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
  * @version 1.08
@@ -32,9 +31,9 @@ public class Account {
 	/**
 	 * Create's an Account object based off of the given information.
 	 * 
-	 * @param pId         - the id of the account object
-	 * @param pName       - the name of the account object
-	 * @param pEmail      - the email of the account object
+	 * @param pId - the id of the account object
+	 * @param pName - the name of the account object
+	 * @param pEmail - the email of the account object
 	 * @param pPeriodType - the pay period type of the account object
 	 */
 	public Account(int pId, String pName, String pEmail, String pSub,
@@ -95,8 +94,8 @@ public class Account {
 	}
 
 	/**
-	 * Get's the hash map of all employees that are connected to the account object
-	 * using the employee's id as the key and the employee object as the value.
+	 * Get's the hash map of all employees that are connected to the account object using the
+	 * employee's id as the key and the employee object as the value.
 	 * 
 	 * @return the HashMap of the employees of the account object
 	 */
@@ -106,9 +105,8 @@ public class Account {
 	}
 
 	/**
-	 * Get's the hash map of all the pay periods that are connected to the account
-	 * object using the pay period's id as the key and the PayPeriod object as the
-	 * value.
+	 * Get's the hash map of all the pay periods that are connected to the account object using the
+	 * pay period's id as the key and the PayPeriod object as the value.
 	 * 
 	 * @return the HashMap of the pay periods of the account object
 	 */
@@ -119,9 +117,9 @@ public class Account {
 
 	// Class Methods
 	/**
-	 * Generates an employee ID number using the account ID and the number of
-	 * employees that the account has, up to 9999 employees. Style:
-	 * "[AccountID]-E-[# of Employees, with leading zeros to make 4 digits]"
+	 * Generates an employee ID number using the account ID and the number of employees that the
+	 * account has, up to 9999 employees. Style: "[AccountID]-E-[# of Employees, with leading zeros
+	 * to make 4 digits]"
 	 * 
 	 * @return - the generated EmployeeID string
 	 */
@@ -142,9 +140,8 @@ public class Account {
 	}
 
 	/**
-	 * Generates the end date of a PayPeriod by using the given start date and
-	 * the account's information about the type of PayPeriod it uses to calculate
-	 * the PayPeriod's end date.
+	 * Generates the end date of a PayPeriod by using the given start date and the account's
+	 * information about the type of PayPeriod it uses to calculate the PayPeriod's end date.
 	 * 
 	 * @param startDate - the date that the PayPeriod begins
 	 * @return - the last day of the PayPeriod (is included in the period)
@@ -167,9 +164,9 @@ public class Account {
 	}
 
 	/**
-	 * Generates a pay period ID number using the account ID and the number of pay
-	 * periods that the account has, up to 9999 pay periods. Style:
-	 * "[AccountID]-P-[# of PayPeriods, with leading zeros to make 4 digits]"
+	 * Generates a pay period ID number using the account ID and the number of pay periods that the
+	 * account has, up to 9999 pay periods. Style: "[AccountID]-P-[# of PayPeriods, with leading
+	 * zeros to make 4 digits]"
 	 * 
 	 * @return - the generated PayPeriodID string
 	 */
@@ -190,9 +187,9 @@ public class Account {
 	}
 
 	/**
-	 * Collects all of the tuples attached to the Employee table with the AccountID
-	 * equal to the current account's AccountID from the database, and then adds any
-	 * tuple to the employees HashMap that is not already listed in it.
+	 * Collects all of the tuples attached to the Employee table with the AccountID equal to the
+	 * current account's AccountID from the database, and then adds any tuple to the employees
+	 * HashMap that is not already listed in it.
 	 */
 	private void updateEmployees() {
 		List<Employee> empList = DatabaseQueries.getEmployees(this);
@@ -204,9 +201,9 @@ public class Account {
 	}
 
 	/**
-	 * Collects all of the tuples attached to the PayPeriod table with the AccountID
-	 * equal to the current account's AccountID from the database, and then adds any
-	 * tuple to the payPeriods HashMap that is not already listed in it.
+	 * Collects all of the tuples attached to the PayPeriod table with the AccountID equal to the
+	 * current account's AccountID from the database, and then adds any tuple to the payPeriods
+	 * HashMap that is not already listed in it.
 	 */
 	private void updatePayPeriods() {
 		List<PayPeriod> payPeriodList = DatabaseQueries.getPayPeriods(this);
@@ -218,14 +215,13 @@ public class Account {
 	}
 
 	/**
-	 * Collects all of the information about the Account object and then creates a
-	 * JSONObject representation of all of that information (including the basic info
-	 * about the Account object [excluding the AccountSub], basic info about all of
-	 * the Employees tied to this account, and basic info about all of the PayPeriods
-	 * tied to this account.
+	 * Collects all of the information about the Account object and then creates a JSONObject
+	 * representation of all of that information (including the basic info about the Account object
+	 * [excluding the AccountSub], basic info about all of the Employees tied to this account, and
+	 * basic info about all of the PayPeriods tied to this account.
 	 * 
-	 * @return - a JSONObject representation of an Account object as well as all of its
-	 *           Employees and PayPeriods
+	 * @return - a JSONObject representation of an Account object as well as all of its Employees
+	 *         and PayPeriods
 	 */
 	public JSONObject makeIntoJSONObject() {
 		JSONObject result = new JSONObject();
