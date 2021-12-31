@@ -18,11 +18,11 @@ public class HourlyEmployee extends Employee {
 	/**
 	 * Creates an Hourly Employee object from the given information.
 	 * 
-	 * @param pEmployeeId - the id of the Hourly Employee object
-	 * @param pFirstName - the first name of the Hourly Employee object
-	 * @param pLastName - the last name of the Hourly Employee object
-	 * @param pPhoneNum - the phone number of the Hourly Employee object (can be null)
-	 * @param pRate - the pay rate of the Hourly Employee object
+	 * @param pEmployeeId the id of the Hourly Employee object
+	 * @param pFirstName the first name of the Hourly Employee object
+	 * @param pLastName the last name of the Hourly Employee object
+	 * @param pPhoneNum the phone number of the Hourly Employee object (can be null)
+	 * @param pRate the pay rate of the Hourly Employee object
 	 */
 	public HourlyEmployee(String pEmployeeId, String pFirstName, String pLastName, String pPhoneNum,
 			double pRate) {
@@ -46,7 +46,7 @@ public class HourlyEmployee extends Employee {
 	 * the basic object, and then appends the Hourly Employee's pay rate to the object before
 	 * returning it.
 	 * 
-	 * @return - the JSONObject representation of an Hourly employee
+	 * @return the JSONObject representation of an Hourly employee
 	 */
 	@Override
 	public JSONObject makeIntoJSONObject() {

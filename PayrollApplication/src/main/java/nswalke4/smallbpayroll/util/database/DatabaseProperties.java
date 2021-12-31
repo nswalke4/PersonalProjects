@@ -61,6 +61,8 @@ public class DatabaseProperties {
 
 	// Getters
 	/**
+	 * Get's the username to access the database.
+	 * 
 	 * @return the username of the database
 	 */
 	public static String getUsername() {
@@ -68,6 +70,8 @@ public class DatabaseProperties {
 	}
 
 	/**
+	 * Get's the password to access the database.
+	 * 
 	 * @return the password of the database
 	 */
 	public static String getPassword() {
@@ -75,6 +79,8 @@ public class DatabaseProperties {
 	}
 
 	/**
+	 * Get's the url of the read-only database.
+	 * 
 	 * @return the url of the read-only database
 	 */
 	public static String getReadDb() {
@@ -82,6 +88,8 @@ public class DatabaseProperties {
 	}
 
 	/**
+	 * Get's the url of the full-access database.
+	 * 
 	 * @return the url of the writeable database
 	 */
 	public static String getWriteDb() {
@@ -89,6 +97,8 @@ public class DatabaseProperties {
 	}
 
 	/**
+	 * Get's the string representation of the database driver.
+	 * 
 	 * @return the string representation of the driver for the database connection
 	 */
 	public static String getDriver() {

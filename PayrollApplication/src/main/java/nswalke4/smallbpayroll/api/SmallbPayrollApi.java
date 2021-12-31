@@ -16,7 +16,7 @@ import org.json.JSONObject;
  * back end of the Smallb Payroll Application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.03
+ * @version 1.04
  */
 public class SmallbPayrollApi extends HttpServlet {
 
@@ -24,9 +24,20 @@ public class SmallbPayrollApi extends HttpServlet {
 	private static final long serialVersionUID = -7174927741311355125L;
 	private final String JSON_CONTENT = "application/json";
 
+	// Constructor
+	/**
+	 * This creates a SmallbPayrollApi object using its parent's (javax.servlet.http.HttpServlet)
+	 * constructor.
+	 */
+	public SmallbPayrollApi() {
+		super();
+	}
+
+	// Class Methods (Overrides)
 	/**
 	 * Initializes the Smallb Payroll Servlet to be able to accept http methods.
 	 */
+	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 	}
@@ -34,6 +45,7 @@ public class SmallbPayrollApi extends HttpServlet {
 	/**
 	 * Handles all of the requests that come in via a "get" request.
 	 */
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType(JSON_CONTENT);
@@ -138,6 +150,7 @@ public class SmallbPayrollApi extends HttpServlet {
 	/**
 	 * Handles all of the requests that come in via a "post" request.
 	 */
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType(JSON_CONTENT);
@@ -284,6 +297,7 @@ public class SmallbPayrollApi extends HttpServlet {
 	// /**
 	// * Handles all of the requests that come in via a "delete" request.
 	// */
+	// @Override
 	// public void doDelete(HttpServletRequest request, HttpServletResponse response) throws
 	// ServletException, IOException {
 	// response.setContentType(JSON_CONTENT);

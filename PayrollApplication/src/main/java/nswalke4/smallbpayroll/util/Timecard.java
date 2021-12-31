@@ -22,12 +22,12 @@ public class Timecard {
 	/**
 	 * Creates a timecard object from the given information.
 	 * 
-	 * @param pEmployeeId - the employee id of the Timecard object
-	 * @param pPeriodId - the pay period id of the Timecard object
-	 * @param pRegularHours - the number of regular hours of the Timecard object
-	 * @param pOvertimeHours - the number of overtime hours of the Timecard object
-	 * @param pBonusPay - the amount of bonus pay of the Timecard object
-	 * @param pOtherPay - the amount of other pay of the Timecard object
+	 * @param pEmployeeId the employee id of the Timecard object
+	 * @param pPeriodId the pay period id of the Timecard object
+	 * @param pRegularHours the number of regular hours of the Timecard object
+	 * @param pOvertimeHours the number of overtime hours of the Timecard object
+	 * @param pBonusPay the amount of bonus pay of the Timecard object
+	 * @param pOtherPay the amount of other pay of the Timecard object
 	 */
 	public Timecard(String pEmployeeId, String pPeriodId, double pRegularHours,
 			double pOvertimeHours, double pBonusPay, double pOtherPay) {
@@ -98,7 +98,7 @@ public class Timecard {
 	/**
 	 * Creates a JSONObject representation of the Timecard java object.
 	 * 
-	 * @return - a JSONObject representation of the Timecard object
+	 * @return a JSONObject representation of the Timecard object
 	 */
 	public JSONObject makeIntoJSONObject() {
 		JSONObject result = new JSONObject();

@@ -21,19 +21,29 @@ import nswalke4.smallbpayroll.util.Timecard;
  * keeping the connection time as minimal as possible.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.09
+ * @version 1.10
  */
 public class DatabaseQueries {
+
+	/**
+	 * (NOT FOR USE) - The DatabaseQueries class contains static methods to be used by the
+	 * SmallbPayrollApi to access and gather/add information from/to the database through only one
+	 * command.
+	 */
+	public DatabaseQueries() {
+		System.out.println("DatabaseQueries object constructed");
+	}
 
 	// Insertion Methods
 	/**
 	 * Inserts the given information into the database as a new Account tuple. NOTE: This does not
 	 * check if the insertion worked properly...
 	 * 
-	 * @param name - the business name / name of the account object/tuple
-	 * @param email - the email associated with the account
-	 * @param sub - the AWS Cognito generated sub (id) to signify the account being used
-	 * @param periodType - the type of PayPeriod the account uses
+	 * @param name the business name / name of the account object/tuple
+	 * @param email the email associated with the account
+	 * @param sub the AWS Cognito generated sub (id) to signify the account being used
+	 * @param periodType the type of PayPeriod the account uses
+	 * @return (T or F) the account was successfully added to the database
 	 */
 	public static boolean addAccount(String name, String email, String sub,
 			PayPeriod.PayPeriodType periodType) {
@@ -54,11 +64,12 @@ public class DatabaseQueries {
 	 * Employee and Hourly_Employee tuple that should be attached to the given Account object. NOTE:
 	 * This does not check if the insertion worked properly...
 	 * 
-	 * @param account - the account to insert the employee into
-	 * @param firstName - the first name of the employee
-	 * @param lastName - the last name of the employee
-	 * @param phoneNum - the phone number of the employee
-	 * @param payRate - the pay rate of the hourly employee
+	 * @param account the account to insert the employee into
+	 * @param firstName the first name of the employee
+	 * @param lastName the last name of the employee
+	 * @param phoneNum the phone number of the employee
+	 * @param payRate the pay rate of the hourly employee
+	 * @return (T or F) the hourly employee was successfully added to the database
 	 */
 	public static boolean addHourlyEmployee(Account account, String firstName, String lastName,
 			String phoneNum, double payRate) {
@@ -85,11 +96,12 @@ public class DatabaseQueries {
 	 * Employee and Salary_Employee tuple that should be attached to the given Account object. NOTE:
 	 * This does not check if the insertion worked properly...
 	 * 
-	 * @param account - the account to insert the employee into
-	 * @param firstName - the first name of the employee
-	 * @param lastName - the last name of the employee
-	 * @param phoneNum - the phone number of the employee
-	 * @param payRate - the pay rate of the salary employee
+	 * @param account the account to insert the employee into
+	 * @param firstName the first name of the employee
+	 * @param lastName the last name of the employee
+	 * @param phoneNum the phone number of the employee
+	 * @param payRate the pay rate of the salary employee
+	 * @return (T or F) the salary employee was successfully added to the database
 	 */
 	public static boolean addSalaryEmployee(Account account, String firstName, String lastName,
 			String phoneNum, double payRate) {
@@ -116,8 +128,9 @@ public class DatabaseQueries {
 	 * PayPeriod tuple that should be attached to the given Account object. NOTE: This does not
 	 * check if the insertion worked properly...
 	 * 
-	 * @param account - the account to attach the payPeriod to
-	 * @param startDate - the start date of the payPeriod
+	 * @param account the account to attach the payPeriod to
+	 * @param startDate the start date of the payPeriod
+	 * @return (T or F) the pay period was successfully added to the database
 	 */
 	public static boolean addPayPeriod(Account account, Date startDate) {
 		String periodId = account.generatePayPeriodID();
@@ -139,13 +152,14 @@ public class DatabaseQueries {
 	 * attached to the given Account, Employee, and PayPeriod object. NOTE: This does not check if
 	 * the insertion worked properly...
 	 * 
-	 * @param account - the account to attach the timecard to
-	 * @param employeeId - the id of the employee to attach the timecard to
-	 * @param payPeriod - the id of the payPeriod to attach the timercard to
-	 * @param regHours - the number of regular hours worked (used by 'hourly')
-	 * @param overtimeHours - the number of overtime hours worked (used by 'hourly')
-	 * @param bonusPay - the amount of bonusPay given to the employee
-	 * @param otherPay - the amount of otherPay given to the employee
+	 * @param account the account to attach the timecard to
+	 * @param employeeId the id of the employee to attach the timecard to
+	 * @param payPeriodId the id of the payPeriod to attach the timercard to
+	 * @param regHours the number of regular hours worked (used by 'hourly')
+	 * @param overtimeHours the number of overtime hours worked (used by 'hourly')
+	 * @param bonusPay the amount of bonusPay given to the employee
+	 * @param otherPay the amount of otherPay given to the employee
+	 * @return (T or F) the timecard was successfully added to the database
 	 */
 	public static boolean addTimecard(Account account, String employeeId, String payPeriodId,
 			double regHours, double overtimeHours, double bonusPay, double otherPay) {
@@ -167,7 +181,7 @@ public class DatabaseQueries {
 	 * Queries the database to gather all of the accounts tied to the database, creates Account
 	 * Objects for each of them, and then returns an ArrayList of all of those Accounts.
 	 * 
-	 * @return - the ArrayList of all of the Account tuples in the database
+	 * @return the ArrayList of all of the Account tuples in the database
 	 */
 	public static List<Account> getAllAccounts() {
 		List<Account> result = new ArrayList<Account>();
@@ -194,8 +208,8 @@ public class DatabaseQueries {
 	 * Queries the database to gather a specific account using the account's sub (which is generated
 	 * by the AWS Cognito sign-in page) as the lookup parameter from the Payroll database.
 	 * 
-	 * @param sub - the AWS Cognito generated "sub" id to lookup the account tuple
-	 * @return - the Account object that matches the given "sub" in the database
+	 * @param sub the AWS Cognito generated "sub" id to lookup the account tuple
+	 * @return the Account object that matches the given "sub" in the database
 	 */
 	public static Account getSpecificAccount(String sub) {
 		Account result = null;
@@ -221,8 +235,8 @@ public class DatabaseQueries {
 	 * Queries the database to gather the number of Employee accounts attached to the given Account
 	 * and returns the result.
 	 * 
-	 * @param account - the Account object that the employees are tied to
-	 * @return - an integer representing the number of Employees the account has
+	 * @param account the Account object that the employees are tied to
+	 * @return an integer representing the number of Employees the account has
 	 */
 	public static int getNumEmployees(Account account) {
 		int result = 0;
@@ -248,8 +262,8 @@ public class DatabaseQueries {
 	 * creates the HourlyEmployee or SalaryEmployee object representation based on the "emp_type"
 	 * attribute, and then adds each employee to an ArrayList to be returned as the result.
 	 * 
-	 * @param account - the Account object that the employees are tied to
-	 * @return - an ArrayList of all of the employees attached to the given account
+	 * @param account the Account object that the employees are tied to
+	 * @return an ArrayList of all of the employees attached to the given account
 	 */
 	public static List<Employee> getEmployees(Account account) {
 		List<Employee> result = new ArrayList<Employee>();
@@ -285,8 +299,8 @@ public class DatabaseQueries {
 	 * Queries the database to gather the number of Pay Periods that are attached to the given
 	 * Account and returns the result.
 	 * 
-	 * @param account - the Account object that the pay periods are tied to
-	 * @return - an integer representing the number of pay periods the account has
+	 * @param account the Account object that the pay periods are tied to
+	 * @return an integer representing the number of pay periods the account has
 	 */
 	public static int getNumPayPeriods(Account account) {
 		int result = 0;
@@ -312,8 +326,8 @@ public class DatabaseQueries {
 	 * account, creates PayPeriod object for each of the tuples, and then returns an array list of
 	 * all of those PayPeriod objects.
 	 * 
-	 * @param account - the account that the PayPeriods are tied to
-	 * @return - an ArrayList of PayPeriods that are all attached to the given account
+	 * @param account the account that the PayPeriods are tied to
+	 * @return an ArrayList of PayPeriods that are all attached to the given account
 	 */
 	public static List<PayPeriod> getPayPeriods(Account account) {
 		List<PayPeriod> result = new ArrayList<PayPeriod>();
@@ -339,8 +353,8 @@ public class DatabaseQueries {
 	 * Queries the database to gather a specific employee using the given "employeeId" string to
 	 * find the specific employee, and then return's the given hourly or salary employee object.
 	 * 
-	 * @param employeeId - the id of the employee to find in the database
-	 * @return - the Employee object tied to the given employeeId string (or null)
+	 * @param employeeId the id of the employee to find in the database
+	 * @return the Employee object tied to the given employeeId string (or null)
 	 */
 	public static Employee getSpecificEmployee(String employeeId) {
 		Employee result = null;
@@ -374,8 +388,8 @@ public class DatabaseQueries {
 	 * Queries the database to gather the number of Timecards that are attached to the given
 	 * Employee and returns the result.
 	 * 
-	 * @param employee - the Employee object that the timecards are tied to
-	 * @return - an integer representing the number of timecards the employee has
+	 * @param employee the Employee object that the timecards are tied to
+	 * @return an integer representing the number of timecards the employee has
 	 */
 	public static int getNumEmployeeTimecards(Employee employee) {
 		int result = 0;
@@ -401,8 +415,8 @@ public class DatabaseQueries {
 	 * creates new Timecard object for each of the tuples, and then returns an ArrayList of all of
 	 * the Timecards attached to the given employee.
 	 * 
-	 * @param employee - the employee to gather all Timecards from
-	 * @return - an ArrayList of all of the Timecards attached to the given employee
+	 * @param employee the employee to gather all Timecards from
+	 * @return an ArrayList of all of the Timecards attached to the given employee
 	 */
 	public static List<Timecard> getAllEmployeeTimecards(Employee employee) {
 		List<Timecard> result = new ArrayList<Timecard>();
@@ -430,8 +444,8 @@ public class DatabaseQueries {
 	 * Queries the database to gather a specific pay period using the give "payPeriodId" string to
 	 * find the specific pay period, and then return's the pay period object.
 	 * 
-	 * @param payPeriodId - the id of the pay period to find in the database
-	 * @return - the PayPeriod object tied to the given payPeriodId string (or null)
+	 * @param payPeriodId the id of the pay period to find in the database
+	 * @return the PayPeriod object tied to the given payPeriodId string (or null)
 	 */
 	public static PayPeriod getSpecificPayPeriod(String payPeriodId) {
 		PayPeriod result = null;
@@ -456,8 +470,8 @@ public class DatabaseQueries {
 	 * Queries the database to gather the number of Timecards that are attached to the given Pay
 	 * Period and returns the result.
 	 * 
-	 * @param payPeriod - the Pay Period object that the timecards are tied to
-	 * @return - an integer representing the number of timecards the pay period has
+	 * @param payPeriod the Pay Period object that the timecards are tied to
+	 * @return an integer representing the number of timecards the pay period has
 	 */
 	public static int getNumPayPeriodTimecards(PayPeriod payPeriod) {
 		int result = 0;
@@ -483,8 +497,8 @@ public class DatabaseQueries {
 	 * creates new Timecard object for each of the tuples, and then returns an ArrayList of all of
 	 * the Timecards attached to the given pay period.
 	 * 
-	 * @param payPeriod - the payPeriod to gather all Timecards from
-	 * @return - an ArrayList of all of the Timecards attached to the given payPeriod
+	 * @param payPeriod the payPeriod to gather all Timecards from
+	 * @return an ArrayList of all of the Timecards attached to the given payPeriod
 	 */
 	public static List<Timecard> getAllPayPeriodTimecards(PayPeriod payPeriod) {
 		List<Timecard> result = new ArrayList<Timecard>();

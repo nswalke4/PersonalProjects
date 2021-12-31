@@ -19,12 +19,12 @@ public class Employee {
 
 	// Constructor
 	/**
-	 * Constructs an Employee object from the given information (includes the phone number).
+	 * Constructs an Employee object from the given information.
 	 * 
-	 * @param pEmployeeId - the id of the Employee object
-	 * @param pFirstName - the first name of the Employee object
-	 * @param pLastName - the last name of the Employee object
-	 * @param pPhoneNum - the phone number of the Employee object (can be null)
+	 * @param pEmployeeId the id of the Employee object
+	 * @param pFirstName the first name of the Employee object
+	 * @param pLastName the last name of the Employee object
+	 * @param pPhoneNum the phone number of the Employee object (can be null)
 	 */
 	public Employee(String pEmployeeId, String pFirstName, String pLastName, String pPhoneNum) {
 		this.employeeId = pEmployeeId;
@@ -74,7 +74,7 @@ public class Employee {
 	/**
 	 * Takes the given Employee object and turn's it into a JSONObject.
 	 * 
-	 * @return - a JSONObject representation of the Employee object
+	 * @return a JSONObject representation of the Employee object
 	 */
 	public JSONObject makeIntoJSONObject() {
 		JSONObject result = new JSONObject();

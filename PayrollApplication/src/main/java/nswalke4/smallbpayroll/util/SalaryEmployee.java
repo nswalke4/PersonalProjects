@@ -18,11 +18,11 @@ public class SalaryEmployee extends Employee {
 	/**
 	 * Creates an Salary Employee object from the given information.
 	 * 
-	 * @param pEmployeeId - the id of the Salary Employee object
-	 * @param pFirstName - the first name of the Salary Employee object
-	 * @param pLastName - the last name of the Salary Employee object
-	 * @param pPhoneNum - the phone number of the Salary Employee object (can be null)
-	 * @param pPeriodRate - the rate of pay for a pay period of the Salary Employee object
+	 * @param pEmployeeId the id of the Salary Employee object
+	 * @param pFirstName the first name of the Salary Employee object
+	 * @param pLastName the last name of the Salary Employee object
+	 * @param pPhoneNum the phone number of the Salary Employee object (can be null)
+	 * @param pPeriodRate the rate of pay for a pay period of the Salary Employee object
 	 */
 	public SalaryEmployee(String pEmployeeId, String pFirstName, String pLastName, String pPhoneNum,
 			double pPeriodRate) {
@@ -46,7 +46,7 @@ public class SalaryEmployee extends Employee {
 	 * the basic object, and then appends the Salary Employee's period pay rate to the object before
 	 * returning it.
 	 * 
-	 * @return - the JSONObject representation of an Salary employee
+	 * @return the JSONObject representation of an Salary employee
 	 */
 	@Override
 	public JSONObject makeIntoJSONObject() {

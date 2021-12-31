@@ -9,7 +9,7 @@ import org.json.JSONObject;
  * application, as well as the two enumerators used by the account object in the database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.05
+ * @version 1.06
  */
 public class PayPeriod {
 
@@ -19,7 +19,14 @@ public class PayPeriod {
 	 * with this payroll application.
 	 */
 	public enum PayPeriodType {
-		WEEKLY, BIWEEKLY
+		/**
+		 * This Pay Period lasts 7 days.
+		 */
+		WEEKLY,
+		/**
+		 * This Pay Period lasts 14 days.
+		 */
+		BIWEEKLY
 	}
 
 	// Class Variables
@@ -28,6 +35,13 @@ public class PayPeriod {
 	private final Date endDate;
 
 	// Constructor
+	/**
+	 * Constructs a Pay Period object from the given params.
+	 * 
+	 * @param pPeriodId the id of the Pay Period object
+	 * @param pStartDate the start date of the Pay Period object
+	 * @param pEndDate the end date of the Pay Period object
+	 */
 	public PayPeriod(String pPeriodId, Date pStartDate, Date pEndDate) {
 		this.periodId = pPeriodId;
 		this.startDate = pStartDate;
@@ -66,7 +80,7 @@ public class PayPeriod {
 	/**
 	 * Creates a JSONObject representation of the PayPeriod object.
 	 * 
-	 * @return - a JSONObject representation of this PayPeriod object
+	 * @return a JSONObject representation of this PayPeriod object
 	 */
 	public JSONObject makeIntoJSONObject() {
 		JSONObject result = new JSONObject();

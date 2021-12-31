@@ -14,7 +14,7 @@ import nswalke4.smallbpayroll.util.database.DatabaseQueries;
  * This class contains the Account object that is used in the database for the Payroll application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.08
+ * @version 1.09
  */
 public class Account {
 
@@ -31,10 +31,11 @@ public class Account {
 	/**
 	 * Create's an Account object based off of the given information.
 	 * 
-	 * @param pId - the id of the account object
-	 * @param pName - the name of the account object
-	 * @param pEmail - the email of the account object
-	 * @param pPeriodType - the pay period type of the account object
+	 * @param pId the id of the account object
+	 * @param pName the name of the account object
+	 * @param pEmail the email of the account object
+	 * @param pSub the AWS Cognito-generated 'sub' id for the account object
+	 * @param pPeriodType the pay period type of the account object
 	 */
 	public Account(int pId, String pName, String pEmail, String pSub,
 			PayPeriod.PayPeriodType pPeriodType) {
@@ -121,7 +122,7 @@ public class Account {
 	 * account has, up to 9999 employees. Style: "[AccountID]-E-[# of Employees, with leading zeros
 	 * to make 4 digits]"
 	 * 
-	 * @return - the generated EmployeeID string
+	 * @return the generated EmployeeID string
 	 */
 	public String generateEmployeeID() {
 		String empId = String.valueOf(this.id);
@@ -143,8 +144,8 @@ public class Account {
 	 * Generates the end date of a PayPeriod by using the given start date and the account's
 	 * information about the type of PayPeriod it uses to calculate the PayPeriod's end date.
 	 * 
-	 * @param startDate - the date that the PayPeriod begins
-	 * @return - the last day of the PayPeriod (is included in the period)
+	 * @param startDate the date that the PayPeriod begins
+	 * @return the last day of the PayPeriod (is included in the period)
 	 */
 	public Date generateEndDate(Date startDate) {
 		int numDaysToIncrement = 0;
@@ -168,7 +169,7 @@ public class Account {
 	 * account has, up to 9999 pay periods. Style: "[AccountID]-P-[# of PayPeriods, with leading
 	 * zeros to make 4 digits]"
 	 * 
-	 * @return - the generated PayPeriodID string
+	 * @return the generated PayPeriodID string
 	 */
 	public String generatePayPeriodID() {
 		String ppId = String.valueOf(this.id);
@@ -220,8 +221,8 @@ public class Account {
 	 * [excluding the AccountSub], basic info about all of the Employees tied to this account, and
 	 * basic info about all of the PayPeriods tied to this account.
 	 * 
-	 * @return - a JSONObject representation of an Account object as well as all of its Employees
-	 *         and PayPeriods
+	 * @return a JSONObject representation of an Account object as well as all of its Employees and
+	 *         PayPeriods
 	 */
 	public JSONObject makeIntoJSONObject() {
 		JSONObject result = new JSONObject();

@@ -28,7 +28,7 @@ public class DatabaseConnector {
 	/**
 	 * Constructs a basic Database Connector object to the given database URL..
 	 * 
-	 * @param pDatabaseURL - the URL of the database connection
+	 * @param pDatabaseURL the URL of the database connection
 	 */
 	public DatabaseConnector(String pDatabaseURL) {
 		this.URL = pDatabaseURL;
@@ -60,8 +60,8 @@ public class DatabaseConnector {
 	 * Executes a basic query (given as a parameter) onto the database and return's the ResultSet
 	 * associated with that query.
 	 * 
-	 * @param query - the query string to be sent to the database to be executed
-	 * @return - the ResultSet containing the answer to the query (or null)
+	 * @param query the query string to be sent to the database to be executed
+	 * @return the ResultSet containing the answer to the query (or null)
 	 */
 	protected ResultSet executeBasicQuery(String query) {
 		try {
@@ -80,8 +80,8 @@ public class DatabaseConnector {
 	 * Executes a basic update (given as a parameter) statement onto the database and returns a
 	 * value representing the number of rows affected (or -1 if the update failed).
 	 * 
-	 * @param update - the update string to be sent to the database to be executed
-	 * @return - the number of rows affected by the update (or -1 if it fails)
+	 * @param update the update string to be sent to the database to be executed
+	 * @return the number of rows affected by the update (or -1 if it fails)
 	 */
 	protected int executeBasicUpdate(String update) {
 		try {
