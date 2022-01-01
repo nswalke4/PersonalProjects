@@ -255,25 +255,6 @@ public class SmallbPayrollApi extends HttpServlet {
 	}
 
 	/**
-	 * Handles all of the requests that come in via a "delete" request.
-	 */
-	@Override
-	public void doDelete(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		System.out.println("\n   ~Received a new \"Delete\" request...");
-		System.out.println(
-				"     !FAILURE!\n     -Currently the \"Delete\" requests are not implemented...");
-		response.setContentType(JSON_CONTENT);
-		JSONObject responseObj = new JSONObject();
-		response.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
-		responseObj.put("Failure", "Not Implemented");
-		responseObj.put("ErrorMessage",
-				"Currently, this servlet does not have the 'delete' method implemented, so the request cannot be completed.  Please try again once the server has updated the API to accept these requests.");
-		System.out.println("   ~ Response:\n" + responseObj.toString());
-		response.getWriter().println(responseObj.toString());
-	}
-
-	/**
 	 * Handles all of the requests that come in via a "put" request.
 	 */
 	@Override
@@ -288,6 +269,25 @@ public class SmallbPayrollApi extends HttpServlet {
 		responseObj.put("Failure", "Not Implemented");
 		responseObj.put("ErrorMessage",
 				"Currently, this servlet does not have the 'put' method implemented, so the request cannot be completed.  Please try again once the server has updated the API to accept these requests.");
+		System.out.println("   ~ Response:\n" + responseObj.toString());
+		response.getWriter().println(responseObj.toString());
+	}
+
+	/**
+	 * Handles all of the requests that come in via a "delete" request.
+	 */
+	@Override
+	public void doDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("\n   ~Received a new \"Delete\" request...");
+		System.out.println(
+				"     !FAILURE!\n     -Currently the \"Delete\" requests are not implemented...");
+		response.setContentType(JSON_CONTENT);
+		JSONObject responseObj = new JSONObject();
+		response.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
+		responseObj.put("Failure", "Not Implemented");
+		responseObj.put("ErrorMessage",
+				"Currently, this servlet does not have the 'delete' method implemented, so the request cannot be completed.  Please try again once the server has updated the API to accept these requests.");
 		System.out.println("   ~ Response:\n" + responseObj.toString());
 		response.getWriter().println(responseObj.toString());
 	}
