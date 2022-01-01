@@ -33,3 +33,12 @@ tomcat {
     httpProtocol = 'org.apache.coyote.http11.Http11Nio2Protocol'
     ajpProtocol  = 'org.apache.coyote.ajp.AjpNio2Protocol'
 }
+
+task dbConnTest(type: JavaExec) {
+    group 'API&Database'
+    description 'Task which checks the connection to the Database and the API Responses'
+    
+    classpath = sourceSets.main.runtimeClasspath
+    
+    main = 'nswalke4.smallbpayroll.api.Main'
+}

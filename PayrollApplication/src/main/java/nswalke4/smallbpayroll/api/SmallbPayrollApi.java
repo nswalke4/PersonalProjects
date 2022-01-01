@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import nswalke4.smallbpayroll.util.database.DatabaseProperties;
+
 import org.json.JSONObject;
 
 /**
@@ -32,6 +34,7 @@ public class SmallbPayrollApi extends HttpServlet {
 	 */
 	public SmallbPayrollApi() {
 		super();
+		new DatabaseProperties();
 	}
 
 	// Class Methods (Overrides)

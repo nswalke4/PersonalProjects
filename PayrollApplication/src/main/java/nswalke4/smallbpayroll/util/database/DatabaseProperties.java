@@ -1,7 +1,6 @@
 package nswalke4.smallbpayroll.util.database;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -10,53 +9,20 @@ import java.util.Properties;
  * class parameters accessable through getter methods.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.02
+ * @version 1.03
  */
 public class DatabaseProperties {
 
 	// Class Varialbes
-	private final String FILE_NAME = "src/main/resources/database.properties";
-	private static String username;
-	private static String password;
-	private static String readDb;
-	private static String writeDb;
-	private static String driver;
+	private static final String FILE_NAME = "src/main/resources/database.properties";
 
 	// Constructor
 	/**
-	 * Creates the database properties object and sets up all of the different parameters to match
-	 * the key/value pairs listed in properties file. NOTE: This constructor must be called prior to
-	 * using any of the getter methods that follow.
+	 * (NOT IN USE) A Database Properties object is not creates, as all of the different methods are
+	 * static methods.
 	 */
 	public DatabaseProperties() {
-		FileInputStream fis = null;
-		Properties prop = null;
-		try {
-			prop = new Properties();
-			fis = new FileInputStream(FILE_NAME);
-			prop.load(fis);
-			username = prop.getProperty("username");
-			password = prop.getProperty("password");
-			readDb = prop.getProperty("read_database");
-			writeDb = prop.getProperty("write_database");
-			driver = prop.getProperty("driver");
-		} catch (FileNotFoundException fnfex) {
-			System.out.println("[FAILURE] The database properties files was not found in the "
-					+ "resources directory");
-			fnfex.printStackTrace();
-		} catch (IOException ioex) {
-			System.out.println("[FAILURE] Something went wrong with the input/output");
-			ioex.printStackTrace();
-		} finally {
-			if (fis != null) {
-				try {
-					fis.close();
-				} catch (IOException ioex2) {
-					System.out.println("[FAILURE] Unable to properly close the input stream...");
-					ioex2.printStackTrace();
-				}
-			}
-		}
+
 	}
 
 	// Getters
@@ -64,44 +30,64 @@ public class DatabaseProperties {
 	 * Get's the username to access the database.
 	 * 
 	 * @return the username of the database
+	 * @throws IOException
 	 */
-	public String getUsername() {
-		return username;
+	public static String getUsername() throws IOException {
+		Properties props = new Properties();
+		FileInputStream fis = new FileInputStream(FILE_NAME);
+		props.load(fis);
+		return props.getProperty("username");
 	}
 
 	/**
 	 * Get's the password to access the database.
 	 * 
 	 * @return the password of the database
+	 * @throws IOException
 	 */
-	public String getPassword() {
-		return password;
+	public static String getPassword() throws IOException {
+		Properties props = new Properties();
+		FileInputStream fis = new FileInputStream(FILE_NAME);
+		props.load(fis);
+		return props.getProperty("password");
 	}
 
 	/**
 	 * Get's the url of the read-only database.
 	 * 
 	 * @return the url of the read-only database
+	 * @throws IOException
 	 */
-	public String getReadDb() {
-		return readDb;
+	public static String getReadDb() throws IOException {
+		Properties props = new Properties();
+		FileInputStream fis = new FileInputStream(FILE_NAME);
+		props.load(fis);
+		return props.getProperty("read_database");
 	}
 
 	/**
 	 * Get's the url of the full-access database.
 	 * 
 	 * @return the url of the writeable database
+	 * @throws IOException
 	 */
-	public String getWriteDb() {
-		return writeDb;
+	public static String getWriteDb() throws IOException {
+		Properties props = new Properties();
+		FileInputStream fis = new FileInputStream(FILE_NAME);
+		props.load(fis);
+		return props.getProperty("write_database");
 	}
 
 	/**
 	 * Get's the string representation of the database driver.
 	 * 
 	 * @return the string representation of the driver for the database connection
+	 * @throws IOException
 	 */
-	public String getDriver() {
-		return driver;
+	public static String getDriver() throws IOException {
+		Properties props = new Properties();
+		FileInputStream fis = new FileInputStream(FILE_NAME);
+		props.load(fis);
+		return props.getProperty("driver");
 	}
 }

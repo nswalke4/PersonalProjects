@@ -1,5 +1,6 @@
 package nswalke4.smallbpayroll.util;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -99,8 +100,9 @@ public class Account {
 	 * employee's id as the key and the employee object as the value.
 	 * 
 	 * @return the HashMap of the employees of the account object
+	 * @throws IOException
 	 */
-	public HashMap<String, Employee> getEmployees() {
+	public HashMap<String, Employee> getEmployees() throws IOException {
 		this.updateEmployees();
 		return employees;
 	}
@@ -110,8 +112,9 @@ public class Account {
 	 * pay period's id as the key and the PayPeriod object as the value.
 	 * 
 	 * @return the HashMap of the pay periods of the account object
+	 * @throws IOException
 	 */
-	public HashMap<String, PayPeriod> getPayPeriods() {
+	public HashMap<String, PayPeriod> getPayPeriods() throws IOException {
 		this.updatePayPeriods();
 		return payPeriods;
 	}
@@ -123,8 +126,9 @@ public class Account {
 	 * to make 4 digits]"
 	 * 
 	 * @return the generated EmployeeID string
+	 * @throws IOException
 	 */
-	public String generateEmployeeID() {
+	public String generateEmployeeID() throws IOException {
 		String empId = String.valueOf(this.id);
 		empId += "-E-";
 		int empNum = DatabaseQueries.getNumEmployees(this) + 1;
@@ -170,8 +174,9 @@ public class Account {
 	 * zeros to make 4 digits]"
 	 * 
 	 * @return the generated PayPeriodID string
+	 * @throws IOException
 	 */
-	public String generatePayPeriodID() {
+	public String generatePayPeriodID() throws IOException {
 		String ppId = String.valueOf(this.id);
 		ppId += "-P-";
 		int ppNum = DatabaseQueries.getNumPayPeriods(this) + 1;
@@ -191,8 +196,10 @@ public class Account {
 	 * Collects all of the tuples attached to the Employee table with the AccountID equal to the
 	 * current account's AccountID from the database, and then adds any tuple to the employees
 	 * HashMap that is not already listed in it.
+	 * 
+	 * @throws IOException
 	 */
-	private void updateEmployees() {
+	private void updateEmployees() throws IOException {
 		List<Employee> empList = DatabaseQueries.getEmployees(this);
 		for (Employee e : empList) {
 			if (!employees.containsKey(e.getEmployeeId())) {
@@ -205,8 +212,10 @@ public class Account {
 	 * Collects all of the tuples attached to the PayPeriod table with the AccountID equal to the
 	 * current account's AccountID from the database, and then adds any tuple to the payPeriods
 	 * HashMap that is not already listed in it.
+	 * 
+	 * @throws IOException
 	 */
-	private void updatePayPeriods() {
+	private void updatePayPeriods() throws IOException {
 		List<PayPeriod> payPeriodList = DatabaseQueries.getPayPeriods(this);
 		for (PayPeriod p : payPeriodList) {
 			if (!payPeriods.containsKey(p.getPeriodId())) {
@@ -223,8 +232,9 @@ public class Account {
 	 * 
 	 * @return a JSONObject representation of an Account object as well as all of its Employees and
 	 *         PayPeriods
+	 * @throws IOException
 	 */
-	public JSONObject makeIntoJSONObject() {
+	public JSONObject makeIntoJSONObject() throws IOException {
 		JSONObject result = new JSONObject();
 		result.put("ID", this.getId());
 		result.put("Name", this.getName());

@@ -1,5 +1,6 @@
 package nswalke4.smallbpayroll.util.database;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -29,12 +30,13 @@ public class DatabaseConnector {
 	 * Constructs a basic Database Connector object to the given database URL..
 	 * 
 	 * @param pDatabaseURL the URL of the database connection
+	 * @throws IOException
 	 */
-	public DatabaseConnector(String pDatabaseURL) {
+	public DatabaseConnector(String pDatabaseURL) throws IOException {
 		this.URL = pDatabaseURL;
-		this.USERNAME = new DatabaseProperties().getUsername();
-		this.PASSWORD = new DatabaseProperties().getPassword();
-		this.DRIVER = new DatabaseProperties().getDriver();
+		this.USERNAME = DatabaseProperties.getUsername();
+		this.PASSWORD = DatabaseProperties.getPassword();
+		this.DRIVER = DatabaseProperties.getDriver();
 		this.connect();
 	}
 
@@ -45,6 +47,7 @@ public class DatabaseConnector {
 	 */
 	private void connect() {
 		try {
+			System.out.println(this.DRIVER);
 			Class.forName(DRIVER);
 			this.conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 		} catch (ClassNotFoundException cnfex) {

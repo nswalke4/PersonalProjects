@@ -1,5 +1,6 @@
 package nswalke4.smallbpayroll.util.database;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,12 +45,13 @@ public class DatabaseQueries {
 	 * @param sub the AWS Cognito generated sub (id) to signify the account being used
 	 * @param periodType the type of PayPeriod the account uses
 	 * @return (T or F) the account was successfully added to the database
+	 * @throws IOException
 	 */
 	public static boolean addAccount(String name, String email, String sub,
-			PayPeriod.PayPeriodType periodType) {
+			PayPeriod.PayPeriodType periodType) throws IOException {
 		String insert = "INSERT INTO Account (Name, Email, Account_Sub, Pay_Period) VALUES (\""
 				+ name + "\", \"" + email + "\", \"" + sub + "\", \"" + periodType + "\");";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getWriteDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
 		int insertedRows = db.executeBasicUpdate(insert);
 		db.closeConnection();
 		if (insertedRows == 1) {
@@ -70,16 +72,17 @@ public class DatabaseQueries {
 	 * @param phoneNum the phone number of the employee
 	 * @param payRate the pay rate of the hourly employee
 	 * @return (T or F) the hourly employee was successfully added to the database
+	 * @throws IOException
 	 */
 	public static boolean addHourlyEmployee(Account account, String firstName, String lastName,
-			String phoneNum, double payRate) {
+			String phoneNum, double payRate) throws IOException {
 		String empId = account.generateEmployeeID();
 		String insertEmp =
 				"INSERT INTO Employee VALUES (" + account.getId() + ", \"" + empId + "\", \""
 						+ firstName + "\", \"" + lastName + "\", \"" + phoneNum + "\", 'HOURLY');";
 		String insertHrly = "INSERT INTO Hourly_Employee VALUES (" + account.getId() + ", \""
 				+ empId + "\", " + payRate + ");";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getWriteDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
 		int insertedRows = 0;
 		insertedRows += db.executeBasicUpdate(insertEmp);
 		insertedRows += db.executeBasicUpdate(insertHrly);
@@ -102,16 +105,17 @@ public class DatabaseQueries {
 	 * @param phoneNum the phone number of the employee
 	 * @param payRate the pay rate of the salary employee
 	 * @return (T or F) the salary employee was successfully added to the database
+	 * @throws IOException
 	 */
 	public static boolean addSalaryEmployee(Account account, String firstName, String lastName,
-			String phoneNum, double payRate) {
+			String phoneNum, double payRate) throws IOException {
 		String empId = account.generateEmployeeID();
 		String insertEmp =
 				"INSERT INTO Employee VALUES (" + account.getId() + ", \"" + empId + "\", \""
 						+ firstName + "\", \"" + lastName + "\", \"" + phoneNum + "\", 'SALARY');";
 		String insertSlry = "INSERT INTO Salary_Employee VALUES (" + account.getId() + ", \""
 				+ empId + "\", " + payRate + ");";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getWriteDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
 		int insertedRows = 0;
 		insertedRows += db.executeBasicUpdate(insertEmp);
 		insertedRows += db.executeBasicUpdate(insertSlry);
@@ -131,13 +135,14 @@ public class DatabaseQueries {
 	 * @param account the account to attach the payPeriod to
 	 * @param startDate the start date of the payPeriod
 	 * @return (T or F) the pay period was successfully added to the database
+	 * @throws IOException
 	 */
-	public static boolean addPayPeriod(Account account, Date startDate) {
+	public static boolean addPayPeriod(Account account, Date startDate) throws IOException {
 		String periodId = account.generatePayPeriodID();
 		Date endDate = account.generateEndDate(startDate);
 		String insert = "INSERT INTO Pay_Period VALUES (" + account.getId() + ", \"" + periodId
 				+ "\", '" + startDate + "', '" + endDate + "');";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getWriteDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
 		int insertedRows = db.executeBasicUpdate(insert);
 		db.closeConnection();
 		if (insertedRows == 1) {
@@ -160,13 +165,15 @@ public class DatabaseQueries {
 	 * @param bonusPay the amount of bonusPay given to the employee
 	 * @param otherPay the amount of otherPay given to the employee
 	 * @return (T or F) the timecard was successfully added to the database
+	 * @throws IOException
 	 */
 	public static boolean addTimecard(Account account, String employeeId, String payPeriodId,
-			double regHours, double overtimeHours, double bonusPay, double otherPay) {
+			double regHours, double overtimeHours, double bonusPay, double otherPay)
+			throws IOException {
 		String insert = "INSERT INTO Timecard VALUES (" + account.getId() + ", \"" + employeeId
 				+ "\", \"" + payPeriodId + "\", \"" + regHours + "\", \"" + overtimeHours + "\", \""
 				+ bonusPay + "\", \"" + otherPay + "\");";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getWriteDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
 		int insertedRows = db.executeBasicUpdate(insert);
 		db.closeConnection();
 		if (insertedRows == 1) {
@@ -182,11 +189,12 @@ public class DatabaseQueries {
 	 * Objects for each of them, and then returns an ArrayList of all of those Accounts.
 	 * 
 	 * @return the ArrayList of all of the Account tuples in the database
+	 * @throws IOException
 	 */
-	public static List<Account> getAllAccounts() {
+	public static List<Account> getAllAccounts() throws IOException {
 		List<Account> result = new ArrayList<Account>();
 		String query = "SELECT * FROM Account;";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -210,11 +218,12 @@ public class DatabaseQueries {
 	 * 
 	 * @param sub the AWS Cognito generated "sub" id to lookup the account tuple
 	 * @return the Account object that matches the given "sub" in the database
+	 * @throws IOException
 	 */
-	public static Account getSpecificAccount(String sub) {
+	public static Account getSpecificAccount(String sub) throws IOException {
 		Account result = null;
 		String query = "SELECT * FROM Account AS A WHERE A.Account_Sub = \"" + sub + "\";";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -237,12 +246,13 @@ public class DatabaseQueries {
 	 * 
 	 * @param account the Account object that the employees are tied to
 	 * @return an integer representing the number of Employees the account has
+	 * @throws IOException
 	 */
-	public static int getNumEmployees(Account account) {
+	public static int getNumEmployees(Account account) throws IOException {
 		int result = 0;
 		String query = "SELECT COUNT(*) AS Emp_Count FROM Employee WHERE Account_Id = "
 				+ account.getId() + ";";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -264,13 +274,14 @@ public class DatabaseQueries {
 	 * 
 	 * @param account the Account object that the employees are tied to
 	 * @return an ArrayList of all of the employees attached to the given account
+	 * @throws IOException
 	 */
-	public static List<Employee> getEmployees(Account account) {
+	public static List<Employee> getEmployees(Account account) throws IOException {
 		List<Employee> result = new ArrayList<Employee>();
 		String query = "SELECT * FROM ((Employee AS E LEFT JOIN Hourly_Employee AS H ON E.Emp_Id = "
 				+ "H.Emp_Id) LEFT JOIN Salary_Employee AS S ON E.Emp_Id = S.Emp_Id)"
 				+ "WHERE E.Account_Id = " + account.getId() + ";";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -301,12 +312,13 @@ public class DatabaseQueries {
 	 * 
 	 * @param account the Account object that the pay periods are tied to
 	 * @return an integer representing the number of pay periods the account has
+	 * @throws IOException
 	 */
-	public static int getNumPayPeriods(Account account) {
+	public static int getNumPayPeriods(Account account) throws IOException {
 		int result = 0;
 		String query = "SELECT COUNT(*) AS Pay_Period_Count FROM Pay_Period WHERE Account_Id = "
 				+ account.getId() + ";";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -328,11 +340,12 @@ public class DatabaseQueries {
 	 * 
 	 * @param account the account that the PayPeriods are tied to
 	 * @return an ArrayList of PayPeriods that are all attached to the given account
+	 * @throws IOException
 	 */
-	public static List<PayPeriod> getPayPeriods(Account account) {
+	public static List<PayPeriod> getPayPeriods(Account account) throws IOException {
 		List<PayPeriod> result = new ArrayList<PayPeriod>();
 		String query = "SELECT * FROM Pay_Period WHERE Account_Id = " + account.getId() + ";";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -355,13 +368,14 @@ public class DatabaseQueries {
 	 * 
 	 * @param employeeId the id of the employee to find in the database
 	 * @return the Employee object tied to the given employeeId string (or null)
+	 * @throws IOException
 	 */
-	public static Employee getSpecificEmployee(String employeeId) {
+	public static Employee getSpecificEmployee(String employeeId) throws IOException {
 		Employee result = null;
 		String query = "SELECT * FROM ((Employee AS E LEFT JOIN Hourly_Employee AS H ON E.Emp_Id = "
 				+ "H.Emp_Id) LEFT JOIN Salary_Employee AS S ON E.Emp_Id = S.Emp_Id)"
 				+ "WHERE E.Emp_Id = \"" + employeeId + "\";";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -390,12 +404,13 @@ public class DatabaseQueries {
 	 * 
 	 * @param employee the Employee object that the timecards are tied to
 	 * @return an integer representing the number of timecards the employee has
+	 * @throws IOException
 	 */
-	public static int getNumEmployeeTimecards(Employee employee) {
+	public static int getNumEmployeeTimecards(Employee employee) throws IOException {
 		int result = 0;
 		String query = "SELECT COUNT(*) AS Timecard_Count FROM Timecard WHERE Emp_Id = "
 				+ employee.getEmployeeId() + ";";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -417,12 +432,13 @@ public class DatabaseQueries {
 	 * 
 	 * @param employee the employee to gather all Timecards from
 	 * @return an ArrayList of all of the Timecards attached to the given employee
+	 * @throws IOException
 	 */
-	public static List<Timecard> getAllEmployeeTimecards(Employee employee) {
+	public static List<Timecard> getAllEmployeeTimecards(Employee employee) throws IOException {
 		List<Timecard> result = new ArrayList<Timecard>();
 		String query =
 				"SELECT * FROM Timecard WHERE Emp_Id = \"" + employee.getEmployeeId() + "\";";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -446,11 +462,12 @@ public class DatabaseQueries {
 	 * 
 	 * @param payPeriodId the id of the pay period to find in the database
 	 * @return the PayPeriod object tied to the given payPeriodId string (or null)
+	 * @throws IOException
 	 */
-	public static PayPeriod getSpecificPayPeriod(String payPeriodId) {
+	public static PayPeriod getSpecificPayPeriod(String payPeriodId) throws IOException {
 		PayPeriod result = null;
 		String query = "";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -472,12 +489,13 @@ public class DatabaseQueries {
 	 * 
 	 * @param payPeriod the Pay Period object that the timecards are tied to
 	 * @return an integer representing the number of timecards the pay period has
+	 * @throws IOException
 	 */
-	public static int getNumPayPeriodTimecards(PayPeriod payPeriod) {
+	public static int getNumPayPeriodTimecards(PayPeriod payPeriod) throws IOException {
 		int result = 0;
 		String query = "SELECT COUNT(*) AS Timecard_Count FROM Timecard WHERE Period_Id = "
 				+ payPeriod.getPeriodId() + ";";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -499,12 +517,13 @@ public class DatabaseQueries {
 	 * 
 	 * @param payPeriod the payPeriod to gather all Timecards from
 	 * @return an ArrayList of all of the Timecards attached to the given payPeriod
+	 * @throws IOException
 	 */
-	public static List<Timecard> getAllPayPeriodTimecards(PayPeriod payPeriod) {
+	public static List<Timecard> getAllPayPeriodTimecards(PayPeriod payPeriod) throws IOException {
 		List<Timecard> result = new ArrayList<Timecard>();
 		String query =
 				"SELECT * FROM Timecard WHERE Period_Id = \"" + payPeriod.getPeriodId() + "\";";
-		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
+		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
