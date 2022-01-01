@@ -20,7 +20,7 @@ import nswalke4.smallbpayroll.util.database.DatabaseQueries;
  * that contains the results of the requested action.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.03
+ * @version 1.04
  */
 public class SmallbPayrollMethods {
 
@@ -47,8 +47,8 @@ public class SmallbPayrollMethods {
             Account account = DatabaseQueries.getSpecificAccount(accountSub);
             if (account == null) {
                 result.put("Failure", "Invalid AccountSub");
-                result.put("ErrorMessage", "The given \"AccountSub\" was not found tied to a valid "
-                        + "Smallb Payroll Account.");
+                result.put("ErrorMessage",
+                        "The given 'AccountSub' was not found tied to a valid Smallb Payroll Account.");
             } else {
                 result.put("Account", account.makeIntoJSONObject());
             }
@@ -75,8 +75,7 @@ public class SmallbPayrollMethods {
             if (emp == null) {
                 result.put("Failure", "Invalid EmployeeId");
                 result.put("ErrorMessage",
-                        "There were no employees found in the database matching the"
-                                + " given \"EmployeeId\" parameter.");
+                        "There were no employees found in the database matching the given 'EmployeeId' parameter.");
             } else {
                 result = emp.makeIntoJSONObject();
                 List<Timecard> timecards = DatabaseQueries.getAllEmployeeTimecards(emp);
@@ -110,8 +109,7 @@ public class SmallbPayrollMethods {
             if (payPeriod == null) {
                 result.put("Failure", "Invalid PayPeriodId");
                 result.put("ErrorMessage",
-                        "There were no pay periods found in the database matching "
-                                + "the given \"PayPeriodId\" parameter.");
+                        "There were no pay periods found in the database matching the given 'PayPeriodId' parameter.");
             } else {
                 result = payPeriod.makeIntoJSONObject();
                 List<Timecard> timecards = DatabaseQueries.getAllPayPeriodTimecards(payPeriod);
