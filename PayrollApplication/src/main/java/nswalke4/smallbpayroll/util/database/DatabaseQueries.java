@@ -21,7 +21,7 @@ import nswalke4.smallbpayroll.util.Timecard;
  * keeping the connection time as minimal as possible.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.10
+ * @version 1.11
  */
 public class DatabaseQueries {
 
@@ -49,7 +49,7 @@ public class DatabaseQueries {
 			PayPeriod.PayPeriodType periodType) {
 		String insert = "INSERT INTO Account (Name, Email, Account_Sub, Pay_Period) VALUES (\""
 				+ name + "\", \"" + email + "\", \"" + sub + "\", \"" + periodType + "\");";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getWriteDb());
 		int insertedRows = db.executeBasicUpdate(insert);
 		db.closeConnection();
 		if (insertedRows == 1) {
@@ -79,7 +79,7 @@ public class DatabaseQueries {
 						+ firstName + "\", \"" + lastName + "\", \"" + phoneNum + "\", 'HOURLY');";
 		String insertHrly = "INSERT INTO Hourly_Employee VALUES (" + account.getId() + ", \""
 				+ empId + "\", " + payRate + ");";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getWriteDb());
 		int insertedRows = 0;
 		insertedRows += db.executeBasicUpdate(insertEmp);
 		insertedRows += db.executeBasicUpdate(insertHrly);
@@ -111,7 +111,7 @@ public class DatabaseQueries {
 						+ firstName + "\", \"" + lastName + "\", \"" + phoneNum + "\", 'SALARY');";
 		String insertSlry = "INSERT INTO Salary_Employee VALUES (" + account.getId() + ", \""
 				+ empId + "\", " + payRate + ");";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getWriteDb());
 		int insertedRows = 0;
 		insertedRows += db.executeBasicUpdate(insertEmp);
 		insertedRows += db.executeBasicUpdate(insertSlry);
@@ -137,7 +137,7 @@ public class DatabaseQueries {
 		Date endDate = account.generateEndDate(startDate);
 		String insert = "INSERT INTO Pay_Period VALUES (" + account.getId() + ", \"" + periodId
 				+ "\", '" + startDate + "', '" + endDate + "');";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getWriteDb());
 		int insertedRows = db.executeBasicUpdate(insert);
 		db.closeConnection();
 		if (insertedRows == 1) {
@@ -166,7 +166,7 @@ public class DatabaseQueries {
 		String insert = "INSERT INTO Timecard VALUES (" + account.getId() + ", \"" + employeeId
 				+ "\", \"" + payPeriodId + "\", \"" + regHours + "\", \"" + overtimeHours + "\", \""
 				+ bonusPay + "\", \"" + otherPay + "\");";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getWriteDb());
 		int insertedRows = db.executeBasicUpdate(insert);
 		db.closeConnection();
 		if (insertedRows == 1) {
@@ -186,7 +186,7 @@ public class DatabaseQueries {
 	public static List<Account> getAllAccounts() {
 		List<Account> result = new ArrayList<Account>();
 		String query = "SELECT * FROM Account;";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -214,7 +214,7 @@ public class DatabaseQueries {
 	public static Account getSpecificAccount(String sub) {
 		Account result = null;
 		String query = "SELECT * FROM Account AS A WHERE A.Account_Sub = \"" + sub + "\";";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -242,7 +242,7 @@ public class DatabaseQueries {
 		int result = 0;
 		String query = "SELECT COUNT(*) AS Emp_Count FROM Employee WHERE Account_Id = "
 				+ account.getId() + ";";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -270,7 +270,7 @@ public class DatabaseQueries {
 		String query = "SELECT * FROM ((Employee AS E LEFT JOIN Hourly_Employee AS H ON E.Emp_Id = "
 				+ "H.Emp_Id) LEFT JOIN Salary_Employee AS S ON E.Emp_Id = S.Emp_Id)"
 				+ "WHERE E.Account_Id = " + account.getId() + ";";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -306,7 +306,7 @@ public class DatabaseQueries {
 		int result = 0;
 		String query = "SELECT COUNT(*) AS Pay_Period_Count FROM Pay_Period WHERE Account_Id = "
 				+ account.getId() + ";";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -332,7 +332,7 @@ public class DatabaseQueries {
 	public static List<PayPeriod> getPayPeriods(Account account) {
 		List<PayPeriod> result = new ArrayList<PayPeriod>();
 		String query = "SELECT * FROM Pay_Period WHERE Account_Id = " + account.getId() + ";";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -361,7 +361,7 @@ public class DatabaseQueries {
 		String query = "SELECT * FROM ((Employee AS E LEFT JOIN Hourly_Employee AS H ON E.Emp_Id = "
 				+ "H.Emp_Id) LEFT JOIN Salary_Employee AS S ON E.Emp_Id = S.Emp_Id)"
 				+ "WHERE E.Emp_Id = \"" + employeeId + "\";";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -395,7 +395,7 @@ public class DatabaseQueries {
 		int result = 0;
 		String query = "SELECT COUNT(*) AS Timecard_Count FROM Timecard WHERE Emp_Id = "
 				+ employee.getEmployeeId() + ";";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -422,7 +422,7 @@ public class DatabaseQueries {
 		List<Timecard> result = new ArrayList<Timecard>();
 		String query =
 				"SELECT * FROM Timecard WHERE Emp_Id = \"" + employee.getEmployeeId() + "\";";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -450,7 +450,7 @@ public class DatabaseQueries {
 	public static PayPeriod getSpecificPayPeriod(String payPeriodId) {
 		PayPeriod result = null;
 		String query = "";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -477,7 +477,7 @@ public class DatabaseQueries {
 		int result = 0;
 		String query = "SELECT COUNT(*) AS Timecard_Count FROM Timecard WHERE Period_Id = "
 				+ payPeriod.getPeriodId() + ";";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {
@@ -504,7 +504,7 @@ public class DatabaseQueries {
 		List<Timecard> result = new ArrayList<Timecard>();
 		String query =
 				"SELECT * FROM Timecard WHERE Period_Id = \"" + payPeriod.getPeriodId() + "\";";
-		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
+		DatabaseConnector db = new DatabaseConnector(new DatabaseProperties().getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
 			while (rs.next()) {

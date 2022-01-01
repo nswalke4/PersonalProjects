@@ -10,7 +10,7 @@ import java.util.Properties;
  * class parameters accessable through getter methods.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.01
+ * @version 1.02
  */
 public class DatabaseProperties {
 
@@ -65,7 +65,7 @@ public class DatabaseProperties {
 	 * 
 	 * @return the username of the database
 	 */
-	public static String getUsername() {
+	public String getUsername() {
 		return username;
 	}
 
@@ -74,7 +74,7 @@ public class DatabaseProperties {
 	 * 
 	 * @return the password of the database
 	 */
-	public static String getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
@@ -83,7 +83,7 @@ public class DatabaseProperties {
 	 * 
 	 * @return the url of the read-only database
 	 */
-	public static String getReadDb() {
+	public String getReadDb() {
 		return readDb;
 	}
 
@@ -92,7 +92,7 @@ public class DatabaseProperties {
 	 * 
 	 * @return the url of the writeable database
 	 */
-	public static String getWriteDb() {
+	public String getWriteDb() {
 		return writeDb;
 	}
 
@@ -101,7 +101,7 @@ public class DatabaseProperties {
 	 * 
 	 * @return the string representation of the driver for the database connection
 	 */
-	public static String getDriver() {
+	public String getDriver() {
 		return driver;
 	}
 }

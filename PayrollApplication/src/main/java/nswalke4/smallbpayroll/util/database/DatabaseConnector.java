@@ -13,7 +13,7 @@ import java.sql.Statement;
  * information from the database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.05
+ * @version 1.06
  */
 public class DatabaseConnector {
 
@@ -32,9 +32,9 @@ public class DatabaseConnector {
 	 */
 	public DatabaseConnector(String pDatabaseURL) {
 		this.URL = pDatabaseURL;
-		this.USERNAME = DatabaseProperties.getUsername();
-		this.PASSWORD = DatabaseProperties.getPassword();
-		this.DRIVER = DatabaseProperties.getDriver();
+		this.USERNAME = new DatabaseProperties().getUsername();
+		this.PASSWORD = new DatabaseProperties().getPassword();
+		this.DRIVER = new DatabaseProperties().getDriver();
 		this.connect();
 	}
 
