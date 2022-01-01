@@ -465,7 +465,7 @@ public class DatabaseQueries {
 	 */
 	public static PayPeriod getSpecificPayPeriod(String payPeriodId) throws IOException {
 		PayPeriod result = null;
-		String query = "SELECT * FROM PayPeriod WHERE Period_Id = \"" + payPeriodId + "\";";
+		String query = "SELECT * FROM Pay_Period WHERE Period_Id = \"" + payPeriodId + "\";";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
