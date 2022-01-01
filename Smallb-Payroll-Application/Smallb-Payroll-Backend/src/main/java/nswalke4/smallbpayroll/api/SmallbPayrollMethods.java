@@ -20,7 +20,7 @@ import nswalke4.smallbpayroll.util.database.DatabaseQueries;
  * that contains the results of the requested action.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.04
+ * @version 1.05
  */
 public class SmallbPayrollMethods {
 
@@ -134,19 +134,19 @@ public class SmallbPayrollMethods {
      * Attempt's to create a new Account object from the given "accountObj" JSONObject, and then
      * generates a JSONObject response with the created Account information (or a failure message).
      * 
+     * @param accountSub the sub of the account that is being added to the database
      * @param accountObj a JSONObject that contains the necessary information to create a new
      *        Account
      * @return a JSONObject with the new Account information (or a message explaining why the
      *         requested method failed
      */
-    protected static JSONObject createNewAccount(JSONObject accountObj) {
+    protected static JSONObject createNewAccount(String accountSub, JSONObject accountObj) {
         JSONObject result = new JSONObject();
         String name = accountObj.getString("Name");
         String email = accountObj.getString("Email");
-        String sub = accountObj.getString("AccountSub");
         PayPeriodType periodType = PayPeriodType.valueOf(accountObj.getString("PayPeriodType"));
         try {
-            if (DatabaseQueries.addAccount(name, email, sub, periodType)) {
+            if (DatabaseQueries.addAccount(name, email, accountSub, periodType)) {
                 result.put("Success", "Account Created");
             } else {
                 result.put("Failure", "Unable to Create Account");
@@ -162,22 +162,19 @@ public class SmallbPayrollMethods {
     }
 
     /**
-     * Attempt's to create a new Employee object from the given "requestObj" JSONObject (which has
-     * an "AccountSub" string to signify which account the employee belongs to and a "NewEmployee"
-     * object that contains the employee's information), and then generates a JSONObject response
-     * with the created Employee information (or a failure message).
+     * Attempt's to create a new Employee object from the given "newEmployee"" JSONObject, and then
+     * generates a JSONObject response with the created Employee information (or a failure message).
      * 
-     * @param requestObj a JSONObject that contains the necessary information to create a new
+     * @param accountSub the sub of the account that the new employee is being added to
+     * @param newEmpObj a JSONObject that contains the necessary information to create a new
      *        Employee connected to the given Account
      * @return a JSONObject with the new Employee's information (or a message explaining why the
      *         requested method failed
      */
-    protected static JSONObject createNewEmployee(JSONObject requestObj) {
+    protected static JSONObject createNewEmployee(String accountSub, JSONObject newEmpObj) {
         JSONObject result = new JSONObject();
         try {
-            Account account =
-                    DatabaseQueries.getSpecificAccount(requestObj.getString("AccountSub"));
-            JSONObject newEmpObj = requestObj.getJSONObject("NewEmployee");
+            Account account = DatabaseQueries.getSpecificAccount(accountSub);
             String firstName = newEmpObj.getString("FirstName");
             String lastName = newEmpObj.getString("LastName");
             String empType = newEmpObj.getString("EmpType");
@@ -214,22 +211,20 @@ public class SmallbPayrollMethods {
     }
 
     /**
-     * Attempt's to create a new PayPeriod object from the given "requestObj" JSONObject (which has
-     * an "AccountSub" string to signify which account the pay period belongs to and a
-     * "PeriodStartDate" date), and then generates a JSONObject response with the created Pay Period
-     * information (or a failure message).
+     * Attempt's to create a new PayPeriod object from the given "periodStartDate" String, and then
+     * generates a JSONObject response with the created Pay Period information (or a failure
+     * message).
      * 
-     * @param requestObj a JSONObject that contains the necessary information to create a new Pay
-     *        Period connected to the given Account
+     * @param accountSub the sub of the account that the new pay period is being added to
+     * @param periodStartDate the date that the pay period will start on
      * @return a JSONObject with the new PayPeriod's information (or a message explaining why the
      *         requested method failed
      */
-    protected static JSONObject createNewPayPeriod(JSONObject requestObj) {
+    protected static JSONObject createNewPayPeriod(String accountSub, String periodStartDate) {
         JSONObject result = new JSONObject();
         try {
-            Account account =
-                    DatabaseQueries.getSpecificAccount(requestObj.getString("AccountSub"));
-            Date startDate = Date.valueOf(requestObj.getString("PeriodStartDate"));
+            Account account = DatabaseQueries.getSpecificAccount(accountSub);
+            Date startDate = Date.valueOf(periodStartDate);
             if (DatabaseQueries.addPayPeriod(account, startDate)) {
                 result.put("Success", "Pay Period Created");
             } else {
@@ -246,40 +241,26 @@ public class SmallbPayrollMethods {
     }
 
     /**
-     * Attempt's to create a new Timecard object from the given "requestObj" JSONObject (which has
-     * an "AccountSub" string to signify which account the timecard belongs to and a "TimecardInfo"
-     * object that contains the timecard's information), and then generates a JSONObject response
-     * with the created Timecard information (or a failure message).
+     * Attempt's to create a new Timecard object from the given "TimecardInfo" JSONObject , and then
+     * generates a JSONObject response with the created Timecard information (or a failure message).
      * 
-     * @param requestObj a JSONObject that contains the necessary information to create a new
+     * @param accountSub the sub of the account that the new employee is being added to
+     * @param timecardObj a JSONObject that contains the necessary information to create a new
      *        Timecard connected to the given Account
      * @return a JSONObject with the new Timecard information (or a message explaining why the
      *         requested method failed
      */
-    protected static JSONObject createNewTimecard(JSONObject requestObj) {
+    protected static JSONObject createNewTimecard(String accountSub, JSONObject timecardObj) {
         JSONObject result = new JSONObject();
         try {
-            Account account =
-                    DatabaseQueries.getSpecificAccount(requestObj.getString("AccountSub"));
-            JSONObject timecardObj = requestObj.getJSONObject("TimecardInfo");
+            Account account = DatabaseQueries.getSpecificAccount(accountSub);
             String empId = timecardObj.getString("EmployeeId");
             String payPeriodId = timecardObj.getString("PeriodId");
-            Double regHrs = null;
-            if (timecardObj.has("RegularHours")) {
-                regHrs = timecardObj.getDouble("RegularHours");
-            }
-            Double overHrs = null;
-            if (timecardObj.has("OvertimeHours")) {
-                overHrs = timecardObj.getDouble("OvertimeHours");
-            }
-            Double bonus = null;
-            if (timecardObj.has("BonusPay")) {
-                bonus = timecardObj.getDouble("BonusPay");
-            }
-            Double other = null;
-            if (timecardObj.has("OtherPay")) {
-                other = timecardObj.getDouble("OtherPay");
-            }
+            Double regHrs = timecardObj.getDouble("RegularHours");
+            Double overHrs = timecardObj.getDouble("OvertimeHours");
+            Double bonus = timecardObj.getDouble("BonusPay");
+            Double other = timecardObj.getDouble("OtherPay");
+            System.out.println(account.makeIntoJSONObject());
             if (DatabaseQueries.addTimecard(account, empId, payPeriodId, regHrs, overHrs, bonus,
                     other)) {
                 result.put("Success", "Timecard Created");

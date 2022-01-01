@@ -170,8 +170,8 @@ public class DatabaseQueries {
 			double regHours, double overtimeHours, double bonusPay, double otherPay)
 			throws IOException {
 		String insert = "INSERT INTO Timecard VALUES (" + account.getId() + ", \"" + employeeId
-				+ "\", \"" + payPeriodId + "\", \"" + regHours + "\", \"" + overtimeHours + "\", \""
-				+ bonusPay + "\", \"" + otherPay + "\");";
+				+ "\", \"" + payPeriodId + "\", " + regHours + ", " + overtimeHours + ", "
+				+ bonusPay + ", " + otherPay + ");";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getWriteDb());
 		int insertedRows = db.executeBasicUpdate(insert);
 		db.closeConnection();
