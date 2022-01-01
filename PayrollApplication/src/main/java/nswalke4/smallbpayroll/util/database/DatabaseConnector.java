@@ -14,7 +14,7 @@ import java.sql.Statement;
  * information from the database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.06
+ * @version 1.07
  */
 public class DatabaseConnector {
 
@@ -22,7 +22,6 @@ public class DatabaseConnector {
 	private final String URL;
 	private final String USERNAME;
 	private final String PASSWORD;
-	private final String DRIVER;
 	private Connection conn;
 
 	// Constructor
@@ -36,7 +35,6 @@ public class DatabaseConnector {
 		this.URL = pDatabaseURL;
 		this.USERNAME = DatabaseProperties.getUsername();
 		this.PASSWORD = DatabaseProperties.getPassword();
-		this.DRIVER = DatabaseProperties.getDriver();
 		this.connect();
 	}
 
@@ -47,25 +45,13 @@ public class DatabaseConnector {
 	 */
 	private void connect() {
 		try {
-			System.out.println(this.DRIVER);
-			// Class.forName(DRIVER).newInstance();
 			this.conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			// } catch (ClassNotFoundException cnfex) {
-			// System.out.println("[FAILURE] Unable to find the driver class...");
-			// cnfex.printStackTrace();
 		} catch (SQLException sqlex) {
 			System.out.println("[FAILURE] Something went wrong with opening this connection...");
 			System.out.println("Error Code: " + sqlex.getErrorCode());
 			System.out.println("SQL State: " + sqlex.getSQLState());
 			System.out.println("Message: " + sqlex.getMessage());
 			sqlex.printStackTrace();
-			// } catch (InstantiationException iex) {
-			// System.out.println("[FAILURE] Something went wrong with the driver
-			// instantiation...");
-			// iex.printStackTrace();
-			// } catch (IllegalAccessException iae) {
-			// System.out.println("[FAILURE] No access to create the driver instantiation...");
-			// iae.printStackTrace();
 		}
 	}
 

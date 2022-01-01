@@ -9,7 +9,7 @@ import java.util.Properties;
  * class parameters accessable through getter methods.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.03
+ * @version 1.04
  */
 public class DatabaseProperties {
 
@@ -76,18 +76,5 @@ public class DatabaseProperties {
 		FileInputStream fis = new FileInputStream(FILE_NAME);
 		props.load(fis);
 		return props.getProperty("write_database");
-	}
-
-	/**
-	 * Get's the string representation of the database driver.
-	 * 
-	 * @return the string representation of the driver for the database connection
-	 * @throws IOException
-	 */
-	public static String getDriver() throws IOException {
-		Properties props = new Properties();
-		FileInputStream fis = new FileInputStream(FILE_NAME);
-		props.load(fis);
-		return props.getProperty("driver");
 	}
 }
