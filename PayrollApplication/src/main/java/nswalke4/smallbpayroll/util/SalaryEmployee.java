@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * application.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.04
+ * @version 1.05
  */
 public class SalaryEmployee extends Employee {
 
@@ -51,6 +51,7 @@ public class SalaryEmployee extends Employee {
 	@Override
 	public JSONObject makeIntoJSONObject() {
 		JSONObject result = super.makeIntoJSONObject();
+		result.put("Type", "SALARY");
 		result.put("PayPeriodRate", this.getPeriodRate());
 		return result;
 	}
