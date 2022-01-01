@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import org.json.JSONObject;
 import nswalke4.smallbpayroll.util.Account;
 import nswalke4.smallbpayroll.util.Employee;
 import nswalke4.smallbpayroll.util.HourlyEmployee;
@@ -22,7 +21,7 @@ import nswalke4.smallbpayroll.util.Timecard;
  * keeping the connection time as minimal as possible.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.11
+ * @version 1.12
  */
 public class DatabaseQueries {
 
@@ -466,7 +465,7 @@ public class DatabaseQueries {
 	 */
 	public static PayPeriod getSpecificPayPeriod(String payPeriodId) throws IOException {
 		PayPeriod result = null;
-		String query = "";
+		String query = "SELECT * FROM PayPeriod WHERE Period_Id = \"" + payPeriodId + "\";";
 		DatabaseConnector db = new DatabaseConnector(DatabaseProperties.getReadDb());
 		ResultSet rs = db.executeBasicQuery(query);
 		try {
