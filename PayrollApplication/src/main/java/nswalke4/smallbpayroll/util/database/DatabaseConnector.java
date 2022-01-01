@@ -55,6 +55,9 @@ public class DatabaseConnector {
 			// cnfex.printStackTrace();
 		} catch (SQLException sqlex) {
 			System.out.println("[FAILURE] Something went wrong with opening this connection...");
+			System.out.println("Error Code: " + sqlex.getErrorCode());
+			System.out.println("SQL State: " + sqlex.getSQLState());
+			System.out.println("Message: " + sqlex.getMessage());
 			sqlex.printStackTrace();
 			// } catch (InstantiationException iex) {
 			// System.out.println("[FAILURE] Something went wrong with the driver

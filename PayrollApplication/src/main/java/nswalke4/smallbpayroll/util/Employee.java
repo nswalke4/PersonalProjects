@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * payroll application database.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.06
+ * @version 1.07
  */
 public class Employee {
 
@@ -81,7 +81,11 @@ public class Employee {
 		result.put("EmployeeID", this.getEmployeeId());
 		result.put("FirstName", this.getFirstName());
 		result.put("LastName", this.getLastName());
-		result.put("PhoneNum", this.getPhoneNum());
+		if (this.getPhoneNum() == null) {
+			result.put("PhoneNum", JSONObject.NULL);
+		} else {
+			result.put("PhoneNum", this.getPhoneNum());
+		}
 		return result;
 	}
 }
