@@ -533,8 +533,8 @@ public class DatabaseQueries {
 				result.add(tc);
 			}
 		} catch (SQLException sqlex) {
-			System.out.println(
-					"[FAILURE] Something went wrong while trying to read the " + "results...");
+			System.out
+					.println("[FAILURE] Something went wrong while trying to read the results...");
 			sqlex.printStackTrace();
 		}
 		db.closeConnection();

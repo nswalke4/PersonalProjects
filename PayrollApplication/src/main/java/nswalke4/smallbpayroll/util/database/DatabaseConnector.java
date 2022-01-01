@@ -48,14 +48,21 @@ public class DatabaseConnector {
 	private void connect() {
 		try {
 			System.out.println(this.DRIVER);
-			Class.forName(DRIVER);
+			// Class.forName(DRIVER).newInstance();
 			this.conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-		} catch (ClassNotFoundException cnfex) {
-			System.out.println("[FAILURE] Unable to find the driver class...");
-			cnfex.printStackTrace();
+			// } catch (ClassNotFoundException cnfex) {
+			// System.out.println("[FAILURE] Unable to find the driver class...");
+			// cnfex.printStackTrace();
 		} catch (SQLException sqlex) {
 			System.out.println("[FAILURE] Something went wrong with opening this connection...");
 			sqlex.printStackTrace();
+			// } catch (InstantiationException iex) {
+			// System.out.println("[FAILURE] Something went wrong with the driver
+			// instantiation...");
+			// iex.printStackTrace();
+			// } catch (IllegalAccessException iae) {
+			// System.out.println("[FAILURE] No access to create the driver instantiation...");
+			// iae.printStackTrace();
 		}
 	}
 
