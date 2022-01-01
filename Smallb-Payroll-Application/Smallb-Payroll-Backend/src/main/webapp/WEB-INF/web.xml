@@ -12,6 +12,6 @@
 
    <servlet-mapping>
        <servlet-name>SmallbPayroll</servlet-name>
-       <url-pattern>/smallb-payroll-api</url-pattern>
+       <url-pattern>/api</url-pattern>
    </servlet-mapping>
 </web-app>
