@@ -15,13 +15,13 @@ Once the server has been started, it can be accessed at this URL: http://localho
 
 ## Communicating with the API
 
-After the server has been started, it will begin to accept HTTP requests at the correct URL. The Smallb Payroll API servlet listens at the "/api" location of the server URL. ~~Please see the REST API Documentation in the 'doc/' directory for more information about how to access the API.~~The REST API documentation has not been completed yet.
+After the server has been started, it will begin to accept HTTP requests at the correct URL. The Smallb Payroll API servlet listens at the "/api" location of the server URL. ~~Please see the REST API Documentation in the 'doc/' directory for more information about how to access the API.~~ The REST API documentation has not been completed yet.
 
 ## Database Information
 
 This project utilizes a remote database hosted by Amazon Web Services. The database is a MySQL database, and connection to the database uses the AWS JDBC connection. Information about the database is included in the 'database.properties' file located in the 'resources/' directory.
 
-### Directory Contents
+## Directory Contents
 
--   doc: Contains the Javadoc files ~~and the REST API Documentation~~
--   mysql: Contains the MySQL Schema and Test-Data Scripts and an EER Diagram of the 'Smallb_Payroll' Schema
+-   [doc](/doc/): Contains the Javadoc files ~~and the REST API Documentation~~
+-   [mysql](/mysql/): Contains the MySQL Schema and Test-Data Scripts and an EER Diagram of the 'Smallb_Payroll' Schema
