@@ -23,5 +23,5 @@ This project utilizes a remote database hosted by Amazon Web Services. The datab
 
 ## Directory Contents
 
--   [doc](/doc/): Contains the Javadoc files ~~and the REST API Documentation~~
--   [mysql](/mysql/): Contains the MySQL Schema and Test-Data Scripts and an EER Diagram of the 'Smallb_Payroll' Schema
+-   [doc](https://github.com/nswalke4/PersonalProjects/tree/main/Smallb-Payroll-Application/smallb-payroll-server/doc): Contains the Javadoc files ~~and the REST API Documentation~~
+-   [mysql](https://github.com/nswalke4/PersonalProjects/tree/main/Smallb-Payroll-Application/smallb-payroll-server/mysql): Contains the MySQL Schema and Test-Data Scripts and an EER Diagram of the 'Smallb_Payroll' Schema
