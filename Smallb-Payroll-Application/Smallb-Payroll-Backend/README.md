@@ -1,9 +1,27 @@
-# Payroll Application
-This application will be able to handle basic payroll tasks using a database as storage system.
+# Smallb Payroll Application Backend
 
-## AWS Database Information
-The application will utilize Amazon Web Services's (AWS) Relational Database System.  This will allow the information stored in the database to be accessed anywhere that a user has access to the internet.  This is to hopefully allow this application to be a web-based application upon completion of this project.
+This is the backend portion of the Smallb Payroll Application. Inside this directory are all of the necessary files to run the Smallb Payroll Application REST API. Currently, the API is able to handle 'GET' and 'POST' requests. However, it will soon be able to handle 'PUT' and 'DELETE' requests as well as additional functionality is included.
 
-### Payroll Database
-username: admin
-password: iz3cEOftoroFYYmf27Sh
+## Running the Backend
+
+In order to start this server, a build.gradle file has been created. This allows the server to be started using one easy command. Starting the server involves executing the two following commands in a CLI:
+
+```
+gradle build
+gradle tomcatRunWar
+```
+
+Once the server has been started, it can be accessed at this URL: http://localhost:8080/Smallb-Payroll-Backend/
+
+## Communicating with the API
+
+After the server has been started, it will begin to accept HTTP requests at the correct URL. The Smallb Payroll API servlet listens at the "/api" location of the server URL. ~~Please see the REST API Documentation in the 'doc/' directory for more information about how to access the API.~~The REST API documentation has not been completed yet.
+
+## Database Information
+
+This project utilizes a remote database hosted by Amazon Web Services. The database is a MySQL database, and connection to the database uses the AWS JDBC connection. Information about the database is included in the 'database.properties' file located in the 'resources/' directory.
+
+### Directory Contents
+
+-   doc: Contains the Javadoc files ~~and the REST API Documentation~~
+-   mysql: Contains the MySQL Schema and Test-Data Scripts and an EER Diagram of the 'Smallb_Payroll' Schema
