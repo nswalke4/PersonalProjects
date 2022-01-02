@@ -11,7 +11,7 @@ gradle build
 gradle tomcatRunWar
 ```
 
-Once the server has been started, it can be accessed at this URL: http://localhost:8080/Smallb-Payroll-Backend/
+Once the server has been started, it can be accessed at this URL: http://localhost:8080/smallb-payroll-server/
 
 ## Communicating with the API
 
