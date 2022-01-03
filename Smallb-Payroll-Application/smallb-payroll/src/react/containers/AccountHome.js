@@ -5,7 +5,7 @@ import EmployeeInfo from "./EmployeeInfo";
 import PayPeriodInfo from "./PayPeriodInfo";
 import { useState } from "react";
 
-const AccountHome = ({ account }) => {
+const AccountHome = ({ account, signOut }) => {
     const [addEmpActive, setAddEmpActive] = useState(false);
 
     const swapAddEmpState = () => {
@@ -56,9 +56,13 @@ const AccountHome = ({ account }) => {
         });
     };
 
+    const log = () => {
+        console.log(account);
+    };
+
     return (
         <div className="account-home">
-            <h2>Account ID: {account.sub}</h2>
+            <h2 onDoubleClick={log}>Account Info:</h2>
             {addEmpActive && <AddEmployee onClose={swapAddEmpState} />}
             {addPayPerActive && <AddPayPeriod onClose={swapAddPayPerState} />}
             {empInfo.active && <EmployeeInfo onClose={resetEmp} employee={empInfo.employee} />}
@@ -73,6 +77,9 @@ const AccountHome = ({ account }) => {
                     perInfo={choosePayPer}
                 />
             )}
+            <button className="sign-out" onClick={signOut}>
+                Sign Out
+            </button>
         </div>
     );
 };

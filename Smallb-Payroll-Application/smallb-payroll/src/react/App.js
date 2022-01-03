@@ -1,10 +1,14 @@
 import AccountHome from "./containers/AccountHome";
-import Login from "./containers/Login";
 import Goal from "./Goal";
 import { useState } from "react";
+import { Amplify } from "aws-amplify";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+import awsExports from "../aws-exports";
+Amplify.configure(awsExports);
 
-function App() {
-    const [showGoal, setShowGoal] = useState(true);
+function App({ signOut, user }) {
+    const [showGoal, setShowGoal] = useState(false);
 
     const swapGoalVsActual = () => {
         setShowGoal(!showGoal);
@@ -18,16 +22,6 @@ function App() {
         }
     };
 
-    const [account, setAccount] = useState({
-        sub: "test-sub",
-    });
-
-    const completeLogin = (accSub) => {
-        setAccount({
-            sub: accSub,
-        });
-    };
-
     return (
         <div className="App">
             <div className="constant-header">
@@ -38,10 +32,9 @@ function App() {
             </div>
             <hr />
             {showGoal && <Goal />}
-            {!showGoal && account.sub === null && <Login login={completeLogin} />}
-            {!showGoal && account.sub !== null && <AccountHome account={account} />}
+            {!showGoal && <AccountHome account={user} signOut={signOut} />}
         </div>
     );
 }
 
-export default App;
+export default withAuthenticator(App);

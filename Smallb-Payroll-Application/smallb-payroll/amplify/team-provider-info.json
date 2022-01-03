@@ -1,0 +1,21 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-smallbpayroll-dev-205658-authRole",
+      "UnauthRoleArn": "arn:aws:iam::524476269553:role/amplify-smallbpayroll-dev-205658-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::524476269553:role/amplify-smallbpayroll-dev-205658-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-smallbpayroll-dev-205658-deployment",
+      "UnauthRoleName": "amplify-smallbpayroll-dev-205658-unauthRole",
+      "StackName": "amplify-smallbpayroll-dev-205658",
+      "StackId": "arn:aws:cloudformation:us-east-1:524476269553:stack/amplify-smallbpayroll-dev-205658/d2a97370-6c40-11ec-b5b3-12c62a3ba0a7",
+      "AmplifyAppId": "d1yr416ixxuvfo"
+    },
+    "categories": {
+      "auth": {
+        "smallbpayroll9ca8515b": {},
+        "smallbpayrolla22a3538": {}
+      }
+    }
+  }
+}
