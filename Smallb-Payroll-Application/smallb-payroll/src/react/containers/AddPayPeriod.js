@@ -1,5 +1,3 @@
-import React from "react";
-
 const AddPayPeriod = ({ onClose }) => {
     return (
         <div className="add-pay-period">
