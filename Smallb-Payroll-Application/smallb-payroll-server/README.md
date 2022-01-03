@@ -19,7 +19,8 @@ After the server has been started, it will begin to accept HTTP requests at the 
 
 ## Database Information
 
-This project utilizes a remote database hosted by Amazon Web Services. The database is a MySQL database, and connection to the database uses the AWS JDBC connection. Information about the database is included in the 'database.properties' file located in the 'resources/' directory.
+~~This project utilizes a remote database hosted by Amazon Web Services. The database is a MySQL database, and connection to the database uses the AWS JDBC connection. Information about the database is included in the 'database.properties' file located in the 'resources/' directory.~~  
+Currently, the Database that will be used is unknown. Additional research about how to ensure that the AWS RDS is in the "free tier" is needed to minimize (or eliminate) unnecessary costs.
 
 ## Directory Contents
 

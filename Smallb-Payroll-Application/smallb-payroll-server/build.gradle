@@ -18,7 +18,7 @@ repositories {
 
 dependencies {
     implementation 'org.json:json:20211205'
-    implementation 'software.aws.rds:aws-mysql-jdbc:0.4.0'
+    // implementation 'software.aws.rds:aws-mysql-jdbc:0.4.0' #NOTE-Currently unsure of DB platform...
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
 }
 
