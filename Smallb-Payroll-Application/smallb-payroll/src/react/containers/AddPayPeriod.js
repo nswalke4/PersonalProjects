@@ -2,7 +2,7 @@ import React from "react";
 
 const AddPayPeriod = ({ onClose }) => {
     return (
-        <div>
+        <div className="add-pay-period">
             <p>Add Pay Period will go here...</p>
             <button onClick={onClose}>Close</button>
         </div>

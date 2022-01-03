@@ -1,9 +1,7 @@
-import React from "react";
-
 const AccountInfo = ({ addEmp, addPer, empInfo, perInfo }) => {
     return (
-        <div>
-            <table>
+        <div className="account-tables">
+            <table className="employee-table">
                 <caption>
                     <div className="tableHeader">Employees</div>
                     <button className="addButton" onClick={addEmp}>
@@ -29,7 +27,7 @@ const AccountInfo = ({ addEmp, addPer, empInfo, perInfo }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr onDoubleClick={empInfo}>
+                    <tr onDoubleClick={() => empInfo("1-E-0001")}>
                         <td>1-E-0001</td>
                         <td>TestA</td>
                         <td>EmployeeA</td>
@@ -37,7 +35,7 @@ const AccountInfo = ({ addEmp, addPer, empInfo, perInfo }) => {
                         <td>HOURLY</td>
                         <td>7.25</td>
                     </tr>
-                    <tr onDoubleClick={empInfo}>
+                    <tr onDoubleClick={() => empInfo("1-E-0002")}>
                         <td>1-E-0002</td>
                         <td>TestB</td>
                         <td>EmployeeB</td>
@@ -45,7 +43,7 @@ const AccountInfo = ({ addEmp, addPer, empInfo, perInfo }) => {
                         <td>HOURLY</td>
                         <td>9.50</td>
                     </tr>
-                    <tr onDoubleClick={empInfo}>
+                    <tr onDoubleClick={() => empInfo("1-E-0003")}>
                         <td>1-E-0003</td>
                         <td>TestC</td>
                         <td>EmployeeC</td>
@@ -56,7 +54,7 @@ const AccountInfo = ({ addEmp, addPer, empInfo, perInfo }) => {
                 </tbody>
             </table>
             <div className="break" />
-            <table>
+            <table className="pay-period-table">
                 <caption>
                     <div className="tableHeader">Pay Periods</div>
                     <button className="addButton" onClick={addPer}>
@@ -76,17 +74,17 @@ const AccountInfo = ({ addEmp, addPer, empInfo, perInfo }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr onDoubleClick={perInfo} perId="1">
+                    <tr onDoubleClick={() => perInfo("1-P-0001")}>
                         <td>1-P-0001</td>
                         <td>11/28/2021</td>
                         <td>12/04/2021</td>
                     </tr>
-                    <tr onDoubleClick={perInfo} perId="2">
+                    <tr onDoubleClick={() => perInfo("1-P-0002")}>
                         <td>1-P-0002</td>
                         <td>12/05/2021</td>
                         <td>12/11/2021</td>
                     </tr>
-                    <tr onDoubleClick={perInfo} perId="3">
+                    <tr onDoubleClick={() => perInfo("1-P-0003")}>
                         <td>1-P-0003</td>
                         <td>12/12/2021</td>
                         <td>12/18/2021</td>

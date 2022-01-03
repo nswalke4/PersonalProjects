@@ -1,9 +1,10 @@
 import React from "react";
 
-const EmployeeInfo = ({ onClose }) => {
+const EmployeeInfo = ({ onClose, employee }) => {
     return (
-        <div>
+        <div className="employee-info">
             <p>Employee Information will go here...</p>
+            <p>Employee ID: {employee}</p>
             <button onClick={onClose}>Close</button>
         </div>
     );

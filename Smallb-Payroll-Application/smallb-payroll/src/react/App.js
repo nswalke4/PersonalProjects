@@ -1,9 +1,6 @@
-import AccountInfo from "./containers/AccountInfo.js";
-import AddEmployee from "./containers/AddEmployee.js";
-import AddPayPeriod from "./containers/AddPayPeriod.js";
-import EmployeeInfo from "./containers/EmployeeInfo.js";
-import PayPeriodInfo from "./containers/PayPeriodInfo.js";
-import Goal from "./Goal.js";
+import AccountHome from "./containers/AccountHome";
+import Login from "./containers/Login";
+import Goal from "./Goal";
 import { useState } from "react";
 
 function App() {
@@ -21,58 +18,28 @@ function App() {
         }
     };
 
-    const [addEmpActive, setAddEmpActive] = useState(false);
+    const [account, setAccount] = useState({
+        sub: "test-sub",
+    });
 
-    const swapAddEmpState = () => {
-        setAddEmpActive(!addEmpActive);
-    };
-
-    const [addPayPerActive, setAddPayPerActive] = useState(false);
-
-    const swapAddPayPerState = () => {
-        setAddPayPerActive(!addPayPerActive);
-    };
-
-    const [empInfoActive, setEmpInfoActive] = useState(false);
-
-    const swapEmpInfoState = () => {
-        setEmpInfoActive(!empInfoActive);
-    };
-
-    const [payPerInfoActive, setPayPerInfoActive] = useState(false);
-
-    const swapPayPerInfoState = () => {
-        setPayPerInfoActive(!payPerInfoActive);
+    const completeLogin = (accSub) => {
+        setAccount({
+            sub: accSub,
+        });
     };
 
     return (
         <div className="App">
-            <div className="header">
+            <div className="constant-header">
                 <p className="goalOrActual">{goalOrActual()}</p>
                 <button className="swapButton" onClick={swapGoalVsActual}>
                     Switch Version
                 </button>
             </div>
             <hr />
-            <div className="body">
-                {showGoal && <Goal />}
-                {!showGoal && addEmpActive && <AddEmployee onClose={swapAddEmpState} />}
-                {!showGoal && addPayPerActive && <AddPayPeriod onClose={swapAddPayPerState} />}
-                {!showGoal && empInfoActive && <EmployeeInfo onClose={swapEmpInfoState} />}
-                {!showGoal && payPerInfoActive && <PayPeriodInfo onClose={swapPayPerInfoState} />}
-                {!showGoal &&
-                    !addEmpActive &&
-                    !addPayPerActive &&
-                    !empInfoActive &&
-                    !payPerInfoActive && (
-                        <AccountInfo
-                            addEmp={swapAddEmpState}
-                            addPer={swapAddPayPerState}
-                            empInfo={swapEmpInfoState}
-                            perInfo={swapPayPerInfoState}
-                        />
-                    )}
-            </div>
+            {showGoal && <Goal />}
+            {!showGoal && account.sub === null && <Login login={completeLogin} />}
+            {!showGoal && account.sub !== null && <AccountHome account={account} />}
         </div>
     );
 }
