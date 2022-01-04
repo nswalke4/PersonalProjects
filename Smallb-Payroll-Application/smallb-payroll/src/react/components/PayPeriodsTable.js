@@ -7,10 +7,10 @@ const PayPeriodsTable = ({ payPeriods, addPayPeriod, selectPayPeriod }) => {
                     Add New Pay Period
                 </button>
             </caption>
-            <colgroup className="payPeriod">
-                <col className="periodId" />
-                <col className="startDate" />
-                <col className="endDate" />
+            <colgroup className="pay-period-colgroup">
+                <col className="pay-period-id" />
+                <col className="pay-period-start" />
+                <col className="pay-period-end" />
             </colgroup>
             <thead>
                 <tr>

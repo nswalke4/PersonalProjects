@@ -8,12 +8,12 @@ const EmployeesTable = ({ employees, addEmployee, selectEmployee }) => {
                 </button>
             </caption>
             <colgroup className="employee-colgroup">
-                <col className="empId" />
-                <col className="firstName" />
-                <col className="lastName" />
-                <col className="phoneNum" />
-                <col className="type" />
-                <col className="payRate" />
+                <col className="emp-id" />
+                <col className="emp-first-name" />
+                <col className="emp-last-name" />
+                <col className="emp-phone-num" />
+                <col className="emp-type" />
+                <col className="emp-pay-rate" />
             </colgroup>
             <thead>
                 <tr>

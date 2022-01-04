@@ -1,7 +1,7 @@
-import EmployeesTable from "../components/EmployeesTable";
-import PayPeriodsTable from "../components/PayPeriodsTable";
+import EmployeesTable from "./EmployeesTable";
+import PayPeriodsTable from "./PayPeriodsTable";
 
-const AccountInfo = ({ employees, payPeriods, addEmp, addPer, empInfo, perInfo }) => {
+const AccountTables = ({ employees, payPeriods, addEmp, addPer, empInfo, perInfo }) => {
     return (
         <div className="account-tables">
             <EmployeesTable employees={employees} addEmployee={addEmp} selectEmployee={empInfo} />
@@ -15,4 +15,4 @@ const AccountInfo = ({ employees, payPeriods, addEmp, addPer, empInfo, perInfo }
     );
 };
 
-export default AccountInfo;
+export default AccountTables;

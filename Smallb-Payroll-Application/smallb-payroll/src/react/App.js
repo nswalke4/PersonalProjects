@@ -1,4 +1,4 @@
-import AccountHome from "./containers/AccountHome";
+import AccountHome from "./pages/AccountHome";
 import Goal from "./Goal";
 
 function App() {

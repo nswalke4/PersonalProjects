@@ -1,4 +1,4 @@
-import AccountTables from "./AccountTables";
+import AccountTables from "../components/AccountTables";
 import AddEmployee from "./AddEmployee";
 import AddPayPeriod from "./AddPayPeriod";
 import EmployeeInfo from "./EmployeeInfo";
