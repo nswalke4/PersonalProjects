@@ -1,11 +1,11 @@
-import TimecardTable from "./TimecardTable";
+import TimecardsTable from "../components/TimecardsTable";
 
 const EmployeeInfo = ({ onClose, employee }) => {
     return (
         <div className="employee-info">
             <p>Employee Information will go here...</p>
             <p>Employee ID: {employee}</p>
-            <TimecardTable info={employee.timecards} />
+            <TimecardsTable timecards={timecards} />
             <button onClick={onClose}>Close</button>
         </div>
     );

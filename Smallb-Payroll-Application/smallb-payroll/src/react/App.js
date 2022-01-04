@@ -12,7 +12,7 @@ function App({ signOut, user }) {
     return (
         <div className="App">
             {showGoal && <Goal />}
-            {!showGoal && <AccountHome account={user} signOut={signOut} />}
+            {!showGoal && <AccountHome sub={user} signOut={signOut} />}
         </div>
     );
 }

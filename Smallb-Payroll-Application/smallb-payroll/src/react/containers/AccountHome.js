@@ -5,31 +5,79 @@ import EmployeeInfo from "./EmployeeInfo";
 import PayPeriodInfo from "./PayPeriodInfo";
 import { useState } from "react";
 
-const AccountHome = ({ account, signOut }) => {
-    const [addEmpActive, setAddEmpActive] = useState(false);
+const AccountHome = ({ sub, signOut }) => {
+    // Account Object
+    const account = {
+        sub: sub,
+        employees: [
+            {
+                id: "1-E-0001",
+                firstName: "TestA",
+                lastName: "EmployeeA",
+                phoneNum: "-",
+                type: "HOURLY",
+                payRate: 7.25,
+            },
+            {
+                id: "1-E-0002",
+                firstName: "TestB",
+                lastName: "EmployeeB",
+                phoneNum: "-",
+                type: "HOURLY",
+                payRate: 9.5,
+            },
+            {
+                id: "1-E-0003",
+                firstName: "TestC",
+                lastName: "EmployeeC",
+                phoneNum: "-",
+                type: "SALARY",
+                payRate: 525.25,
+            },
+        ],
+        payPeriods: [
+            {
+                id: "1-P-0001",
+                startDate: "11/28/2021",
+                endDate: "12/04/2021",
+            },
+            {
+                id: "1-P-0002",
+                startDate: "12/05/2021",
+                endDate: "12/11/2021",
+            },
+            {
+                id: "1-P-0003",
+                startDate: "12/12/2021",
+                endDate: "12/18/2021",
+            },
+        ],
+    };
 
+    // Methods to Adjust Current View
+    // Add Employee View
+    const [addEmpActive, setAddEmpActive] = useState(false);
     const swapAddEmpState = () => {
         setAddEmpActive(!addEmpActive);
     };
 
+    // Add Pay Period View
     const [addPayPerActive, setAddPayPerActive] = useState(false);
-
     const swapAddPayPerState = () => {
         setAddPayPerActive(!addPayPerActive);
     };
 
+    // Specific Employee View
     const [empInfo, setEmpInfo] = useState({
         active: false,
         employee: null,
     });
-
     const chooseEmp = (emp) => {
         setEmpInfo({
             active: true,
             employee: emp,
         });
     };
-
     const resetEmp = () => {
         setEmpInfo({
             active: false,
@@ -37,18 +85,17 @@ const AccountHome = ({ account, signOut }) => {
         });
     };
 
+    // Specific Pay Period View
     const [payPerInfo, setPayPerInfo] = useState({
         active: false,
         payPeriod: null,
     });
-
     const choosePayPer = (payPer) => {
         setPayPerInfo({
             active: true,
             payPeriod: payPer,
         });
     };
-
     const resetPayPer = () => {
         setPayPerInfo({
             active: false,
@@ -56,6 +103,7 @@ const AccountHome = ({ account, signOut }) => {
         });
     };
 
+    // Debugging Methods
     const log = () => {
         console.log(account);
     };
@@ -71,6 +119,8 @@ const AccountHome = ({ account, signOut }) => {
             )}
             {!addEmpActive && !addPayPerActive && !empInfo.active && !payPerInfo.active && (
                 <AccountTables
+                    employees={account.employees}
+                    payPeriods={account.payPeriods}
                     addEmp={swapAddEmpState}
                     addPer={swapAddPayPerState}
                     empInfo={chooseEmp}
