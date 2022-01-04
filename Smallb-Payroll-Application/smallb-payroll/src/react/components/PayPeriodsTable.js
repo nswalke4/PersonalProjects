@@ -20,21 +20,15 @@ const PayPeriodsTable = ({ payPeriods, addPayPeriod, selectPayPeriod }) => {
                 </tr>
             </thead>
             <tbody>
-                <tr onDoubleClick={() => selectPayPeriod("1-P-0001")}>
-                    <td>1-P-0001</td>
-                    <td>11/28/2021</td>
-                    <td>12/04/2021</td>
-                </tr>
-                <tr onDoubleClick={() => selectPayPeriod("1-P-0002")}>
-                    <td>1-P-0002</td>
-                    <td>12/05/2021</td>
-                    <td>12/11/2021</td>
-                </tr>
-                <tr onDoubleClick={() => selectPayPeriod("1-P-0003")}>
-                    <td>1-P-0003</td>
-                    <td>12/12/2021</td>
-                    <td>12/18/2021</td>
-                </tr>
+                {payPeriods.map((pp) => {
+                    return (
+                        <tr onDoubleClick={() => selectPayPeriod(pp)}>
+                            <td>{pp.id}</td>
+                            <td>{pp.startDate}</td>
+                            <td>{pp.endDate}</td>
+                        </tr>
+                    );
+                })}
             </tbody>
         </table>
     );
