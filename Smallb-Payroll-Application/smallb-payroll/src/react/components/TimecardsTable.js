@@ -3,9 +3,6 @@ const TimecardsTable = ({ timecards }) => {
         <table className="timecards-table">
             <caption>
                 <div className="tableHeader">Timecards</div>
-                {/* <button className="addButton" onClick={addTimecard}>
-                    Add New Employee
-                </button> */}
             </caption>
             <colgroup className="timecard-colgroup">
                 <col className="timecard-emp-id" />
@@ -17,12 +14,12 @@ const TimecardsTable = ({ timecards }) => {
             </colgroup>
             <thead>
                 <tr>
-                    <th>EmployeeID</th>
-                    <th>PayPeriodID</th>
-                    <th>RegularHours</th>
-                    <th>OvertimeHours</th>
-                    <th>BonusPay</th>
-                    <th>OtherPay</th>
+                    <th>Employee ID</th>
+                    <th>Pay Period ID</th>
+                    <th>Regular Hours</th>
+                    <th>Overtime Hours</th>
+                    <th>Bonus Pay</th>
+                    <th>Other Pay</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,8 +30,8 @@ const TimecardsTable = ({ timecards }) => {
                             <td>{tc.perId}</td>
                             <td>{tc.regHrs}</td>
                             <td>{tc.overHrs}</td>
-                            <td>{tc.bonus}</td>
-                            <td>{tc.other}</td>
+                            <td>${tc.bonus.toFixed(2)}</td>
+                            <td>${tc.other.toFixed(2)}</td>
                         </tr>
                     );
                 })}

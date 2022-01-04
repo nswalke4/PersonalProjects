@@ -107,7 +107,9 @@ const AccountHome = () => {
         <div className="account-home">
             <h2>Test Account: {account.sub}</h2>
             {addEmpActive && <AddEmployee onClose={swapAddEmpState} />}
-            {addPayPerActive && <AddPayPeriod onClose={swapAddPayPerState} />}
+            {addPayPerActive && (
+                <AddPayPeriod employees={account.employees} onClose={swapAddPayPerState} />
+            )}
             {empInfo.active && <EmployeeInfo onClose={resetEmp} employee={empInfo.employee} />}
             {payPerInfo.active && (
                 <PayPeriodInfo onClose={resetPayPer} payPeriod={payPerInfo.payPeriod} />
@@ -115,10 +117,10 @@ const AccountHome = () => {
             {!addEmpActive && !addPayPerActive && !empInfo.active && !payPerInfo.active && (
                 <AccountTables
                     employees={account.employees}
-                    payPeriods={account.payPeriods}
                     addEmp={swapAddEmpState}
-                    addPer={swapAddPayPerState}
                     empInfo={chooseEmp}
+                    payPeriods={account.payPeriods}
+                    addPer={swapAddPayPerState}
                     perInfo={choosePayPer}
                 />
             )}

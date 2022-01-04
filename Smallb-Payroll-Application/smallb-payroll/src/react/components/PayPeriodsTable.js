@@ -15,8 +15,8 @@ const PayPeriodsTable = ({ payPeriods, addPayPeriod, selectPayPeriod }) => {
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>StartDate</th>
-                    <th>EndDate</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                 </tr>
             </thead>
             <tbody>

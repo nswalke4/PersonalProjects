@@ -18,11 +18,11 @@ const EmployeesTable = ({ employees, addEmployee, selectEmployee }) => {
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>FirstName</th>
-                    <th>LastName</th>
-                    <th>PhoneNum</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone Number</th>
                     <th>Type</th>
-                    <th>PayRate</th>
+                    <th>Pay Rate</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,9 +32,9 @@ const EmployeesTable = ({ employees, addEmployee, selectEmployee }) => {
                             <td>{emp.id}</td>
                             <td>{emp.firstName}</td>
                             <td>{emp.lastName}</td>
-                            <td>{emp.phoneNuim}</td>
+                            <td>{emp.phoneNum}</td>
                             <td>{emp.type}</td>
-                            <td>{emp.payRate}</td>
+                            <td>${emp.payRate.toFixed(2)}</td>
                         </tr>
                     );
                 })}
