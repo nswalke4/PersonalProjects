@@ -5,10 +5,10 @@ import EmployeeInfo from "./EmployeeInfo";
 import PayPeriodInfo from "./PayPeriodInfo";
 import { useState } from "react";
 
-const AccountHome = ({ sub, signOut }) => {
+const AccountHome = () => {
     // Account Object
     const account = {
-        sub: sub,
+        sub: "Testing-Sub-123",
         employees: [
             {
                 id: "1-E-0001",
@@ -103,14 +103,9 @@ const AccountHome = ({ sub, signOut }) => {
         });
     };
 
-    // Debugging Methods
-    const log = () => {
-        console.log(account);
-    };
-
     return (
         <div className="account-home">
-            <h2 onDoubleClick={log}>Account Info:</h2>
+            <h2>Test Account: {account.sub}</h2>
             {addEmpActive && <AddEmployee onClose={swapAddEmpState} />}
             {addPayPerActive && <AddPayPeriod onClose={swapAddPayPerState} />}
             {empInfo.active && <EmployeeInfo onClose={resetEmp} employee={empInfo.employee} />}
@@ -127,9 +122,6 @@ const AccountHome = ({ sub, signOut }) => {
                     perInfo={choosePayPer}
                 />
             )}
-            <button className="sign-out" onClick={signOut}>
-                Sign Out
-            </button>
         </div>
     );
 };
