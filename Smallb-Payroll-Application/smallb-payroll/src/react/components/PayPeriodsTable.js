@@ -22,7 +22,7 @@ const PayPeriodsTable = ({ payPeriods, addPayPeriod, selectPayPeriod }) => {
             <tbody>
                 {payPeriods.map((pp) => {
                     return (
-                        <tr onDoubleClick={() => selectPayPeriod(pp)}>
+                        <tr key={pp.id} onDoubleClick={() => selectPayPeriod(pp)}>
                             <td>{pp.id}</td>
                             <td>{pp.startDate}</td>
                             <td>{pp.endDate}</td>

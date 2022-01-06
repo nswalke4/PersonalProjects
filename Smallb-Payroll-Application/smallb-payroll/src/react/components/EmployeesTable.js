@@ -1,6 +1,6 @@
 const EmployeesTable = ({ employees, addEmployee, selectEmployee }) => {
     return (
-        <table classname="employees-table">
+        <table className="employees-table">
             <caption>
                 <div className="tableHeader">Employees</div>
                 <button className="addButton" onClick={addEmployee}>
@@ -28,7 +28,7 @@ const EmployeesTable = ({ employees, addEmployee, selectEmployee }) => {
             <tbody>
                 {employees.map((emp) => {
                     return (
-                        <tr onDoubleClick={() => selectEmployee(emp)}>
+                        <tr key={emp.id} onDoubleClick={() => selectEmployee(emp)}>
                             <td>{emp.id}</td>
                             <td>{emp.firstName}</td>
                             <td>{emp.lastName}</td>
