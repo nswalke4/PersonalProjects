@@ -1,13 +1,11 @@
 import AccountHome from "./pages/AccountHome";
-import Goal from "./Goal";
+import Header from "./pages/Header";
 
 function App() {
-    const showGoal = false;
-
     return (
         <div className="App">
-            {showGoal && <Goal />}
-            {!showGoal && <AccountHome />}
+            <Header />
+            <AccountHome />
         </div>
     );
 }
