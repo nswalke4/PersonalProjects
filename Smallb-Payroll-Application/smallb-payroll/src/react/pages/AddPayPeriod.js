@@ -17,20 +17,23 @@ const AddPayPeriod = ({ employees, onClose }) => {
         console.log(newDate);
         chosenStartDate({ date: formatDate(newDate._d) });
     };
-
     const createNewPayPeriod = (e) => {
         e.preventDefault();
         console.log(startDate);
     };
 
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const changeIndex = (e) => {
-        setSelectedIndex(e.target.value);
+    const [selected] = useState(new Set());
+    const flipSelected = (index) => {
+        console.log(index);
+        if (selected.has(index)) {
+            selected.delete(index);
+        } else {
+            selected.add(index);
+        }
     };
-
-    const createNewEmployeeTimecard = (e) => {
+    const confirmSelected = (e) => {
         e.preventDefault();
-        console.log(employees[selectedIndex]);
+        console.log(selected);
     };
 
     return (
@@ -49,17 +52,21 @@ const AddPayPeriod = ({ employees, onClose }) => {
                 <input name="date-submit" type="submit" value="Add Pay Period" />
             </form>
             <br />
-            <form className="choose-emp" onSubmit={createNewEmployeeTimecard}>
-                Select Employee to Create Timecard for:{"  "}
-                <select name="select-emp" defaultValue={selectedIndex} onChange={changeIndex}>
-                    {employees.map((emp, index) => {
-                        return (
-                            <option key={emp.id} value={index}>
-                                {emp.firstName} {emp.lastName}
-                            </option>
-                        );
-                    })}
-                </select>
+            <form className="choose-emp" onSubmit={confirmSelected}>
+                Select which employees to create timecards for in this Pay Period:
+                {employees.map((emp, index) => {
+                    return (
+                        <label key={emp.id}>
+                            <input
+                                key={emp.id}
+                                type="checkbox"
+                                value={index}
+                                onChange={() => flipSelected(index)}
+                            />
+                            {emp.firstName} {emp.lastName}
+                        </label>
+                    );
+                })}
                 <input name="index-submit" type="submit" value="Add Timecard" />
             </form>
         </div>
