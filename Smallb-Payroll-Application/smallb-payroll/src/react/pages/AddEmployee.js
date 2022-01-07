@@ -22,7 +22,7 @@ const AddEmployee = ({ onClose }) => {
 
     return (
         <div className="add-employee">
-            <button onClick={onClose}>Close</button>
+            <button onClick={onClose}>Go Back</button>
             <br />
             <form className="add-employee-form" onSubmit={addNewEmployee}>
                 First Name:
