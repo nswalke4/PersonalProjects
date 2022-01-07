@@ -16,10 +16,11 @@ const AddEmployeeTimecard = ({ employee, index, onSave }) => {
     return (
         <div className="add-employee-timecard">
             {employee.id} - {employee.firstName} {employee.lastName}
-            <input type="button" onClick={save} value="Save Timecard" />
+            <input name="save-timecard-button" type="button" onClick={save} value="Save Timecard" />
             <br />
             Regular Hours:
             <input
+                name="reg-hrs-input"
                 type="number"
                 step="0.01"
                 placeholder={regularHours}
@@ -27,6 +28,7 @@ const AddEmployeeTimecard = ({ employee, index, onSave }) => {
             />
             Overtime Hours:
             <input
+                name="over-hrs-input"
                 type="number"
                 step="0.01"
                 placeholder={overtimeHours}
@@ -34,6 +36,7 @@ const AddEmployeeTimecard = ({ employee, index, onSave }) => {
             />
             Bonus Pay:
             <input
+                name="bonus-pay-input"
                 type="number"
                 step="0.01"
                 placeholder={bonusPay}
@@ -41,6 +44,7 @@ const AddEmployeeTimecard = ({ employee, index, onSave }) => {
             />
             Other Pay:
             <input
+                name="other-pay-input"
                 type="number"
                 step="0.01"
                 placeholder={otherPay}
