@@ -86,56 +86,53 @@ const AddPayPeriod = ({ employees, onClose }) => {
     };
 
     return (
-        <div>
-            <div className="add-pay-period">
-                <h3>Add Pay Period will go here...</h3>
-                <button onClick={onClose}>Cancel</button>
-                <br />
-                {!submittedPayPeriod && (
-                    <form className="add-pay-period-form" onSubmit={submitPayPeriodForm}>
-                        Start Date:{" "}
-                        <Datetime
-                            initialValue={startDate.date}
-                            dateFormat="MM/DD/YYYY"
-                            timeFormat={false}
-                            closeOnSelect={true}
-                            closeOnClickOutside={true}
-                            onChange={changeDate}
-                        />
-                        Select which employees to create timecards for in this Pay Period:
-                        {employees.map((emp, index) => {
-                            return (
-                                <EmployeeCheckbox
-                                    key={index}
-                                    employee={emp}
-                                    index={index}
-                                    onChange={flipSelected}
-                                />
-                            );
-                        })}
-                        <input name="index-submit" type="submit" value="Add Pay Period" />
-                    </form>
-                )}
-                {submittedPayPeriod && (
-                    <form
-                        className="add-employees-timecards-form"
-                        onSubmit={submitEmployeeTimecardsForm}
-                    >
-                        <h3>Pay Period Start Date: {startDate.date}</h3>
-                        {selectedEmployees().map((emp, index) => {
-                            return (
-                                <AddEmployeeTimecard
-                                    key={index}
-                                    employee={emp}
-                                    index={index}
-                                    onSave={updateTimecard}
-                                />
-                            );
-                        })}
-                        <input name="timecards-submit" type="submit" value="Add Timecards" />
-                    </form>
-                )}
-            </div>
+        <div className="add-pay-period">
+            <button onClick={onClose}>Go Back</button>
+            <br />
+            {!submittedPayPeriod && (
+                <form className="add-pay-period-form" onSubmit={submitPayPeriodForm}>
+                    Start Date:{" "}
+                    <Datetime
+                        initialValue={startDate.date}
+                        dateFormat="MM/DD/YYYY"
+                        timeFormat={false}
+                        closeOnSelect={true}
+                        closeOnClickOutside={true}
+                        onChange={changeDate}
+                    />
+                    Select which employees to create timecards for in this Pay Period:
+                    {employees.map((emp, index) => {
+                        return (
+                            <EmployeeCheckbox
+                                key={index}
+                                employee={emp}
+                                index={index}
+                                onChange={flipSelected}
+                            />
+                        );
+                    })}
+                    <input name="index-submit" type="submit" value="Add Pay Period" />
+                </form>
+            )}
+            {submittedPayPeriod && (
+                <form
+                    className="add-employees-timecards-form"
+                    onSubmit={submitEmployeeTimecardsForm}
+                >
+                    <h3>Pay Period Start Date: {startDate.date}</h3>
+                    {selectedEmployees().map((emp, index) => {
+                        return (
+                            <AddEmployeeTimecard
+                                key={index}
+                                employee={emp}
+                                index={index}
+                                onSave={updateTimecard}
+                            />
+                        );
+                    })}
+                    <input name="timecards-submit" type="submit" value="Add Timecards" />
+                </form>
+            )}
         </div>
     );
 };
