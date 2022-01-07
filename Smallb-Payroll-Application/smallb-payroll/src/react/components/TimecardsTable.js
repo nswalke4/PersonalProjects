@@ -1,12 +1,16 @@
-const TimecardsTable = ({ timecards }) => {
+const TimecardsTable = ({ timecards, isEmployee }) => {
+    const tcKey = (tc) => {
+        return `${tc.empId}:${tc.perId}`;
+    };
+
     return (
         <table className="timecards-table">
             <caption>
                 <div className="tableHeader">Timecards</div>
             </caption>
             <colgroup className="timecard-colgroup">
-                <col className="timecard-emp-id" />
-                <col className="timecard-pay-period-id" />
+                {!isEmployee && <col className="timecard-emp-id" />}
+                {isEmployee && <col className="timecard-pay-period-id" />}
                 <col className="timecard-reg-hrs" />
                 <col className="timecard-over-hrs" />
                 <col className="timecard-bonus-pay" />
@@ -14,8 +18,8 @@ const TimecardsTable = ({ timecards }) => {
             </colgroup>
             <thead>
                 <tr>
-                    <th>Employee ID</th>
-                    <th>Pay Period ID</th>
+                    {!isEmployee && <th>Employee ID</th>}
+                    {isEmployee && <th>Pay Period ID</th>}
                     <th>Regular Hours</th>
                     <th>Overtime Hours</th>
                     <th>Bonus Pay</th>
@@ -25,9 +29,9 @@ const TimecardsTable = ({ timecards }) => {
             <tbody>
                 {timecards.map((tc) => {
                     return (
-                        <tr>
-                            <td>{tc.empId}</td>
-                            <td>{tc.perId}</td>
+                        <tr key={tcKey(tc)}>
+                            {!isEmployee && <td>{tc.empId}</td>}
+                            {isEmployee && <td>{tc.perId}</td>}
                             <td>{tc.regHrs}</td>
                             <td>{tc.overHrs}</td>
                             <td>${tc.bonus.toFixed(2)}</td>
