@@ -17,10 +17,6 @@ const AddPayPeriod = ({ employees, onClose }) => {
         console.log(newDate);
         chosenStartDate({ date: formatDate(newDate._d) });
     };
-    const createNewPayPeriod = (e) => {
-        e.preventDefault();
-        console.log(startDate);
-    };
 
     const [selected] = useState(new Set());
     const flipSelected = (index) => {
@@ -31,8 +27,10 @@ const AddPayPeriod = ({ employees, onClose }) => {
             selected.add(index);
         }
     };
-    const confirmSelected = (e) => {
+
+    const submitPayPeriodForm = (e) => {
         e.preventDefault();
+        console.log(`Start Date: ${startDate.date}\nSelected Employees: `);
         console.log(selected);
     };
 
@@ -40,7 +38,9 @@ const AddPayPeriod = ({ employees, onClose }) => {
         <div className="add-pay-period">
             <h3>Add Pay Period will go here...</h3>
             <button onClick={onClose}>Close</button>
-            <form className="choose-start-date" onSubmit={createNewPayPeriod}>
+            <br />
+            <form className="add-pay-period-form" onSubmit={submitPayPeriodForm}>
+                Start Date:{" "}
                 <Datetime
                     initialValue={startDate.date}
                     dateFormat="MM/DD/YYYY"
@@ -49,10 +49,6 @@ const AddPayPeriod = ({ employees, onClose }) => {
                     closeOnClickOutside={true}
                     onChange={changeDate}
                 />
-                <input name="date-submit" type="submit" value="Add Pay Period" />
-            </form>
-            <br />
-            <form className="choose-emp" onSubmit={confirmSelected}>
                 Select which employees to create timecards for in this Pay Period:
                 {employees.map((emp, index) => {
                     return (
@@ -67,7 +63,7 @@ const AddPayPeriod = ({ employees, onClose }) => {
                         </label>
                     );
                 })}
-                <input name="index-submit" type="submit" value="Add Timecard" />
+                <input name="index-submit" type="submit" value="Add Pay Period" />
             </form>
         </div>
     );
