@@ -1,5 +1,5 @@
-import AccountHome from "./pages/AccountHome";
-import Header from "./pages/Header";
+import AccountHome from "./containers/AccountHome";
+import Header from "./containers/Header";
 
 /* The main conatiner of the Smallb Payroll Application. */
 function App() {
