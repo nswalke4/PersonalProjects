@@ -1,12 +1,15 @@
 import { useState } from "react";
 
+/* The Add Employee container contains the creation of a new Employee to be added into the Account. */
 const AddEmployee = ({ onClose }) => {
+    // New Employee Form Information
     const [firstName, setFirstName] = useState(" ");
     const [lastName, setLastName] = useState(" ");
     const [phoneNum, setPhoneNum] = useState(" ");
     const [type, setType] = useState("HOURLY");
     const [payRate, setPayRate] = useState(" ");
 
+    // Method to add a new employee into the database (currently just log's the object)
     const addNewEmployee = (e) => {
         e.preventDefault();
         const employee = {
@@ -20,6 +23,8 @@ const AddEmployee = ({ onClose }) => {
         console.log(employee);
     };
 
+    // Basic form that updates the New Employee Information objects as they are adjusted in the form.  The form does require
+    // that everything except the phone number is included.
     return (
         <div className="add-employee">
             <button onClick={onClose}>Go Back</button>

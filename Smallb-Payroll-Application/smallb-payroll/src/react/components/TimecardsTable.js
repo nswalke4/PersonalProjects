@@ -1,4 +1,10 @@
+/* The Timecards Table component creates a table from the given timecards array object.  This component is used by both the 
+EmployeeInfo and PayPeriodInfo components, and so includes a parameter named "isEmployee" that is set to either true or
+false, depending on if the table is being creted inside the EmployeeInfo component or not.  This just selects whether the
+pay period id or employee id column is included in the table. */
 const TimecardsTable = ({ timecards, isEmployee }) => {
+    // This method takes the employee id and pay period id of a timecard object and combines them to create a unique id to
+    // be used as the key for each row.
     const tcKey = (tc) => {
         return `${tc.empId}:${tc.perId}`;
     };

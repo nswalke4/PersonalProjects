@@ -1,6 +1,8 @@
 import TimecardsTable from "../components/TimecardsTable";
 import { useState } from "react";
 
+/* The Employee Info container presents the user with the employee's information and the timecards that are attached to the
+employee's ID. */
 const EmployeeInfo = ({ onClose, employee }) => {
     const [timecards] = useState([
         {
@@ -29,6 +31,7 @@ const EmployeeInfo = ({ onClose, employee }) => {
         },
     ]);
 
+    // Presents the user with the employee's information and the table of all of the employee's timecards.
     return (
         <div className="employee-info">
             <p>Employee ID: {employee.id}</p>

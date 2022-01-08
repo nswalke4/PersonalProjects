@@ -1,3 +1,6 @@
+/* The Employees Table component creates a table from the given employees array object, and provides the ability to choose 
+an employee in the table by double clicking it to view more information of that employee.  This component is used by the 
+Account Tables component. */
 const EmployeesTable = ({ employees, addEmployee, selectEmployee }) => {
     return (
         <table className="employees-table">

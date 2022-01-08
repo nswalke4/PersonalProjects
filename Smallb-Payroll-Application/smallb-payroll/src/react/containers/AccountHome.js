@@ -5,6 +5,10 @@ import EmployeeInfo from "./EmployeeInfo";
 import PayPeriodInfo from "./PayPeriodInfo";
 import { useState } from "react";
 
+/* The Account Home container contains information about the Account, a list of the Account's Employees and Pay Periods, 
+and the ability to add new employees or pay periods to the Account.  This Home Page contains the AccountTables object, and 
+the functions that provide the ability to allow the primary view to be changed to either the Employee/PayPeriod information 
+page, or to add new employees or pay periods. */
 const AccountHome = () => {
     // Account Object
     const account = {
@@ -103,6 +107,8 @@ const AccountHome = () => {
         });
     };
 
+    // Checks the above "view" objects and determines which "view" to present.  Initially presents the "AccountTables"
+    // unless the user requests to view a specific employee or pay period, or requests to add a new employee or pay period
     return (
         <div className="account-home">
             <h2>Test Account: {account.sub}</h2>

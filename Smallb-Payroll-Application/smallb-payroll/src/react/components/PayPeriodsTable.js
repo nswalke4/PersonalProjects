@@ -1,3 +1,6 @@
+/* The Pay Period Table component creates a table from the given pay periods array object, and provides the ability to 
+choose a pay period in the table by double clicking it to view more information of that pay period.  This component is used 
+by the Account Tables component. */
 const PayPeriodsTable = ({ payPeriods, addPayPeriod, selectPayPeriod }) => {
     return (
         <table className="pay-periods-table">

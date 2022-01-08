@@ -1,18 +1,24 @@
 import { useState } from "react";
 import { FcApproval, FcCancel } from "react-icons/fc";
 
+/* The Add Employee Timecard component contains the form to gather the necessary infromation to create a new timecard for
+the given employee. */
 const AddEmployeeTimecard = ({ employee, index, onSave }) => {
+    // The New Timecard information objects
     const [regularHours, setRegularHours] = useState(0);
     const [overtimeHours, setOvertimeHours] = useState(0);
     const [bonusPay, setBonusPay] = useState(0);
     const [otherPay, setOtherPay] = useState(0);
 
+    // Object that represents whether the form has been submitted and the timecard information has been "saved"
     const [saved, setSaved] = useState(false);
     const save = () => {
         setSaved(true);
         onSave(index, regularHours, overtimeHours, bonusPay, otherPay);
     };
 
+    // Presents the user with a form to fill in the information about the given employee's timecard, and includes an icon
+    // that informs the user if the given timecard has been "saved".
     return (
         <div className="add-employee-timecard">
             {employee.id} - {employee.firstName} {employee.lastName}

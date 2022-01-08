@@ -1,6 +1,8 @@
 import TimecardsTable from "../components/TimecardsTable";
 import { useState } from "react";
 
+/* The Pay Period Info container conatins all of the information about the Pay Period and all of the timecards that are 
+attached to the given pay period's id. */
 const PayPeriodInfo = ({ onClose, payPeriod }) => {
     const [timecards] = useState([
         {
@@ -29,6 +31,7 @@ const PayPeriodInfo = ({ onClose, payPeriod }) => {
         },
     ]);
 
+    // Presents the user with the pay period's information and the table of all of the pay period's timecards.
     return (
         <div className="pay-period-info">
             <p>Pay Period ID: {payPeriod.id}</p>
