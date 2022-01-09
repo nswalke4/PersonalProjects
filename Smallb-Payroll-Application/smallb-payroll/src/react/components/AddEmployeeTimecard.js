@@ -14,7 +14,7 @@ const AddEmployeeTimecard = ({ employee, index, onSave }) => {
     const [saved, setSaved] = useState(false);
     const save = () => {
         setSaved(true);
-        onSave(index, regularHours, overtimeHours, bonusPay, otherPay);
+        onSave(index, employee.id, regularHours, overtimeHours, bonusPay, otherPay);
     };
 
     // Presents the user with a form to fill in the information about the given employee's timecard, and includes an icon

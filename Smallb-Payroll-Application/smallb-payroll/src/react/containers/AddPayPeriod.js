@@ -7,7 +7,7 @@ import Datetime from "react-datetime";
 ability to choose which employees to create timecards for during this pay period (and then the ability to create those
 timecards).  This container contains the methods to switch the view to the "create timecards" view after the new pay period
 and the employees to create timecards for during that period have been chosen. */
-const AddPayPeriod = ({ employees, onClose }) => {
+const AddPayPeriod = ({ addPayPeriod, employees, onClose }) => {
     // Basic method to ensure that the date is provided in the requested format ("MM-DD-YYYY")
     const formatDate = (date) => {
         return `${(date.getMonth() + 1).toString().padStart(2, "0")}/${date
@@ -55,34 +55,31 @@ const AddPayPeriod = ({ employees, onClose }) => {
     // and then prepares to switch to the timecard creation view
     const submitPayPeriodForm = (e) => {
         e.preventDefault();
+        const payPeriod = {
+            id: "testId",
+            startDate: startDate.date,
+            endDate: getEndDate(startDate.date),
+        };
+        addPayPeriod(payPeriod);
         console.log(`Start Date: ${startDate.date}\nSelected Employees: `);
         console.log(selected);
-        setupTimecards();
         flipSumbitted();
+    };
+
+    // Method only used during "useState" testing -- collecting end date info will be done by the database
+    const getEndDate = (startDate) => {
+        const newDate = new Date(startDate);
+        newDate.setDate(newDate.getDate() + 6);
+        return formatDate(newDate);
     };
 
     // The array of new timecards to be added to the database
     const [timecards, setTimecards] = useState([]);
-    // Creates a set of new timecards for each employee id to be added to the timecards array
-    const setupTimecards = () => {
-        selectedEmployees().forEach((emp) => {
-            const newTimecards = [...timecards];
-            newTimecards.push({
-                empId: emp.id,
-                regHrs: 0,
-                overHrs: 0,
-                bonus: 0,
-                other: 0,
-                saved: false,
-            });
-            setTimecards(newTimecards);
-        });
-    };
     // Updates the given timecard (given by its index) to the given values
-    const updateTimecard = (index, regHrs, overHrs, bonus, other) => {
+    const updateTimecard = (index, empId, regHrs, overHrs, bonus, other) => {
         const newTimecards = [...timecards];
         newTimecards[index] = {
-            empId: newTimecards[index].empId,
+            empId: empId,
             regHrs: regHrs,
             overHrs: overHrs,
             bonus: bonus,

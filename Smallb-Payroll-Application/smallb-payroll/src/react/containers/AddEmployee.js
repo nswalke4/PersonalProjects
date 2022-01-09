@@ -1,18 +1,19 @@
 import { useState } from "react";
 
 /* The Add Employee container contains the creation of a new Employee to be added into the Account. */
-const AddEmployee = ({ onClose }) => {
+const AddEmployee = ({ addEmployee, onClose }) => {
     // New Employee Form Information
     const [firstName, setFirstName] = useState(" ");
     const [lastName, setLastName] = useState(" ");
-    const [phoneNum, setPhoneNum] = useState(" ");
+    const [phoneNum, setPhoneNum] = useState("-");
     const [type, setType] = useState("HOURLY");
-    const [payRate, setPayRate] = useState(" ");
+    const [payRate, setPayRate] = useState(0);
 
     // Method to add a new employee into the database (currently just log's the object)
     const addNewEmployee = (e) => {
         e.preventDefault();
         const employee = {
+            id: "testId",
             firstName: firstName,
             lastName: lastName,
             phoneNum: phoneNum,
@@ -21,6 +22,8 @@ const AddEmployee = ({ onClose }) => {
         };
         console.log("Add new employee pressed");
         console.log(employee);
+        addEmployee(employee);
+        onClose();
     };
 
     // Basic form that updates the New Employee Information objects as they are adjusted in the form.  The form does require
@@ -80,7 +83,7 @@ const AddEmployee = ({ onClose }) => {
                     type="number"
                     step="0.01"
                     placeholder="7.25"
-                    onChange={(e) => setPayRate(e.target.value)}
+                    onChange={(e) => setPayRate(e.target.valueAsNumber)}
                     required
                 />
                 <input name="add-employee-submit" type="submit" value="Add Employee" />

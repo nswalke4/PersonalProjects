@@ -11,51 +11,63 @@ the functions that provide the ability to allow the primary view to be changed t
 page, or to add new employees or pay periods. */
 const AccountHome = () => {
     // Account Object
-    const account = {
-        sub: "Testing-Sub-123",
-        employees: [
-            {
-                id: "1-E-0001",
-                firstName: "TestA",
-                lastName: "EmployeeA",
-                phoneNum: "-",
-                type: "HOURLY",
-                payRate: 7.25,
-            },
-            {
-                id: "1-E-0002",
-                firstName: "TestB",
-                lastName: "EmployeeB",
-                phoneNum: "-",
-                type: "HOURLY",
-                payRate: 9.5,
-            },
-            {
-                id: "1-E-0003",
-                firstName: "TestC",
-                lastName: "EmployeeC",
-                phoneNum: "-",
-                type: "SALARY",
-                payRate: 525.25,
-            },
-        ],
-        payPeriods: [
-            {
-                id: "1-P-0001",
-                startDate: "11/28/2021",
-                endDate: "12/04/2021",
-            },
-            {
-                id: "1-P-0002",
-                startDate: "12/05/2021",
-                endDate: "12/11/2021",
-            },
-            {
-                id: "1-P-0003",
-                startDate: "12/12/2021",
-                endDate: "12/18/2021",
-            },
-        ],
+    const accountSub = "Testing-Sub-123";
+
+    // Employees Array
+    const [employees, setEmployees] = useState([
+        {
+            id: "1-E-0001",
+            firstName: "TestA",
+            lastName: "EmployeeA",
+            phoneNum: "-",
+            type: "HOURLY",
+            payRate: 7.25,
+        },
+        {
+            id: "1-E-0002",
+            firstName: "TestB",
+            lastName: "EmployeeB",
+            phoneNum: "-",
+            type: "HOURLY",
+            payRate: 9.5,
+        },
+        {
+            id: "1-E-0003",
+            firstName: "TestC",
+            lastName: "EmployeeC",
+            phoneNum: "-",
+            type: "SALARY",
+            payRate: 525.25,
+        },
+    ]);
+    const addEmployee = (emp) => {
+        const newEmployees = [...employees];
+        newEmployees.push(emp);
+        setEmployees(newEmployees);
+    };
+
+    // Pay Periods Array
+    const [payPeriods, setPayPeriods] = useState([
+        {
+            id: "1-P-0001",
+            startDate: "11/28/2021",
+            endDate: "12/04/2021",
+        },
+        {
+            id: "1-P-0002",
+            startDate: "12/05/2021",
+            endDate: "12/11/2021",
+        },
+        {
+            id: "1-P-0003",
+            startDate: "12/12/2021",
+            endDate: "12/18/2021",
+        },
+    ]);
+    const addPayPeriod = (payPeriod) => {
+        const newPayPeriods = [...payPeriods];
+        newPayPeriods.push(payPeriod);
+        setPayPeriods(newPayPeriods);
     };
 
     // Methods to Adjust Current View
@@ -111,10 +123,14 @@ const AccountHome = () => {
     // unless the user requests to view a specific employee or pay period, or requests to add a new employee or pay period
     return (
         <div className="account-home">
-            <h2>Test Account: {account.sub}</h2>
-            {addEmpActive && <AddEmployee onClose={swapAddEmpState} />}
+            <h2>Test Account: {accountSub}</h2>
+            {addEmpActive && <AddEmployee addEmployee={addEmployee} onClose={swapAddEmpState} />}
             {addPayPerActive && (
-                <AddPayPeriod employees={account.employees} onClose={swapAddPayPerState} />
+                <AddPayPeriod
+                    addPayPeriod={addPayPeriod}
+                    employees={employees}
+                    onClose={swapAddPayPerState}
+                />
             )}
             {empInfo.active && <EmployeeInfo onClose={resetEmp} employee={empInfo.employee} />}
             {payPerInfo.active && (
@@ -122,10 +138,10 @@ const AccountHome = () => {
             )}
             {!addEmpActive && !addPayPerActive && !empInfo.active && !payPerInfo.active && (
                 <AccountTables
-                    employees={account.employees}
+                    employees={employees}
                     addEmp={swapAddEmpState}
                     empInfo={chooseEmp}
-                    payPeriods={account.payPeriods}
+                    payPeriods={payPeriods}
                     addPer={swapAddPayPerState}
                     perInfo={choosePayPer}
                 />
