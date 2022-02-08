@@ -6,11 +6,8 @@
 
 # Batch file
 *.bat
+*.sh
+/bin/
 
 ### VS Code ###
 .vscode
-
-### Gradle ###
-.gradle
-/build/
-/bin/
