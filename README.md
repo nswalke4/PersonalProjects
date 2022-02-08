@@ -15,3 +15,7 @@ A basic web-application developed using ReactJS.
 ### Smallb Payroll Application
 
 A full-stack application using a MySQL Database, Java-developed back-end, and ReactJS-developed user interface (using AWS for the database storage, user credentials, and web-hosting).
+
+### Sudoku Solver
+
+A basic command-line application built to solve Sudoku puzzles using Java.

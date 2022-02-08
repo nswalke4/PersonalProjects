@@ -1,0 +1,3 @@
+apply plugin: 'java'
+
+mainClassName = "main.java.nswalke4.sudosolve.Main"
