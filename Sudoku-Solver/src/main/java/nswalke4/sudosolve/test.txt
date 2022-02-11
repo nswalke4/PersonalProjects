@@ -1,0 +1,15 @@
+First off, we need to discuss some \"rules\". The importing
+will occur row-by-row, with an entire row being brought in
+at one time. An entire row should be input before pressing
+the 'enter' key. Inside each row, you may separate out the
+numbers by either spaces or commas. All of our values that
+are unknown should be represented by a 0. Pressing 'enter'
+(or 'return') will 'parse' that row and inform you of any
+issues. If you see the '>>', you will know that the
+previous row has been accepted and you can input the next
+row. If the previous row was unsuccessful for any reason,
+the program will inform you, and you will have to input
+that row again. After all 9 rows have been input, the
+puzzle will be presented to you to ensure that it is
+correct.  At that point, you will have the ability to
+choose an incorrect cell and adjust it directly.
