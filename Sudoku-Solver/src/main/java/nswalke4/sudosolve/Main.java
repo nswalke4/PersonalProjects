@@ -8,21 +8,35 @@ package nswalke4.sudosolve;
  * command line or by adjusting the import file).
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.02
+ * @version 1.03
  */
 public class Main {
 
-    /** The basic size of a Sudoku puzzle is 9x9, with numbers 1-9 avaliable for use. */
-    private static final int SIZE = 9;
-
     public static void main(String[] args) {
         System.out.println("Welcome to the Sudoku Solver!");
-        System.out.println("\nTesting the solver algorithm...");
-        Solver solve = new Solver();
-        solve.printPuzzle();
-        solve.solvePuzzle();
-        solve.printPuzzle();
-        System.out.println("This concludes the testing of the solver algorithm.");
+        
+        boolean testSolver = true;
+        boolean testParser = true;
+
+        if (testSolver) {
+            System.out.println("\nTesting the solver algorithm...");
+            Solver solve = new Solver();
+            solve.printPuzzle();
+            solve.solvePuzzle();
+            solve.printPuzzle();
+            System.out.println("This concludes the testing of the solver algorithm.");
+        }
+
+        if (testParser) {
+            System.out.println("\nTesting the parser...");
+            FileParser parser = new FileParser();
+            Solver solveParsed = new Solver(parser.getParsedBoard());
+            solveParsed.printPuzzle();
+            solveParsed.solvePuzzle();
+            solveParsed.printPuzzle();
+            System.out.println("This concludes the testing of the parser.");
+        }
+
         System.out.println("Exiting...");
     }
 }

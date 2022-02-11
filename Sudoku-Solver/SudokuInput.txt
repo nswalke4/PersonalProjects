@@ -1,0 +1,28 @@
+# Sudoku Solver - Puzzle Input
+
+# In this file, you can change the values below
+# to match the puzzle you would like to be solved.
+
+# NOTE: Please do not modify this file in any way
+#       other than changing the values as needed.
+#       The formatting style of this file has
+#       been created specifically to work with
+#       the Sudoku Solver program, and adjusting
+#       the formatting might cause errors or
+#       incorrect results.
+
+# To mark a square as unknown,
+# use either a '0' or an 'x'
+-------------------
+|8,0,0|9,3,0|0,0,2|
+|0,0,9|0,0,0|0,4,0|
+|7,0,2|1,0,0|9,6,0|
+-------------------
+|2,0,0|0,0,0|0,9,0|
+|0,6,0|0,0,0|0,7,0|
+|0,7,0|0,0,6|0,0,5|
+-------------------
+|0,2,7|0,0,8|4,0,6|
+|0,3,0|0,0,0|5,0,0|
+|5,0,0|0,6,2|0,0,8|
+-------------------
