@@ -1,6 +1,7 @@
 package nswalke4.sudosolve;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -63,6 +64,10 @@ public class FileParser {
     private void setCell(int row, int col, int val) {
         this.parsedBoard[row][col] = val;
     }
+    
+    private void setNullBoard() {
+        this.parsedBoard = null;
+    }
 
     /**
      * Get's the two dimensional integer array representation of the Sudoku
@@ -92,20 +97,25 @@ public class FileParser {
     private void parseFile() {
         BufferedReader reader;
         int row = 0;
-        try {
-            reader = new BufferedReader(new FileReader(fileName));
-            String line = reader.readLine();
-            while (line != null) {
-                if ((!line.isEmpty()) && (line.charAt(0) == '|')) {
-                    this.parseString(line, row);
-                    row++;
+        File test = new File(fileName);
+        if (test.exists()) {
+            try {
+                reader = new BufferedReader(new FileReader(fileName));
+                String line = reader.readLine();
+                while (line != null) {
+                    if ((!line.isEmpty()) && (line.charAt(0) == '|')) {
+                        this.parseString(line, row);
+                        row++;
+                    }
+                    line = reader.readLine();
                 }
-                line = reader.readLine();
+                reader.close();
+            } catch (IOException ioex) {
+                System.out.println("[ERROR] Something went wrong with the file reader...");
+                ioex.printStackTrace();
             }
-            reader.close();
-        } catch (IOException ioex) {
-            System.out.println("[ERROR] Something went wrong with the file reader...");
-            ioex.printStackTrace();
+        } else {
+            this.setNullBoard();
         }
     }
 

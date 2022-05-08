@@ -15,6 +15,23 @@ import java.util.concurrent.TimeUnit;
  */
 public class Main {
 
+    private static void solveExecution(FileParser parser) {
+        Solver solve = new Solver(parser.getParsedBoard());
+        System.out.println("\n--------------------\n Collected Puzzle:");
+        solve.printPuzzle();
+        System.out.println("--------------------\n\n~~SOLVING~~");
+        solve.solvePuzzle();
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException ie) {
+            System.out.println("|NO TIMEOUT|");
+        }
+
+        System.out.println("\n--------------------\n   Solved Puzzle:");
+        solve.printPuzzle();
+        System.out.println("--------------------");
+    }
+
     public static void main(String[] args) {
         System.out.println("Welcome to the Sudoku Solver!");
         
@@ -23,12 +40,11 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         String input;
         FileParser parser;
-        Solver solve;
 
         // Testing the "Solver" portion of the project
         if (testSolver) {
             System.out.println("\nTesting the solver algorithm...");
-            solve = new Solver();
+            Solver solve = new Solver();
             solve.printPuzzle();
             solve.solvePuzzle();
             solve.printPuzzle();
@@ -39,7 +55,7 @@ public class Main {
         if (testParser) {
             System.out.println("\nTesting the parser...");
             parser = new FileParser();
-            solve = new Solver(parser.getParsedBoard());
+            Solver solve = new Solver(parser.getParsedBoard());
             solve.printPuzzle();
             solve.solvePuzzle();
             solve.printPuzzle();
@@ -107,27 +123,24 @@ public class Main {
                         System.out.println("\nOriginal file chosen to be imported");
                         parser = new FileParser();
                     }
-                    solve = new Solver(parser.getParsedBoard());
-                    System.out.println("\n--------------------\n Collected Puzzle:");
-                    solve.printPuzzle();
-                    System.out.println("--------------------\n\n~~SOLVING~~");
-                    solve.solvePuzzle();
-                    try {
-                        TimeUnit.SECONDS.sleep(3);
-                    } catch (InterruptedException ie) {
-                        System.out.println("|NO TIMEOUT|");
+                    if (parser.getParsedBoard() != null) {
+                        solveExecution(parser);
+                    } else {
+                        System.out.println("\n     ~! FAILURE !~");
+                        System.out.println("Unable to properly parse the puzzle from the given file.");
+                        System.out.println("\nAre you sure that you typed the file name in correctly?");
+                        System.out.println("Is the file path relative to the root folder of this project?");
                     }
-
-                    System.out.println("\n--------------------\n   Solved Puzzle:");
-                    solve.printPuzzle();
-                    System.out.println("--------------------");
 
                 } else {
                     System.out.println("\nOkay, so we are going to do this the hard way it seems... :)\n");
                     String instructions = "----------------------------------------------------------\n First off, we need to discuss some \"rules\". The importing\nwill occur row-by-row, with an entire row being brought in\nat one time. An entire row should be input before pressing\nthe 'enter' key. Inside each row, you may separate out the\nnumbers by either spaces or commas. All of our values that\nare unknown should be represented by a 0. Pressing 'enter'\n (or 'return') will 'parse' that row and inform you of any\n   issues. If you see the '>>', you will know that the\n previous row has been accepted and you can input the next\n row. If the previous row was unsuccessful for any reason,\n  the program will inform you, and you will have to input\n   that row again. After all 9 rows have been input, the\n   puzzle will be presented to you to ensure that it is\n   correct. At that point, you will have the ability to\n     choose an incorrect cell and adjust it directly.\n----------------------------------------------------------";
                     System.out.println(instructions);
                     System.out.println("\nOkay, so let's start by having you input the first row:");
+                    // Need to finish this execution...
                 }
+
+
                 System.out.println("\n\n=============================================");
                 System.out.println("Press 'Y' to continue accessing the solver.");
                 System.out.println("Press any other key to exit.");
