@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Main {
 
-    private static void solveExecution(FileParser parser) {
+    private static void solveExecution(PuzzleParser parser) {
         Solver solve = new Solver(parser.getParsedBoard());
         System.out.println("\n--------------------\n Collected Puzzle:");
         solve.printPuzzle();
@@ -39,7 +39,7 @@ public class Main {
         boolean testParser = false;
         Scanner scan = new Scanner(System.in);
         String input;
-        FileParser parser;
+        PuzzleParser parser;
 
         // Testing the "Solver" portion of the project
         if (testSolver) {
@@ -134,10 +134,8 @@ public class Main {
 
                 } else {
                     System.out.println("\nOkay, so we are going to do this the hard way it seems... :)\n");
-                    String instructions = "----------------------------------------------------------\n First off, we need to discuss some \"rules\". The importing\nwill occur row-by-row, with an entire row being brought in\nat one time. An entire row should be input before pressing\nthe 'enter' key. Inside each row, you may separate out the\nnumbers by either spaces or commas. All of our values that\nare unknown should be represented by a 0. Pressing 'enter'\n (or 'return') will 'parse' that row and inform you of any\n   issues. If you see the '>>', you will know that the\n previous row has been accepted and you can input the next\n row. If the previous row was unsuccessful for any reason,\n  the program will inform you, and you will have to input\n   that row again. After all 9 rows have been input, the\n   puzzle will be presented to you to ensure that it is\n   correct. At that point, you will have the ability to\n     choose an incorrect cell and adjust it directly.\n----------------------------------------------------------";
-                    System.out.println(instructions);
-                    System.out.println("\nOkay, so let's start by having you input the first row:");
-                    // Need to finish this execution...
+                    parser = new InputParser(scan);
+                    solveExecution(parser);
                 }
 
 

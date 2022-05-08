@@ -14,9 +14,9 @@ import java.io.IOException;
  * or in the README included in this project.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.02
+ * @version 1.03
  */
-public class FileParser {
+public class FileParser implements PuzzleParser {
 
     /////////////////////////////////////////////////////////////////////////////////////
     //// Class Variables
@@ -65,18 +65,12 @@ public class FileParser {
         this.parsedBoard[row][col] = val;
     }
     
+    /**
+     * Set's the parsedBoard to null, signifying there was an issue with the
+     * given file.
+     */
     private void setNullBoard() {
         this.parsedBoard = null;
-    }
-
-    /**
-     * Get's the two dimensional integer array representation of the Sudoku
-     * puzzle that was parsed from the "SudokuInput.txt" file.
-     * 
-     * @return the two dimensional integer array parsed from the file
-     */
-    public int[][] getParsedBoard() {
-        return this.parsedBoard;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -113,6 +107,7 @@ public class FileParser {
             } catch (IOException ioex) {
                 System.out.println("[ERROR] Something went wrong with the file reader...");
                 ioex.printStackTrace();
+                this.setNullBoard();
             }
         } else {
             this.setNullBoard();
@@ -143,5 +138,19 @@ public class FileParser {
                 }
             }
         }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////
+    //// Interface Implementation Method Override
+
+    /**
+     * Get's the two dimensional integer array representation of the Sudoku
+     * puzzle that was parsed from the given file.
+     * 
+     * @return the two dimensional integer array parsed from the file
+     */
+    @Override
+    public int[][] getParsedBoard() {
+        return this.parsedBoard;
     }
 }
