@@ -11,7 +11,8 @@ import java.io.IOException;
  * they wish to import, the file that is being imported must match the style
  * of the original in order to be properly parsed.  More information about the
  * accepted format of the import files can be found in the parseFile method
- * or in the README included in this project.
+ * or in the README included in this project.  This class implements the 
+ * PuzzleParser interface to be able to present the collected puzzle board.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
  * @version 1.03

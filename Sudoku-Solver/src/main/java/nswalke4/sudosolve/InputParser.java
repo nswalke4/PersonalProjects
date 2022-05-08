@@ -2,6 +2,17 @@ package nswalke4.sudosolve;
 
 import java.util.Scanner;
 
+/**
+ * The InputParser class is used to parse the user's input to gather the Sudoku
+ * board that they wish to be solved.  Any of the information related to collecting
+ * user input in order to create a Sudoku board is handled in this class, including
+ * the presentation of instructions, as well as the collection and verification of
+ * the puzzle the user wishes to have solved.  This class implements the PuzzleParser
+ * interface to be able to present the collected puzzle board.
+ * 
+ * @author Nicholas Walker (nswalke4@asu.edu)
+ * @version 1.01
+ */
 public class InputParser implements PuzzleParser {
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -20,8 +31,17 @@ public class InputParser implements PuzzleParser {
     //// Constructors
 
     /**
-     * The constructor for the InputParser that takes instantiates the parsedBoard array before
-     * executing the parsing method.
+     * Basic constructor for the InputParser class that uses the "System.in" as the Scanner,
+     * and then using the other constructor call to instantiate the object.
+     */
+    public InputParser() {
+        this(new Scanner(System.in));
+    }
+
+    /**
+     * The constructor for the InputParser that takes instantiates the parsedBoard array 
+     * before executing the parsing method, using the given scanner as a way to collect
+     * the user's input.
      * 
      * @param pScan the scanner being used to collect the user input
      */
@@ -34,6 +54,13 @@ public class InputParser implements PuzzleParser {
     /////////////////////////////////////////////////////////////////////////////////////
     //// Supporting Methods (private)
 
+    /**
+     * This method executes the parsing algorithm used to collect the user input in order
+     * to create a 2d array representation of the Sudoku Puzzle that the user wishes to
+     * solve.  This algorithm collects each line one at a time, allows the user to request
+     * to review the instructions at any time, and allows the user to make any modifications
+     * to any rows before finalizing their puzzle.
+     */
     private void executeParsing() {
 
         System.out.println(instructions);

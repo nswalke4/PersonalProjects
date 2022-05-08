@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * command line or by adjusting the import file).
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.05
+ * @version 1.06
  */
 public class Main {
 
