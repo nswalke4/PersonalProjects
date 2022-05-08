@@ -11,7 +11,7 @@ import java.util.Scanner;
  * interface to be able to present the collected puzzle board.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.01
+ * @version 1.02
  */
 public class InputParser implements PuzzleParser {
 
@@ -55,18 +55,132 @@ public class InputParser implements PuzzleParser {
     //// Supporting Methods (private)
 
     /**
+     * Collects data from the user to add to the given row.  This method also checks that
+     * the users passes valid data to be parsed, and will continue to loop until the user
+     * presents valid data.
+     */
+    private void collectRow(int row) {
+        System.out.println("\nPlease input the data for row " + (i+1));
+        System.out.print(">>");
+        String input = this.scan.nextLine();
+        // need to add the row into the parsedBoard
+    }
+
+    /**
      * This method executes the parsing algorithm used to collect the user input in order
      * to create a 2d array representation of the Sudoku Puzzle that the user wishes to
-     * solve.  This algorithm collects each line one at a time, allows the user to request
-     * to review the instructions at any time, and allows the user to make any modifications
-     * to any rows before finalizing their puzzle.
+     * solve.  This algorithm collects each line one at a time and then allows the user 
+     * to check the parsed puzzle and make any modifications to any rows before finalizing
+     * the parsed puzzle.
      */
     private void executeParsing() {
-
         System.out.println(instructions);
-        System.out.println("\nOkay, so let's start by having you input the first row:");
-        // Need to finish this execution...
+        for (int i=0; i < 9; i++) {
+            this.collectRow(i);
+        }
+        System.out.println("\n----------------------------------------------------------------");
+        System.out.println("  Okay, now that all rows have been input, its time to review.");
+        System.out.println("You will have the opportunity to fix any cell that is incorrect.");
+        System.out.println("----------------------------------------------------------------");
+        this.review();
+        System.out.println("\n-----------------------------------------------------");
+        System.out.println("Excellent!  Your puzzle has been successfully parsed.");
+        System.out.println("-----------------------------------------------------");
         
+    }
+
+    /**
+     * Presents the current parsed board with each row labeled to help the user select
+     * a row that might have incorrect data.
+     */
+    private void presentCurrentBoard() {
+        for (int i=0; i < 9; i++) {
+            if (i%3 == 0) {
+                System.out.println("");
+            }
+            System.out.print("Row " + (i+1) + ": ");
+            for (int j=0; j < 9; j++) {
+                if (j%3 == 0) {
+                    System.out.print("| ");
+                }
+                System.out.print(this.parsedBoard[i][j] + " ");
+            }
+            System.out.println("|");
+        }
+    }
+
+    /**
+     * This method will continually loop, allowing the user to modify any row that might
+     * have invalid data.  If the user detect's a row that has invalid data, this method
+     * allows the user to select that row and be able to update that row in the system
+     */
+    private void review() {
+        boolean boardInvalid = true;
+        while (boardInvalid) {
+            this.presentCurrentBoard();
+            boolean invalidInput = true;
+            while (invalidInput) {
+                System.out.println("Enter the number of the row that needs to be corrected.");
+                System.out.println("Enter '0' if all rows are correct.");
+                System.out.print(">>");
+                String input = this.scan.nextLine();
+                switch (input) {
+                    case "0":
+                        invalidInput = false;
+                        boardInvalid = false;
+                        System.out.println("  ~~ User: [ALL ROWS ARE CORRECT]");
+                        break;
+                    case "1":
+                        invalidInput = false;
+                        System.out.println("  ~~ User: [UPDATE ROW 1]");
+                        this.collectRow(0);
+                        break;
+                    case "2":
+                        invalidInput = false;
+                        System.out.println("  ~~ User: [UPDATE ROW 2]");
+                        this.collectRow(1);
+                        break;
+                    case "3":
+                        invalidInput = false;
+                        System.out.println("  ~~ User: [UPDATE ROW 3]");
+                        this.collectRow(2);
+                        break;
+                    case "4":
+                        invalidInput = false;
+                        System.out.println("  ~~ User: [UPDATE ROW 4]");
+                        this.collectRow(3);
+                        break;
+                    case "5":
+                        invalidInput = false;
+                        System.out.println("  ~~ User: [UPDATE ROW 5]");
+                        this.collectRow(4);
+                        break;
+                    case "6":
+                        invalidInput = false;
+                        System.out.println("  ~~ User: [UPDATE ROW 6]");
+                        this.collectRow(5);
+                        break;
+                    case "7":
+                        invalidInput = false;
+                        System.out.println("  ~~ User: [UPDATE ROW 7]");
+                        this.collectRow(6);
+                        break;
+                    case "8":
+                        invalidInput = false;
+                        System.out.println("  ~~ User: [UPDATE ROW 8]");
+                        this.collectRow(7);
+                        break;
+                    case "9":
+                        invalidInput = false;
+                        System.out.println("  ~~ User: [UPDATE ROW 9]");
+                        this.collectRow(8);
+                        break;
+                    default:
+                        System.out.println("\nInvalid user input!");
+                        break;
+                }
+            }
+        }
     }
 
     /////////////////////////////////////////////////////////////////////////////////////
