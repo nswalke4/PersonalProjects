@@ -13,7 +13,7 @@ import java.io.IOException;
  * or in the README included in this project.
  * 
  * @author Nicholas Walker (nswalke4@asu.edu)
- * @version 1.01
+ * @version 1.02
  */
 public class FileParser {
 
@@ -44,8 +44,8 @@ public class FileParser {
      * @param pFileName the name of the file that will be parsed
      */
     public FileParser(String pFileName) {
-        fileName = pFileName;
-        parsedBoard = new int[9][9];
+        this.fileName = pFileName;
+        this.parsedBoard = new int[9][9];
         this.parseFile();
     }
 
@@ -96,11 +96,7 @@ public class FileParser {
             reader = new BufferedReader(new FileReader(fileName));
             String line = reader.readLine();
             while (line != null) {
-                if (line.equals("-------------------")) {
-                    System.out.println(line);
-                }
                 if ((!line.isEmpty()) && (line.charAt(0) == '|')) {
-                    System.out.println(line);
                     this.parseString(line, row);
                     row++;
                 }
