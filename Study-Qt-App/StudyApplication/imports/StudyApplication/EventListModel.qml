@@ -38,4 +38,10 @@ ListModel {
         shortcut: "Return"
         parameters: "Enter"
     }
+
+    ListElement {
+    shortcut: "Shift+L, E, F, Backspace"
+    eventDescription: "When a button is clicked"
+    eventId: "clicked"
+    }
 }

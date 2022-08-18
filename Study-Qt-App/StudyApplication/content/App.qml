@@ -38,8 +38,98 @@ Window {
     visible: true
     title: "StudyApplication"
 
-    Screen01 {
+    property int scrHOME: 0
+    property int scrFCHOME: 1
+    property int scrFCQUESTION: 2
+    property int scrFCANSWER: 3
+    property int scrFCRESULT: 4
+    property int scrUNAVAILABLE: 5
+    property int scrIMPORT: 6
+    property int curScr: scrHOME
+
+    HomeScreen {
         id: mainScreen
+        visible: curScr === scrHOME
+        anchors.centerIn: parent
+
+        onVisibleChanged: {
+            if (this.visible) {
+                console.log("  ~SCREENCHANGE~ Home Screen Showing")
+            }
+        }
+
+        flashcardBtn.onClicked: {
+            console.log("[ACTION] flashcardBtn clicked");
+            curScr = scrFCQUESTION
+        }
+
+        unavailableBtn1.onClicked: {
+            console.log("[ACTION] unavailableBtn1 clicked");
+        }
+
+        unavailableBtn2.onClicked: {
+            console.log("[ACTION] unavailableBtn2 clicked");
+        }
+
+        unavailableBtn3.onClicked: {
+            console.log("[ACTION] unavailableBtn3 clicked");
+        }
+
+        unavailableBtn4.onClicked: {
+            console.log("[ACTION] unavailableBtn4 clicked");
+        }
+
+        unavailableBtn5.onClicked: {
+            console.log("[ACTION] unavailableBtn5 clicked");
+        }
+
+        unavailableBtn6.onClicked: {
+            console.log("[ACTION] unavailableBtn6 clicked");
+        }
+
+        importBtn.onClicked: {
+            console.log("[ACTION] importBtn clicked");
+        }
+    }
+
+    QuestionCard {
+        id: fcquestion
+        visible: curScr === scrFCQUESTION
+        anchors.centerIn: parent
+
+        onVisibleChanged: {
+            if (this.visible) {
+                console.log("  ~SCREENCHANGE~ FC Question Screen Showing")
+            }
+        }
+
+        flipBtn.onClicked: {
+            console.log("[ACTION] flipBtn clicked");
+            curScr = scrFCANSWER
+        }
+
+    }
+
+    AnswerCard {
+        id: fcanswer
+        visible: curScr === scrFCANSWER
+        anchors.centerIn: parent
+
+        onVisibleChanged: {
+            if (this.visible) {
+                console.log("  ~SCREENCHANGE~ FC Answer Screen Showing")
+            }
+        }
+
+        incorrectBtn.onClicked: {
+            console.log("[ACTION] incorrectBtn clicked");
+            curScr = scrHOME
+        }
+
+        correctBtn.onClicked: {
+            console.log("[ACTION] correctBtn clicked");
+            curScr = scrFCQUESTION
+        }
     }
 
 }

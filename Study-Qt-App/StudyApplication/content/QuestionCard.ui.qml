@@ -15,6 +15,7 @@ Rectangle {
     height: 480
     color: "#1b3c62"
     radius: 60
+    property alias flipBtn: flipBtn
 
     Rectangle {
         id: questionRect

@@ -94,4 +94,6 @@ Project {
     supportedLanguages: ["en"]
     primaryLanguage: "en"
 
+
+    mainUiFile: "content/HomeScreen.ui.qml"
 }

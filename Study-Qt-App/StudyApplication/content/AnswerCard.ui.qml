@@ -10,10 +10,13 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Rectangle {
+    id: root
     width: 640
     height: 480
     color: "#1b3c62"
     radius: 60
+    property alias correctBtn: correctBtn
+    property alias incorrectBtn: incorrectBtn
 
     Rectangle {
         id: questionRect
@@ -76,7 +79,7 @@ Rectangle {
     }
 
     Button {
-        id: wrongBtn
+        id: incorrectBtn
         x: 65
         y: 407
         width: 220
@@ -90,7 +93,7 @@ Rectangle {
     }
 
     Button {
-        id: rightBtn
+        id: correctBtn
         x: 355
         y: 407
         width: 220
