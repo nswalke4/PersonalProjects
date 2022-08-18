@@ -14,10 +14,4 @@ Rectangle {
     height: Constants.height
 
     color: Constants.backgroundColor
-
-    Text {
-        text: qsTr("Hello StudyApplication")
-        anchors.centerIn: parent
-        font.family: Constants.font.family
-    }
 }
