@@ -1,0 +1,18 @@
+module StudyRight
+typeinfo appStudyRight.qmltypes
+prefer :/StudyRight/
+
+# Basic Theme
+singleton Colors 1.0 src/themes/basic/Colors.qml
+singleton Style 1.0 src/themes/basic/Style.qml
+
+# Basic Theme Texts
+HeaderMainText 1.0 src/themes/basic/fonts/HeaderMainText.qml
+HeaderSubText 1.0 src/themes/basic/fonts/HeaderSubText.qml
+MenuButtonText 1.0 src/themes/basic/fonts/MenuButtonText.qml
+
+# Components
+MenuButton 1.0 src/components/MenuButton.qml
+
+# Screens
+Home 1.0 src/screens/Home.qml
