@@ -17,10 +17,16 @@ qt_add_qml_module(appStudyRight
     QML_FILES
         qmldir
         main.qml
+        src/components/FlipButton.qml
         src/components/MenuButton.qml
+        src/components/RightButton.qml
+        src/components/WrongButton.qml
+        src/screens/Answer.qml
         src/screens/Home.qml
+        src/screens/Question.qml
         src/themes/basic/Colors.qml
         src/themes/basic/Style.qml
+        src/themes/basic/fonts/FlashcardButtonText.qml
         src/themes/basic/fonts/HeaderMainText.qml
         src/themes/basic/fonts/HeaderSubText.qml
         src/themes/basic/fonts/MenuButtonText.qml

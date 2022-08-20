@@ -9,7 +9,15 @@ Rectangle {
     anchors.centerIn: parent
     color: Colors.darkBackground
 
+    signal btnClicked(string text)
+    signal questionBtnClicked
+//    signal btn1Clicked
+//    signal btn2Clicked
+//    signal btn3Clicked
+//    signal btn4Clicked
+
     ColumnLayout  {
+        id: layout
         anchors.centerIn: root
         width: root.width
         height: root.height
@@ -72,10 +80,14 @@ Rectangle {
 
                 MenuButton {
                     id: btn1
-                    btnText: "<TESTING 1>"
+                    btnText: "Question"
                     Layout.preferredWidth: 400
                     Layout.preferredHeight: 150
                     Layout.alignment: Qt.AlignHCenter
+                    onClicked: {
+                        root.btnClicked(this.btnText);
+                        root.questionBtnClicked();
+                    }
                 }
                 MenuButton {
                     id: btn2
@@ -83,6 +95,8 @@ Rectangle {
                     Layout.preferredWidth: 400
                     Layout.preferredHeight: 150
                     Layout.alignment: Qt.AlignHCenter
+                    onClicked: { root.btnClicked(this.btnText) }
+//                    onClicked: { btn2Clicked() }
                 }
                 MenuButton {
                     id: btn3
@@ -90,6 +104,8 @@ Rectangle {
                     Layout.preferredWidth: 400
                     Layout.preferredHeight: 150
                     Layout.alignment: Qt.AlignHCenter
+                    onClicked: { root.btnClicked(this.btnText) }
+//                    onClicked: { btn3Clicked() }
                 }
                 MenuButton {
                     id: btn4
@@ -97,12 +113,13 @@ Rectangle {
                     Layout.preferredWidth: 400
                     Layout.preferredHeight: 150
                     Layout.alignment: Qt.AlignHCenter
+                    onClicked: { root.btnClicked(this.btnText) }
+//                    onClicked: { btn4Clicked() }
                 }
 
             }
+
         }
-
-
 
         Item {
             id: footer

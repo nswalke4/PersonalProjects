@@ -7,12 +7,18 @@ singleton Colors 1.0 src/themes/basic/Colors.qml
 singleton Style 1.0 src/themes/basic/Style.qml
 
 # Basic Theme Texts
+FlashcardButtonText 1.0 src/themes/basic/fonts/FlashcardButtonText.qml
 HeaderMainText 1.0 src/themes/basic/fonts/HeaderMainText.qml
 HeaderSubText 1.0 src/themes/basic/fonts/HeaderSubText.qml
 MenuButtonText 1.0 src/themes/basic/fonts/MenuButtonText.qml
 
 # Components
+FlipButton 1.0 src/components/FlipButton.qml
 MenuButton 1.0 src/components/MenuButton.qml
+RightButton 1.0 src/components/RightButton.qml
+WrongButton 1.0 src/components/WrongButton.qml
 
 # Screens
+Answer 1.0 src/screens/Answer.qml
 Home 1.0 src/screens/Home.qml
+Question 1.0 src/screens/Question.qml

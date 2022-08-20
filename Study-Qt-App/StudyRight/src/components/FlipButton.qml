@@ -6,23 +6,22 @@ Button {
     id: root
     flat: true
 
-    property alias btnText: mbText.text
-
     background: Rectangle {
         implicitWidth: parent.width
         implicitHeight: parent.height
         radius: 15
-        color: Colors.darkBackground
+        color: Colors.lightBackground
         border.color: Colors.midBackground
         border.width: 5
     }
 
-    MenuButtonText {
-        id: mbText
+    FlashcardButtonText {
+        id: fbText
         anchors.centerIn: root
+        text: "Flip"
     }
 
     onClicked: {
-        console.log("[ACTION] '" + btnText + "' was clicked");
+        console.log("[ACTION] '" + fbText.text + "' was clicked");
     }
 }

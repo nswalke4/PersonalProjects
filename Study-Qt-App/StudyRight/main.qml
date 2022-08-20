@@ -23,40 +23,41 @@ Window {
         id: home
         property int screen: screens.home
         visible: this.screen === root.curScreen
-//        onFcBtnClicked: {
-//            console.log("[ACTION] FlashCard Button Pressed");
-//            console.log("  !!NOTICE!! Currently under development, so not entering this view...");
-////            root.swapScreen(screens.question);
-//        }
-//        onImportBtnClicked: {
-//            console.log("[ACTION] Import Button Pressed");
-//            root.swapScreen(screens.imports);
-//        }
+
+        onBtnClicked: (text) => {
+            console.log("    `from home` " + text + " button clicked");
+        }
+
+        onQuestionBtnClicked: {
+            console.log("[SCREEN_CHANGE] Entering Question Screen");
+            root.swapScreen(screens.question);
+        }
     }
 
-//    Question {
-//        id: question
-//        property int screen: screens.question
-//        visible: this.screen === root.curScreen
-//        onFlipBtnClicked: {
-//            console.log("[ACTION] Flip Button Pressed");
-//            root.swapScreen(screens.answer);
-//        }
-//    }
+    Question {
+        id: question
+        property int screen: screens.question
+        visible: this.screen === root.curScreen
 
-//    Answer {
-//        id: answer
-//        property int screen: screens.answer
-//        visible: this.screen === root.curScreen
-//        onNextBtnClicked: {
-//            console.log("[ACTION] Next Button Pressed");
-//            root.swapScreen(screens.question);
-//        }
-//        onResultsBtnClicked: {
-//            console.log("[ACTION] Results Button Pressed");
-//            root.swapScreen(screens.results);
-//        }
-//    }
+        onFlipBtnClicked: {
+            console.log("[SCREEN_CHANGE] Entering Answer Screen");
+            root.swapScreen(screens.answer);
+        }
+    }
+
+    Answer {
+        id: answer
+        property int screen: screens.answer
+        visible: this.screen === root.curScreen
+        onRightBtnClicked: {
+            console.log("[SCREEN_CHANGE] Entering Question Screen");
+            root.swapScreen(screens.question);
+        }
+        onWrongBtnClicked: {
+            console.log("[SCREEN_CHANGE] Entering Home Screen");
+            root.swapScreen(screens.home);
+        }
+    }
 
 //    Results {
 //        id: results
