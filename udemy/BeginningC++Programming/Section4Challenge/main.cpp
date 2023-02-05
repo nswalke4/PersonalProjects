@@ -1,3 +1,11 @@
+/*
+ * @file main.cpp
+ * @author Nicholas Walker
+ * @date 02/04/2022
+ *
+ * @brief Collect and display a number from the console
+ */
+
 #include <iostream>
 
 int main()
