@@ -11,8 +11,8 @@ Although I have received my Bachelors of Science in Software Engineering, that d
 <tr><th>Course</th><th>When?</th></tr>
 
 <tr>
-<td>[Beginning C++ Programming](/BeginningC++Programming)</td>
-<td>Feb 2023 - tbd</td>
+<td>Beginning C++ Programming</td>
+<td>Feb 2023 - ...</td>
 </tr>
 
 </table>
