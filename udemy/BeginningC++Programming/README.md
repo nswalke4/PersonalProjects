@@ -1,8 +1,10 @@
-# Repo for work completed in C++ Beginner Course
-## Course: "Beginning C++ Programming - From Beginner to Beyond"
-### Course URL: [https://www.udemy.com/course/beginning-c-plus-plus-programming/](https://www.udemy.com/course/beginning-c-plus-plus-programming/)
-### Start Date: 02/04/2022
-### End Date: tbd
+# Repo for Work Completed in C++ Beginner Course
+#### Course: "Beginning C++ Programming - From Beginner to Beyond"
+##### Course URL: [https://www.udemy.com/course/beginning-c-plus-plus-programming/](https://www.udemy.com/course/beginning-c-plus-plus-programming/)
+##### Start Date: 02/04/2022
+##### End Date: tbd
+
+<hr />
 
 ## About
 
