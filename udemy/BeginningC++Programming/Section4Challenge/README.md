@@ -2,7 +2,7 @@
 <table>
 <tr>
 <th>Time to Complete</th>
-<td>tbd</td>
+<td>2 mins</td>
 </tr>
 <tr>
 <th>Date Completed</th>
@@ -19,7 +19,7 @@ Create a C++ program that asks the user for their favorite number between 1 and 
 Suppose the user enters '24', display the following to the console:
 
 ```
-    Amazing!! That's my favorite number too!
+    Amazing!!  That's my favorite number too!
     No really!!  24 is my favorite number!
 ```
 
@@ -27,12 +27,12 @@ Suppose the user enters '24', display the following to the console:
 
 ```
     Enter your favorite number between 1 and 100:  24
-    Amazing!! That's my favorite number too!
+    Amazing!!  That's my favorite number too!
     No really!!  24 is my favorite number!
 ```
 
 ```
     Enter your favorite number between 1 and 100:  69
-    Amazing!! That's my favorite number too!
+    Amazing!!  That's my favorite number too!
     No really!!  69 is my favorite number!
 ```
