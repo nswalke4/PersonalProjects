@@ -1,4 +1,4 @@
-/*
+/**
  * @file main.cpp
  * @author Nicholas Walker
  * @date 02/04/2022
