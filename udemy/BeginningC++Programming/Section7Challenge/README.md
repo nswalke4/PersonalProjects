@@ -33,3 +33,5 @@ Write a C++ program based on the following instructions:
     - What did you expect?
     - Did the results show what you expected?
     - What do you think happened?
+
+_NOTE: Questions were answered in the main.cpp at the bottom of the file as comments_
