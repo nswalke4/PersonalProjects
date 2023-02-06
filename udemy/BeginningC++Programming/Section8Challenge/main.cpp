@@ -58,8 +58,9 @@ int main(int argc, char *argv[])
     //     numPenny++;
     // }
 
-    cout << "\n\nYou can provide this change as follows:\n\t dollars: " << numDollar
-         << "\n\tquarters: " << numQuarter << "\n\t   dimes: " << numDime
-         << "\n\t nickels: " << numNickle << "\n\t pennies: " << numPenny << endl;
+    cout << "\n\nThe change for " << amount << " cents is provided using the following:"
+         << "\n\t dollars: " << numDollar << "\n\tquarters: " << numQuarter
+         << "\n\t   dimes: " << numDime << "\n\t nickels: " << numNickle
+         << "\n\t pennies: " << numPenny << endl;
     return 0;
 }
