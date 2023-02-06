@@ -3,7 +3,7 @@
 <table>
 <tr>
 <th>Time to Complete</th>
-<td>tbd</td>
+<td>8 mins (+3 mins)</td>
 </tr>
 <tr>
 <th>Date Completed</th>
@@ -12,6 +12,8 @@
 </table>
 
 <hr />
+
+***NOTE: I did not notice the comment about solving this using the modulo operator until after completing the assignment using my while loops.  Therefore, I attempted to resolve using the modulo operator, which is why there is additional time listed next the the "Time to Complete".  Both versions have been tested and work properly.  I left the modulo version uncommented as I felt it was the more effecient method.***
 
 ## Directions
 
@@ -33,3 +35,5 @@ A sample run for user entering 92 cents:
          nickels: 1
          pennies: 2
 ```
+
+
