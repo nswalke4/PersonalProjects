@@ -3,7 +3,7 @@
 <table>
 <tr>
 <th>Time to Complete</th>
-<td>tbd</td>
+<td>09:46a, pause at 10:30 due to compiler errors </td>
 </tr>
 <tr>
 <th>Date Completed</th>
@@ -20,7 +20,7 @@ Write a C++ Program that will allow a user to complete a variety of actions to m
 - P - Print numbers
     - Display list as `[ # # ]` (if list is empty, display `[] - the list is empty`)
 - A - Add a number
-    - Prompt user for number to add, add that number, display `# added`
+    - Prompt user for number to add, add that number, display `# added` (_assumes the user enters a valid number_)
         - NOTE: After adding the additional functionality of not allowing duplicates, this funcitonality will need to check the list to ensure that the given value by the user is not already in the list if the user has selected to not allow duplicate numbers in their list.  If this occurs, it should display `Invalid option - No duplicates are allowed, and # is already a member of the list; Please enter a new number:` and allow the user to enter a new number to be added to the list.  This will repeat until the user enters a number that is not already in the list.
 - M - Display mean of the numbers
     - Calculate mean and display `Mean: #` (if list is empty, display `Unable to calculate the mean - no data`)
