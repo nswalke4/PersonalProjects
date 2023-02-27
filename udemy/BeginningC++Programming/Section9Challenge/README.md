@@ -3,7 +3,7 @@
 <table>
 <tr>
 <th>Time to Complete</th>
-<td>09:46a, pause at 10:30 due to compiler errors </td>
+<td>67 mins</td>
 </tr>
 <tr>
 <th>Date Completed</th>
@@ -12,6 +12,8 @@
 </table>
 
 <hr />
+
+___Post Completion Note: I ended up having the list be sorted each time a new value was entered instead of just adding it to the end of the list___
 
 ## Directions
 
@@ -25,9 +27,9 @@ Write a C++ Program that will allow a user to complete a variety of actions to m
 - M - Display mean of the numbers
     - Calculate mean and display `Mean: #` (if list is empty, display `Unable to calculate the mean - no data`)
 - S - Display the smallest number
-    - Find the smallest number and display `Min: #` (if list is empty, display `Unable to determine the smallest number - list is empty`)
+    - Find the smallest number and display `The smallest number is #` (if list is empty, display `Unable to determine the smallest number - list is empty`)
 - L - Display the largest number
-    - Find the largest number and display `Max: #` (if list is empty, display `Unable to determine the largest number - list is empty`)
+    - Find the largest number and display `The largest number is #` (if list is empty, display `Unable to determine the largest number - list is empty`)
 - Q - Quit
     - Display `Goodbye` and terminate the program
 

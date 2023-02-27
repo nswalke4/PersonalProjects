@@ -24,10 +24,8 @@ int main(int argc, char *argv[])
 
     cout << boolalpha;
     while (!quit) {
-        bool validNum {false};
-        int addedNum {};
         cout << "\n\n+---------+\n|Main Menu|\n+---------+";
-        if (list.size() == 0);
+        if (list.size() == 0)
             cout << "\nD - Allow Duplicate Numbers? Currently " << useDupes;
         cout << "\nP - Print numbers\nA - Add a number\nF - Find a number\n";
         cout << "M - Display mean of the numbers\nS - Display the smallest number\n";
@@ -37,59 +35,133 @@ int main(int argc, char *argv[])
         switch (menuSelection) {
             case 'a':
             case 'A':
-                do
                 {
-                    cout << "\nEnter the number you wish to add to the list >>";
-                    cin >> addedNum;
-                    if (useDupes) {
-                        for (int i = 0; i < list.size(); i++) {
-                            if (list.at(i) == addedNum) {
-                                cout << "\nInvalid number -- " << addedNum << " is already in the list and ";
-                                cout << "duplicates are not allowed.\nPlease try again";
+                    bool validNum {false};
+                    int addedNum {};
+                    do
+                    {
+                        cout << "\nEnter the number you wish to add to the list >> ";
+                        cin >> addedNum;
+                        if (!useDupes)
+                        {
+                            validNum = true;
+                            for (int val : list)
+                            {
+                                if (val == addedNum)
+                                {
+                                    cout << "\nInvalid number -- " << addedNum << " is already in the list and ";
+                                    cout << "duplicates are not allowed.\nPlease try again";
+                                    validNum = false;
+                                }
                             }
                         }
-                        validNum = true;
-                    } else {
-                        validNum = true;
-                    }
-                } while (!validNum);
-                list.push_back(addedNum);
-                sort(list.begin(), list.end());
-                cout << "\nAdded " << addedNum;
-                break;
+                        else
+                        {
+                            validNum = true;
+                        }
+                    } while (!validNum);
+                    list.push_back(addedNum);
+                    sort(list.begin(), list.end());
+                    cout << "\nAdded " << addedNum;
+                    break;
+                }
             case 'c':
             case 'C':
-                list.clear();
-                cout << "\nList Cleared";
-                break;
+                {
+                    list.clear();
+                    cout << "\nList Cleared";
+                    break;
+                }
             case 'f':
             case 'F':
-                cout << "\nFind a number";
-                break;
+                {
+                    int find {};
+                    cout << "\nEnter the number you wish to find in the list: >> ";
+                    cin >> find;
+                    cout << "\nThe number '" << find << "' ";
+                    if (useDupes)
+                    {
+                        int count {};
+                        for (int val : list)
+                        {
+                            if (val == find)
+                                count++;
+                        }
+                        cout << "is in the list " << count << " time";
+                        if (count != 1)
+                            cout << "s";
+                    }
+                    else
+                    {
+                        bool found {false};
+                        for (int val : list)
+                        {
+                            if (val == find)
+                                found = true;
+                        }
+                        cout << "is " << (found ? "" : "not") << " in the list";
+                    }
+                    break;
+                }
             case 'l':
             case 'L':
-                cout << "\nFind the largest";
-                break;
+                {
+                    if (list.size() > 0)
+                        cout << "\nThe largest number is " << list.back();
+                    else
+                        cout << "\nUnable to determine the largest number - list is empty";
+                    break;
+                }
             case 'm':
             case 'M':
-                cout << "\nFind the mean";
-                break;
+                {
+                    if (list.size() > 0)
+                    {
+                        double mean {};
+                        int total {};
+                        for (int val : list)
+                            total += val;
+                        mean = (double) total / list.size();
+                        cout << "\nThe mean of the list is " << mean;
+                    }
+                    else
+                        cout << "\nUnable to calculate the mean - no data";
+                    break;
+                }
             case 'p':
             case 'P':
-                cout << "\nPrint the numbers";
-                break;
+                {
+                    if (list.size() > 0)
+                    {
+                        cout << "\n[ ";
+                        for (int val : list)
+                            cout << val << " ";
+                        cout << "]";
+                    }
+                    else
+                        cout << "\n[] - the list is empty";
+                    break;
+                }
             case 's':
             case 'S':
-                cout << "\nFind the smallest";
-                break;
+                {
+                    if (list.size() > 0)
+                        cout << "\nThe smallest number is " << list.front();
+                    else
+                        cout << "\nUnable to determine the smallest number - list is empty";
+                    break;
+                }
             case 'q':
             case 'Q':
-                cout << "\nGoodbye\n";
-                quit = true;
-                break;
+                {
+                    cout << "\nGoodbye\n";
+                    quit = true;
+                    break;
+                }
             case 'd':
             case 'D':
-                if (list.size() == 0) {
+                if (list.size() == 0)
+                {
                     useDupes = !useDupes;
                     if (useDupes)
                         cout << "\nNow allowing duplicate numbers in the list...";
