@@ -11,29 +11,31 @@
 
 using namespace std;
 
-int* apply_all(int*, size_t, int*, size_t);
+int* apply_all(const int *const, const size_t, const int *const, const size_t);
 
-void print(int*, size_t);
+void print(const int *const, const size_t);
 
 int main(int argc, char *argv[])
 {
+    const int arr1Size {5};
+    const int arr2Size {3};
     int arr1[] {1,2,3,4,5};
     int arr2[] {10,20,30};
     int *results {nullptr};
 
     cout << "Array 1: ";
-    print(arr1, 5);
+    print(arr1, arr1Size);
     cout << "Array 2: ";
-    print(arr2, 3);
-    results = apply_all(arr1, 5, arr2, 3);
+    print(arr2, arr2Size);
+    results = apply_all(arr1, arr1Size, arr2, arr2Size);
     cout << "Results: ";
-    print(results, 15);
+    print(results, arr1Size*arr2Size);
     return 0;
 }
 
-int* apply_all(int* arr1, size_t arr1Size, int* arr2, size_t arr2Size)
+int* apply_all(const int *const arr1, const size_t arr1Size, const int *const arr2, const size_t arr2Size)
 {
-    size_t newSize {arr1Size * arr2Size};
+    const size_t newSize {arr1Size * arr2Size};
     int *returnPtr {nullptr};
     returnPtr = new int[newSize];
     size_t i = 0;
@@ -47,7 +49,7 @@ int* apply_all(int* arr1, size_t arr1Size, int* arr2, size_t arr2Size)
     return returnPtr;
 }
 
-void print(int* arr, size_t size)
+void print(const int *const arr, const size_t size)
 {
     cout << "[ ";
     for (size_t i = 0; i < size; i++)
