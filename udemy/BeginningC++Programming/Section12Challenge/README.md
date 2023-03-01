@@ -3,7 +3,7 @@
 <table>
 <tr>
 <th>Time to Complete</th>
-<td>tbd</td>
+<td>15mins</td>
 </tr>
 <tr>
 <th>Date Completed</th>
@@ -15,7 +15,7 @@
 
 ## Directions
 
-Write a C++ function named `apply_all` that expects two arrays of integers and their sizes and dynamically allocates a new array of integers whose size is the product of the 2 array sizes.  The function should loop through the second array and multiply each element across each element of array 1 and store the product in the newly created array.  The function should return a pointer to the newly allocated array.  You can also write a print function that expects a pointer to an array of integers and its size and display the elements in the array.
+Write a C++ function named `apply_all` that expects two arrays of integers and their sizes and dynamically allocates a new array of integers whose size is the product of the 2 array sizes.  The function should loop through the second array and multiply each element across each element of array 1 and store the product in the newly created array.  The function should return a pointer to the newly allocated array.  You can also write a `print` function that expects a pointer to an array of integers and its size and display the elements in the array.
 
 ### Example
 
