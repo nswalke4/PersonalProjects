@@ -1,4 +1,4 @@
-# tbd
+# Create Ability for Movie Fans to Keep Track of their Favorite Movies
 
 <table>
 <tr>
@@ -15,18 +15,15 @@
 
 ## Directions
 
-For this challenge you are to develop the foundation for a program 
-for movie fanatics to keep track of what movies they have watched
-and how many times they watched each movie.
+For this challenge you are to develop the foundation for a program for movie fanatics to keep track of what movies they have watched and how many times they watched each movie.
 
 The program must support the following:
 
-class Movie - models a movie which includes
-- movie name
-- movie rating (G, PG, PG-13, R)
-- watched - the number of times the movie has been watched
-
-class Movies - models a collection of movie objects
+- class Movie - models a movie which includes
+    - movie name
+    - movie rating (G, PG, PG-13, R)
+    - watched - the number of times the movie has been watched
+- class Movies - models a collection of movie objects
 
 Obviously, Movies needs to know about Movie since it is a collection of Movie object
 However, our main driver should only interact with the Movies class.
@@ -50,11 +47,11 @@ that has fully implemented
 You can choose to use my starting point or start from scratch.
 
 Here is what your project files should look like:
--Movie.h - include file with the Movie class specification
--Movie.cpp -  file with the Movie class implementation
--Movies.h - include file with the Movies class specification
--Movies.cpp -  file with the Movies class implementation
--main.cpp - the main driver that creates a Movies object and adds and increments movies
+- Movie.h - include file with the Movie class specification
+- Movie.cpp -  file with the Movie class implementation
+- Movies.h - include file with the Movies class specification
+- Movies.cpp -  file with the Movies class implementation
+- main.cpp - the main driver that creates a Movies object and adds and increments movies
 
 Don't create a menu-driven system like we've done in the past -- just concentrate on getting
 the program working. Once it is working, you can certainly provide a menu system for the user
