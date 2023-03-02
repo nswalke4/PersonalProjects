@@ -1,5 +1,19 @@
-Section 13 Challenge
-==============
+# tbd
+
+<table>
+<tr>
+<th>Time to Complete</th>
+<td>tbd</td>
+</tr>
+<tr>
+<th>Date Completed</th>
+<td>03/01/2023</td>
+</tr>
+</table>
+
+<hr />
+
+## Directions
 
 For this challenge you are to develop the foundation for a program 
 for movie fanatics to keep track of what movies they have watched
@@ -52,8 +66,9 @@ you start coding!
 
 Good luck and have fun!
 
-main.cpp
-----------
+### Provided `main.cpp` file
+
+```
 /******************************************************************
  * Section 13 Challenge
  * main.cpp
@@ -129,39 +144,42 @@ int main() {
 
 	return 0;
 }
+```
 
-Sample run
---------------------------------
-Sorry, no movies to display
+### Example Output
+```
+    --------------------------------
+    Sorry, no movies to display
 
-Big added
-Star Wars added
-Cinderella added
+    Big added
+    Star Wars added
+    Cinderella added
 
-===================================
-Big, PG-13, 2
-Star Wars, PG, 5
-Cinderella, PG, 7
-===================================
+    ===================================
+    Big, PG-13, 2
+    Star Wars, PG, 5
+    Cinderella, PG, 7
+    ===================================
 
-Cinderella already exists
-Ice Age added
+    Cinderella already exists
+    Ice Age added
 
-===================================
-Big, PG-13, 2
-Star Wars, PG, 5
-Cinderella, PG, 7
-Ice Age, PG, 12
-===================================
+    ===================================
+    Big, PG-13, 2
+    Star Wars, PG, 5
+    Cinderella, PG, 7
+    Ice Age, PG, 12
+    ===================================
 
-Big watch incremented
-Ice Age watch incremented
+    Big watch incremented
+    Ice Age watch incremented
 
-===================================
-Big, PG-13, 3
-Star Wars, PG, 5
-Cinderella, PG, 7
-Ice Age, PG, 13
-===================================
+    ===================================
+    Big, PG-13, 3
+    Star Wars, PG, 5
+    Cinderella, PG, 7
+    Ice Age, PG, 13
+    ===================================
 
-XXX not found
+    XXX not found
+```
