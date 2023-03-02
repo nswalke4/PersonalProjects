@@ -1,9 +1,8 @@
 # Create Ability for Movie Fans to Keep Track of their Favorite Movies
 
 <table>
-<tr>
-<th>Time to Complete</th>
-<td>tbd</td>
+<tr><th>Time to Complete</th>
+<td>87mins</td>
 </tr>
 <tr>
 <th>Date Completed</th>
@@ -35,13 +34,10 @@ For example. a simple main should be able to
 - ask the Movies object to display all of its movies
 
 Additionally, 
-- if we try to add a movie whose name is already in the movies collection 
-we should display this error to the user
-- if we try to increment the watched count for a movie whose name is not in the movies
-collection we should display this error to the user
+- if we try to add a movie whose name is already in the movies collection we should display this error to the user
+- if we try to increment the watched count for a movie whose name is not in the movies collection we should display this error to the user
 
-I've provided a basic shell as a starting point for one possible solution 
-that has fully implemented
+I've provided a basic shell as a starting point for one possible solution that has fully implemented
 - Movie and main
 
 You can choose to use my starting point or start from scratch.
@@ -53,13 +49,11 @@ Here is what your project files should look like:
 - Movies.cpp -  file with the Movies class implementation
 - main.cpp - the main driver that creates a Movies object and adds and increments movies
 
-Don't create a menu-driven system like we've done in the past -- just concentrate on getting
-the program working. Once it is working, you can certainly provide a menu system for the user
+Don't create a menu-driven system like we've done in the past -- just concentrate on getting the program working. Once it is working, you can certainly provide a menu system for the user
 
 This program is not trivial for, but it's a good challenge for beginning C++ programmers.
 
-Here is a sample main and the output. Make sure you understand the program flow before
-you start coding!
+Here is a sample main and the output. Make sure you understand the program flow before you start coding!
 
 Good luck and have fun!
 
