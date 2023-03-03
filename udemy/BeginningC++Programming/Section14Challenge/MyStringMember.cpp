@@ -148,6 +148,7 @@ MyStringMember &MyStringMember::operator=(MyStringMember &&rhs)
 /**************************************/
 
 // Unary Minus Operator Overload
+// Returns the lowercase version of the object's string
 MyStringMember MyStringMember::operator-() const
 {
     if (DEBUG)
@@ -156,6 +157,7 @@ MyStringMember MyStringMember::operator-() const
 }
 
 // Pre-Increment Operator Overload
+// Make all characters uppercase
 MyStringMember MyStringMember::operator++()
 {
     if (DEBUG)
@@ -164,14 +166,18 @@ MyStringMember MyStringMember::operator++()
 }
 
 // Post-Increment Operator Overload
+// Make all characters uppercase after use
 MyStringMember MyStringMember::operator++(int val)
 {
     if (DEBUG)
         cout << "[DEBUG] Post-Increment overload used" << endl;
-    return *this;
+    MyStringMember temp (*this);    // make a copy
+    operator++();                   // call pre-increment - make sure you call pre-increment!
+    return temp;                    // return the old value
 }
 
 // Equal-To Operator Overload
+// returns true if the two strings are equal
 bool MyStringMember::operator==(const MyStringMember &other) const
 {
     if (DEBUG)
@@ -180,6 +186,7 @@ bool MyStringMember::operator==(const MyStringMember &other) const
 }
 
 // Not-Equal-To Operator Overload
+// returns true if the two strings are not equal
 bool MyStringMember::operator!=(const MyStringMember &) const
 {
     if (DEBUG)
@@ -188,6 +195,7 @@ bool MyStringMember::operator!=(const MyStringMember &) const
 }
 
 // Less-Than Operator Overload
+// returns true if the lhs string is lexically less than the rhs string
 bool MyStringMember::operator<(const MyStringMember &other) const
 {
     if (DEBUG)
@@ -196,6 +204,7 @@ bool MyStringMember::operator<(const MyStringMember &other) const
 }
 
 // Greater-Than Operator Overload
+// returns true if the lhs string is lexically greater than the rhs string
 bool MyStringMember::operator>(const MyStringMember &other) const
 {
     if (DEBUG)
@@ -204,6 +213,7 @@ bool MyStringMember::operator>(const MyStringMember &other) const
 }
 
 // Addition Operator Overload
+// concatenation. Returns an object that concatenates the lhs and rhs
 MyStringMember MyStringMember::operator+(const MyStringMember &other) const
 {
     if (DEBUG)
@@ -212,6 +222,7 @@ MyStringMember MyStringMember::operator+(const MyStringMember &other) const
 }
 
 // Increased-By Operator Overload
+// concatenate the rhs string to the lhs string and store the result in lhs object
 MyStringMember MyStringMember::operator+=(const MyStringMember &other) const
 {
     if (DEBUG)
@@ -220,6 +231,7 @@ MyStringMember MyStringMember::operator+=(const MyStringMember &other) const
 }
 
 // Multiplication Operator Overload
+// repeat -  results in a string that is copied n times
 MyStringMember MyStringMember::operator*(const int value) const
 {
     if (DEBUG)
@@ -228,6 +240,7 @@ MyStringMember MyStringMember::operator*(const int value) const
 }
 
 // Multiplied-By Operator Overload
+// repeat the string on the lhs n times and store the result back in the lhs object
 MyStringMember MyStringMember::operator*=(const int value) const
 {
     if (DEBUG)

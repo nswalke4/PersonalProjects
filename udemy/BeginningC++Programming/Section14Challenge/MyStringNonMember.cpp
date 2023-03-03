@@ -148,6 +148,7 @@ MyStringNonMember &MyStringNonMember::operator=(MyStringNonMember &&rhs)
 /******************************************/
 
 // Unary Minus Operator Overload
+// Returns the lowercase version of the object's string
 MyStringNonMember operator-(const MyStringNonMember &source)
 {
     if (DEBUG)
@@ -156,6 +157,7 @@ MyStringNonMember operator-(const MyStringNonMember &source)
 }
 
 // Pre-Increment Operator Overload
+// Make all characters uppercase
 MyStringNonMember operator++(const MyStringNonMember &source)
 {
     if (DEBUG)
@@ -164,14 +166,18 @@ MyStringNonMember operator++(const MyStringNonMember &source)
 }
 
 // Post-Increment Operator Overload
+// Make all characters uppercase after use
 MyStringNonMember operator++(const MyStringNonMember &source, int val)
 {
     if (DEBUG)
         cout << "[DEBUG] Post-Increment overload used" << endl;
-    return source;
+    MyStringNonMember temp (source);    // make a copy
+    source++;                           // call pre-increment - make sure you call pre-increment!
+    return temp;                        // return the old value
 }
 
 // Equal-To Operator Overload
+// returns true if the two strings are equal
 bool operator==(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 {
     if (DEBUG)
@@ -180,6 +186,7 @@ bool operator==(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 }
 
 // Not-Equal-To Operator Overload
+// returns true if the two strings are not equal
 bool operator!=(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 {
     if (DEBUG)
@@ -188,6 +195,7 @@ bool operator!=(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 }
 
 // Less-Than Operator Overload
+// returns true if the lhs string is lexically less than the rhs string
 bool operator<(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 {
     if (DEBUG)
@@ -196,6 +204,7 @@ bool operator<(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 }
 
 // Greater-Than Operator Overload
+// returns true if the lhs string is lexically greater than the rhs string
 bool operator>(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 {
     if (DEBUG)
@@ -204,6 +213,7 @@ bool operator>(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 }
 
 // Addition Operator Overload
+// concatenation. Returns an object that concatenates the lhs and rhs
 MyStringNonMember operator+(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 {
     if (DEBUG)
@@ -212,6 +222,7 @@ MyStringNonMember operator+(const MyStringNonMember &lhs, const MyStringNonMembe
 }
 
 // Increased-By Operator Overload
+// concatenate the rhs string to the lhs string and store the result in lhs object
 MyStringNonMember operator+=(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 {
     if (DEBUG)
@@ -220,6 +231,7 @@ MyStringNonMember operator+=(const MyStringNonMember &lhs, const MyStringNonMemb
 }
 
 // Multiplication Operator Overload
+// repeat -  results in a string that is copied n times
 MyStringNonMember operator*(const MyStringNonMember &source, const int val)
 {
     if (DEBUG)
@@ -228,6 +240,7 @@ MyStringNonMember operator*(const MyStringNonMember &source, const int val)
 }
 
 // Multiplied-By Operator Overload
+// repeat the string on the lhs n times and store the result back in the lhs object
 MyStringNonMember operator*=(const MyStringNonMember &source, const int val)
 {
     if (DEBUG)
