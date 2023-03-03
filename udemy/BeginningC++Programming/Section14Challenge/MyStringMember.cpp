@@ -12,7 +12,8 @@
 
 using namespace std;
 
-const bool DEBUG = true;
+// const bool DEBUG = true;
+const bool DEBUG = false;
 
 /********************************/
 /* Constructors and Destructors */
@@ -153,15 +154,26 @@ MyStringMember MyStringMember::operator-() const
 {
     if (DEBUG)
         cout << "[DEBUG] Unary Minus overload used" << endl;
-    return *this;
+    char *buff = new char[strlen(this->str) + 1];
+    strcpy(buff, this->str);
+    for (size_t i = 0; i < strlen(buff); i++)
+        buff[i] = tolower(buff[i]);
+    MyStringMember temp {buff};
+    delete [] buff;
+    return temp;
 }
 
 // Pre-Increment Operator Overload
 // Make all characters uppercase
-MyStringMember MyStringMember::operator++()
+MyStringMember &MyStringMember::operator++()
 {
     if (DEBUG)
         cout << "[DEBUG] Pre-Increment overload used" << endl;
+    char *buff = new char[strlen(this->str) + 1];
+    strcpy(buff, this->str);
+    for (size_t i = 0; i < strlen(buff); i++)
+        buff[i] = toupper(buff[i]);
+    *this = MyStringMember(buff);
     return *this;
 }
 
@@ -182,16 +194,16 @@ bool MyStringMember::operator==(const MyStringMember &other) const
 {
     if (DEBUG)
         cout << "[DEBUG] Equal-To overload used" << endl;
-    return false;
+    return (strcmp(this->str, other.str) == 0);
 }
 
 // Not-Equal-To Operator Overload
 // returns true if the two strings are not equal
-bool MyStringMember::operator!=(const MyStringMember &) const
+bool MyStringMember::operator!=(const MyStringMember &other) const
 {
     if (DEBUG)
         cout << "[DEBUG] Not-Equal-To overload used" << endl;
-    return false;
+    return (strcmp(this->str, other.str) != 0);
 }
 
 // Less-Than Operator Overload
@@ -200,7 +212,7 @@ bool MyStringMember::operator<(const MyStringMember &other) const
 {
     if (DEBUG)
         cout << "[DEBUG] Less-Than overload used" << endl;
-    return false;
+    return (strcmp(this->str, other.str) < 0);
 }
 
 // Greater-Than Operator Overload
@@ -209,7 +221,7 @@ bool MyStringMember::operator>(const MyStringMember &other) const
 {
     if (DEBUG)
         cout << "[DEBUG] Greater-Than overload used" << endl;
-    return false;
+    return (strcmp(this->str, other.str) > 0);
 }
 
 // Addition Operator Overload
@@ -218,15 +230,21 @@ MyStringMember MyStringMember::operator+(const MyStringMember &other) const
 {
     if (DEBUG)
         cout << "[DEBUG] Addition overload used" << endl;
-    return *this;
+    char *buff = new char[strlen(this->str) + strlen(other.str) + 1];
+    strcpy(buff, this->str);
+    strcat(buff, other.str);
+    MyStringMember temp {buff};
+    delete [] buff;
+    return temp;
 }
 
 // Increased-By Operator Overload
 // concatenate the rhs string to the lhs string and store the result in lhs object
-MyStringMember MyStringMember::operator+=(const MyStringMember &other) const
+MyStringMember &MyStringMember::operator+=(const MyStringMember &other)
 {
     if (DEBUG)
         cout << "[DEBUG] Increased-By overload used" << endl;
+    *this = *this + other;
     return *this;
 }
 
@@ -236,14 +254,21 @@ MyStringMember MyStringMember::operator*(const int value) const
 {
     if (DEBUG)
         cout << "[DEBUG] Multiplication overload used" << endl;
-    return *this;
+    char *buff = new char[(strlen(this->str)*value) + 1];
+    strcpy(buff, this->str);
+    for (int i = 1; i < value; i++)
+        strcat(buff, this->str);
+    MyStringMember temp {buff};
+    delete [] buff;
+    return temp;
 }
 
 // Multiplied-By Operator Overload
 // repeat the string on the lhs n times and store the result back in the lhs object
-MyStringMember MyStringMember::operator*=(const int value) const
+MyStringMember &MyStringMember::operator*=(const int value)
 {
     if (DEBUG)
         cout << "[DEBUG] Multiplied-By overload used" << endl;
+    *this = *this * value;
     return *this;
 }
