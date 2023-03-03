@@ -15,6 +15,8 @@ using namespace std;
 
 class Class
 {
+    // friend functions
+
 private:
     // args
 
