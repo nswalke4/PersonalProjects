@@ -15,7 +15,11 @@ using namespace std;
 
 class Class
 {
-    // friend functions
+    // Stream Insertion & Extraction Operator Overloads
+    friend ostream &operator<<(ostream &, const Class &);
+    friend istream &operator>>(istream &, Class &);
+
+    // other friend variables/functions
 
 private:
     // args
