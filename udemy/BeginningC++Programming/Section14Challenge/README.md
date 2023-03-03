@@ -3,7 +3,7 @@
 <table>
 <tr>
 <th>Time to Complete</th>
-<td>tbd</td>
+<td>27mins (+ appx 90mins file prep)</td>
 </tr>
 <tr>
 <th>Date Completed</th>

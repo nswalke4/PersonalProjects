@@ -12,7 +12,8 @@
 
 using namespace std;
 
-const bool DEBUG = true;
+// const bool DEBUG = true;
+const bool DEBUG = false;
 
 /********************************/
 /* Constructors and Destructors */
@@ -153,7 +154,13 @@ MyStringNonMember operator-(const MyStringNonMember &source)
 {
     if (DEBUG)
         cout << "[DEBUG] Unary Minus overload used" << endl;
-    return source;
+    char *buff = new char[strlen(source.str) + 1];
+    strcpy(buff, source.str);
+    for (size_t i = 0; i < strlen(buff); i++)
+        buff[i] = tolower(buff[i]);
+    MyStringNonMember temp {buff};
+    delete [] buff;
+    return temp;
 }
 
 // Pre-Increment Operator Overload
@@ -162,6 +169,8 @@ MyStringNonMember operator++(const MyStringNonMember &source)
 {
     if (DEBUG)
         cout << "[DEBUG] Pre-Increment overload used" << endl;
+    for (size_t i = 0; i < strlen(source.str); i++)
+        source.str[i] = toupper(source.str[i]);
     return source;
 }
 
@@ -171,8 +180,8 @@ MyStringNonMember operator++(const MyStringNonMember &source, int val)
 {
     if (DEBUG)
         cout << "[DEBUG] Post-Increment overload used" << endl;
-    MyStringNonMember temp (source);    // make a copy
-    source++;                           // call pre-increment - make sure you call pre-increment!
+    MyStringNonMember temp {source};    // make a copy
+    ++source;                           // call pre-increment - make sure you call pre-increment!
     return temp;                        // return the old value
 }
 
@@ -182,7 +191,7 @@ bool operator==(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 {
     if (DEBUG)
         cout << "[DEBUG] Equal-To overload used" << endl;
-    return false;
+    return (strcmp(lhs.str, rhs.str) == 0);
 }
 
 // Not-Equal-To Operator Overload
@@ -191,7 +200,7 @@ bool operator!=(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 {
     if (DEBUG)
         cout << "[DEBUG] Not-Equal-To overload used" << endl;
-    return false;
+    return (strcmp(lhs.str, rhs.str) != 0);
 }
 
 // Less-Than Operator Overload
@@ -200,7 +209,7 @@ bool operator<(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 {
     if (DEBUG)
         cout << "[DEBUG] Less-Than overload used" << endl;
-    return false;
+    return (strcmp(lhs.str, rhs.str) < 0);
 }
 
 // Greater-Than Operator Overload
@@ -209,7 +218,7 @@ bool operator>(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
 {
     if (DEBUG)
         cout << "[DEBUG] Greater-Than overload used" << endl;
-    return false;
+    return (strcmp(lhs.str, rhs.str) > 0);
 }
 
 // Addition Operator Overload
@@ -218,15 +227,21 @@ MyStringNonMember operator+(const MyStringNonMember &lhs, const MyStringNonMembe
 {
     if (DEBUG)
         cout << "[DEBUG] Addition overload used" << endl;
-    return lhs;
+    char *buff = new char[strlen(lhs.str) + strlen(rhs.str) + 1];
+    strcpy(buff, lhs.str);
+    strcat(buff, rhs.str);
+    MyStringNonMember temp {buff};
+    delete [] buff;
+    return temp;
 }
 
 // Increased-By Operator Overload
 // concatenate the rhs string to the lhs string and store the result in lhs object
-MyStringNonMember operator+=(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
+MyStringNonMember &operator+=(MyStringNonMember &lhs, const MyStringNonMember &rhs)
 {
     if (DEBUG)
         cout << "[DEBUG] Increased-By overload used" << endl;
+    lhs = lhs + rhs;
     return lhs;
 }
 
@@ -236,14 +251,21 @@ MyStringNonMember operator*(const MyStringNonMember &source, const int val)
 {
     if (DEBUG)
         cout << "[DEBUG] Multiplication overload used" << endl;
-    return source;
+    char *buff = new char[(strlen(source.str) * val) + 1];
+    strcpy(buff, source.str);
+    for (int i = 1; i < val; i++)
+        strcat(buff, source.str);
+    MyStringNonMember temp {buff};
+    delete [] buff;
+    return temp;
 }
 
 // Multiplied-By Operator Overload
 // repeat the string on the lhs n times and store the result back in the lhs object
-MyStringNonMember operator*=(const MyStringNonMember &source, const int val)
+MyStringNonMember &operator*=(MyStringNonMember &source, const int val)
 {
     if (DEBUG)
         cout << "[DEBUG] Multiplied-By overload used" << endl;
+    source = source * val;
     return source;
 }

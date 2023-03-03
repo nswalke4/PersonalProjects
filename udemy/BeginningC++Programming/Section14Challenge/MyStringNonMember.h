@@ -26,9 +26,9 @@ class MyStringNonMember
     friend bool operator<(const MyStringNonMember &, const MyStringNonMember &);                // Less-Than Operator Overload
     friend bool operator>(const MyStringNonMember &, const MyStringNonMember &);                // Greater-Than Operator Overload
     friend MyStringNonMember operator+(const MyStringNonMember &, const MyStringNonMember &);   // Addition Operator Overload
-    friend MyStringNonMember operator+=(const MyStringNonMember &, const MyStringNonMember &);  // Increased-By Operator Overload
+    friend MyStringNonMember &operator+=(MyStringNonMember &, const MyStringNonMember &);       // Increased-By Operator Overload
     friend MyStringNonMember operator*(const MyStringNonMember &, const int);                   // Multiplication Operator Overload
-    friend MyStringNonMember operator*=(const MyStringNonMember &, const int);                  // Multiplied-By Operator Overload
+    friend MyStringNonMember &operator*=(MyStringNonMember &, const int);                       // Multiplied-By Operator Overload
 
 private:
     // args
