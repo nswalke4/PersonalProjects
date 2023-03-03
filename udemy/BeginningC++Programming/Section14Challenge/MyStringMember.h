@@ -41,8 +41,8 @@ public:
     bool operator>(const MyStringMember &) const;               // Greater-Than Operator Overload
     MyStringMember operator+(const MyStringMember &) const;     // Addition Operator Overload
     MyStringMember operator+=(const MyStringMember &) const;    // Increased-By Operator Overload
-    MyStringMember operator*(const MyStringMember &) const;     // Multiplication Operator Overload
-    MyStringMember operator*=(const MyStringMember &) const;    // Multiplied-By Operator Overload
+    MyStringMember operator*(const int) const;                  // Multiplication Operator Overload
+    MyStringMember operator*=(const int) const;                 // Multiplied-By Operator Overload
 
     // Getters
     const char *get_str() const;

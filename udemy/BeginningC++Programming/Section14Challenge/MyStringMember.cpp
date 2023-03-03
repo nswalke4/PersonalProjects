@@ -152,6 +152,7 @@ MyStringMember MyStringMember::operator-() const
 {
     if (DEBUG)
         cout << "[DEBUG] Unary Minus overload used" << endl;
+    return *this;
 }
 
 // Pre-Increment Operator Overload
@@ -159,6 +160,7 @@ MyStringMember MyStringMember::operator++()
 {
     if (DEBUG)
         cout << "[DEBUG] Pre-Increment overload used" << endl;
+    return *this;
 }
 
 // Post-Increment Operator Overload
@@ -166,6 +168,7 @@ MyStringMember MyStringMember::operator++(int val)
 {
     if (DEBUG)
         cout << "[DEBUG] Post-Increment overload used" << endl;
+    return *this;
 }
 
 // Equal-To Operator Overload
@@ -205,6 +208,7 @@ MyStringMember MyStringMember::operator+(const MyStringMember &other) const
 {
     if (DEBUG)
         cout << "[DEBUG] Addition overload used" << endl;
+    return *this;
 }
 
 // Increased-By Operator Overload
@@ -212,18 +216,21 @@ MyStringMember MyStringMember::operator+=(const MyStringMember &other) const
 {
     if (DEBUG)
         cout << "[DEBUG] Increased-By overload used" << endl;
+    return *this;
 }
 
 // Multiplication Operator Overload
-MyStringMember MyStringMember::operator*(const MyStringMember &other) const
+MyStringMember MyStringMember::operator*(const int value) const
 {
     if (DEBUG)
         cout << "[DEBUG] Multiplication overload used" << endl;
+    return *this;
 }
 
 // Multiplied-By Operator Overload
-MyStringMember MyStringMember::operator*=(const MyStringMember &other) const
+MyStringMember MyStringMember::operator*=(const int value) const
 {
     if (DEBUG)
         cout << "[DEBUG] Multiplied-By overload used" << endl;
+    return *this;
 }

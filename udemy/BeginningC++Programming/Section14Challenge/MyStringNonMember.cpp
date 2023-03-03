@@ -152,6 +152,7 @@ MyStringNonMember operator-(const MyStringNonMember &source)
 {
     if (DEBUG)
         cout << "[DEBUG] Unary Minus overload used" << endl;
+    return source;
 }
 
 // Pre-Increment Operator Overload
@@ -159,6 +160,7 @@ MyStringNonMember operator++(const MyStringNonMember &source)
 {
     if (DEBUG)
         cout << "[DEBUG] Pre-Increment overload used" << endl;
+    return source;
 }
 
 // Post-Increment Operator Overload
@@ -166,6 +168,7 @@ MyStringNonMember operator++(const MyStringNonMember &source, int val)
 {
     if (DEBUG)
         cout << "[DEBUG] Post-Increment overload used" << endl;
+    return source;
 }
 
 // Equal-To Operator Overload
@@ -205,6 +208,7 @@ MyStringNonMember operator+(const MyStringNonMember &lhs, const MyStringNonMembe
 {
     if (DEBUG)
         cout << "[DEBUG] Addition overload used" << endl;
+    return lhs;
 }
 
 // Increased-By Operator Overload
@@ -212,18 +216,21 @@ MyStringNonMember operator+=(const MyStringNonMember &lhs, const MyStringNonMemb
 {
     if (DEBUG)
         cout << "[DEBUG] Increased-By overload used" << endl;
+    return lhs;
 }
 
 // Multiplication Operator Overload
-MyStringNonMember operator*(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
+MyStringNonMember operator*(const MyStringNonMember &source, const int val)
 {
     if (DEBUG)
         cout << "[DEBUG] Multiplication overload used" << endl;
+    return source;
 }
 
 // Multiplied-By Operator Overload
-MyStringNonMember operator*=(const MyStringNonMember &lhs, const MyStringNonMember &rhs)
+MyStringNonMember operator*=(const MyStringNonMember &source, const int val)
 {
     if (DEBUG)
         cout << "[DEBUG] Multiplied-By overload used" << endl;
+    return source;
 }

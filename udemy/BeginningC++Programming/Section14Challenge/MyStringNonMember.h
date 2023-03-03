@@ -9,6 +9,8 @@
 #ifndef _MYSTRINGNONMEMBER_H_
 #define _MYSTRINGNONMEMBER_H_
 
+using namespace std;
+
 class MyStringNonMember
 {
     // Stream Insertion & Extraction Operator Overloads
@@ -25,8 +27,8 @@ class MyStringNonMember
     friend bool operator>(const MyStringNonMember &, const MyStringNonMember &);                // Greater-Than Operator Overload
     friend MyStringNonMember operator+(const MyStringNonMember &, const MyStringNonMember &);   // Addition Operator Overload
     friend MyStringNonMember operator+=(const MyStringNonMember &, const MyStringNonMember &);  // Increased-By Operator Overload
-    friend MyStringNonMember operator*(const MyStringNonMember &, const MyStringNonMember &);   // Multiplication Operator Overload
-    friend MyStringNonMember operator*=(const MyStringNonMember &, const MyStringNonMember &);  // Multiplied-By Operator Overload
+    friend MyStringNonMember operator*(const MyStringNonMember &, const int);                   // Multiplication Operator Overload
+    friend MyStringNonMember operator*=(const MyStringNonMember &, const int);                  // Multiplied-By Operator Overload
 
 private:
     // args
