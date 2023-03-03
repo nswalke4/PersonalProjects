@@ -9,54 +9,47 @@
 #ifndef _MYSTRINGNONMEMBER_H_
 #define _MYSTRINGNONMEMBER_H_
 
-#include <iostream>
-
-using namespace std;
-
 class MyStringNonMember
 {
     // Stream Insertion & Extraction Operator Overloads
     friend ostream &operator<<(ostream &, const MyStringNonMember &);
     friend istream &operator>>(istream &, MyStringNonMember &);
 
-    // other friend variables/functions
+    // Non-Member Operator Overload Functions
+    friend MyStringNonMember operator-(const MyStringNonMember &);                              // Negation Operator Overload
+    friend MyStringNonMember operator++(const MyStringNonMember &);                             // Pre-Increment Operator Overload
+    friend MyStringNonMember operator++(const MyStringNonMember &, int);                        // Post-Increment Operator Overload
+    friend bool operator==(const MyStringNonMember &, const MyStringNonMember &);               // Equal-To Operator Overload
+    friend bool operator!=(const MyStringNonMember &, const MyStringNonMember &);               // Not-Equal-To Operator Overload       
+    friend bool operator<(const MyStringNonMember &, const MyStringNonMember &);                // Less-Than Operator Overload
+    friend bool operator>(const MyStringNonMember &, const MyStringNonMember &);                // Greater-Than Operator Overload
+    friend MyStringNonMember operator+(const MyStringNonMember &, const MyStringNonMember &);   // Addition Operator Overload
+    friend MyStringNonMember operator+=(const MyStringNonMember &, const MyStringNonMember &);  // Increased-By Operator Overload
+    friend MyStringNonMember operator*(const MyStringNonMember &, const MyStringNonMember &);   // Multiplication Operator Overload
+    friend MyStringNonMember operator*=(const MyStringNonMember &, const MyStringNonMember &);  // Multiplied-By Operator Overload
 
 private:
     // args
-    
+    char *str;      // pointer to the char array (string)
 
 public:
     // Constructors / Destructor
-    MyStringNonMember();                // Default Constructor
-    MyStringNonMember(const MyStringNonMember &);    // Copy Constructor
-    MyStringNonMember(MyStringNonMember &&);         // Move Constructor
-    ~MyStringNonMember();               // Destructor
+    MyStringNonMember();                                // No-Args Default Constructor
+    MyStringNonMember(const char *pStr);                // 1-arg Overload Constructor
+    MyStringNonMember(const MyStringNonMember &);       // Copy Constructor
+    MyStringNonMember(MyStringNonMember &&);            // Move Constructor
+    ~MyStringNonMember();                               // Destructor
 
     // Operator Overloads
     MyStringNonMember &operator=(const MyStringNonMember &);    // Copy Assignment Operator Overload
     MyStringNonMember &operator=(MyStringNonMember &&);         // Move Assignment Operator Overload
 
-    MyStringNonMember operator-() const;            // Negation Operator Overload
-    MyStringNonMember operator++();                 // Pre-Increment Operator Overload
-    MyStringNonMember operator++(int);              // Post-Increment Operator Overload
-    MyStringNonMember operator--();                 // Pre-Decrement Operator Overload
-    MyStringNonMember operator--(int);              // Post-Decrement Operator Overload
-    bool operator!() const;             // Not Operator Overload
-
-    MyStringNonMember operator+(const MyStringNonMember &) const;   // Addition Operator Overload
-    MyStringNonMember operator-(const MyStringNonMember &) const;   // Subtraction Operator Overload
-    bool operator==(const MyStringNonMember &) const;   // Equal-To Operator Overload
-    bool operator!=(const MyStringNonMember &) const;   // Not-Equal-To Operator Overload
-    bool operator>(const MyStringNonMember &) const;    // Greater-Than Operator Overload
-    bool operator>=(const MyStringNonMember &) const;   // Greater-Than or Equal-To Operator Overload
-    bool operator<(const MyStringNonMember &) const;    // Less-Than Operator Overload
-    bool operator<=(const MyStringNonMember &) const;   // Less-Than or Equal-To Operator Overload
-
     // Getters
-
-    // Setters
+    const char *get_str() const;
+    int get_length() const;
 
     // Other Methods
+    void display() const;
 
 };
 
