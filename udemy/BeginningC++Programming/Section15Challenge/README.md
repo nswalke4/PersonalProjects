@@ -3,7 +3,7 @@
 <table>
 <tr>
 <th>Time to Complete</th>
-<td>tbd</td>
+<td>37 mins</td>
 </tr>
 <tr>
 <th>Date Completed</th>

@@ -20,16 +20,16 @@
 //      and then the updated amount will be deposited
 //
 
-class Savings_Account: public Account {
-    friend std::ostream &operator<<(std::ostream &os, const Savings_Account &account);
+class SavingsAccount: public Account {
+    friend std::ostream &operator<<(std::ostream &os, const SavingsAccount &account);
 private:
-    static constexpr const char *def_name = "Unnamed Savings Account";
-    static constexpr double def_balance = 0.0;
-    static constexpr double def_int_rate = 0.0;
+    static constexpr const char *defName = "Unnamed Savings Account";
+    static constexpr double defBalance = 0.0;
+    static constexpr double defIntRate = 0.0;
 protected:
-    double int_rate;
+    double intRate;
 public:
-    Savings_Account(std::string name = def_name, double balance =def_balance, double int_rate = def_int_rate);    
+    SavingsAccount(std::string name = defName, double balance = defBalance, double intRate = defIntRate);    
     bool deposit(double amount);
     // Inherits the Account::withdraw methods
 };
